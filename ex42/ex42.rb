@@ -110,5 +110,5 @@ flipper = Fish.new
 ## Crouse is-a Salmon
 crouse = Salmon.new
 
-## Harry is-a Haalibut
+## Harry is-a Halibut
 harry = Halibut.new
