@@ -35,20 +35,31 @@ class Lexicon
     array = string.split
     @pair = []
     @result = []
+    @value_exists = nil
     array.each do |item|
 
       # We check if item is a number.
-      # If it's not, we iterate over @lexicon_hash.
+      # If it's not, we check if the item exists as a value in @lexicon_hash.
+      # If it exists, it returns true to @value_exists.
+      # If the item exists as a value, we iterate over each key
+      # of @lexicon_hash looking for the item.
       # If we find the item, we push the item and the key it's into,
       # into the @pair array.
       # We push this pair into the @result array, we clean the @pair
-      # array, and we start again.
+      # array, we clean the @value_exists variable, and we start again.
       # If item is a number, we simply push 'number' and the 
       # converted number. 
 
       if self.convert_to_number(item) == nil
-        @lexicon_hash.each_key do |key| 
-          @pair << key << item if @lexicon_hash[key].include?(item) 
+        @lexicon_hash.each_value do |value|
+          @value_exists ||= value.include?(item)
+        end
+        if @value_exists
+          @lexicon_hash.each_key do |key|          
+            @pair << key << item if @lexicon_hash[key].include?(item)  
+          end
+        else
+          @pair << "error" << item
         end
       else
         number = self.convert_to_number(item)
@@ -56,6 +67,7 @@ class Lexicon
       end     
       @result << @pair
       @pair = []
+      @value_exists = nil
     end
     @result
   end
