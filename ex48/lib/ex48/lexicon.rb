@@ -14,11 +14,17 @@ class Lexicon
                                     "up",
                                     "left",
                                     "right",
-                                    "back"],
+                                    "back",
+                                    "forward",
+                                    "ahead"],
                     "verb"      => ["go",
                                     "stop",
                                     "kill",
-                                    "eat"],
+                                    "eat",
+                                    "take",
+                                    "use",
+                                    "open",
+                                    "close"],
                     "stop"      => ["to",
                                     "the",
                                     "in",
@@ -29,7 +35,8 @@ class Lexicon
                     "noun"      => ["door",
                                     "bear",
                                     "princess",
-                                    "cabinet"] }
+                                    "cabinet",
+                                    "key"] }
 
   def self.scan(string)
     array = string.split
@@ -37,8 +44,11 @@ class Lexicon
     @result = []
     @value_exists = nil
     array.each do |item|
+      
+      # We set the item to downcase to handle well capitalization and case.
+      item = item.downcase
 
-      # We check if item is a number.
+      # Now we check if item is a number using self.convert_to_number.
       # If it's not, we check if the item exists as a value in @lexicon_hash.
       # If it exists, it returns true to @value_exists.
       # If the item exists as a value, we iterate over each key

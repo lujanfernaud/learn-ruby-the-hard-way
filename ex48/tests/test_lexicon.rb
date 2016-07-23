@@ -10,6 +10,10 @@ class TestLexicon < Test::Unit::TestCase
     assert_equal(result, [['direction', 'north'],
                           ['direction', 'south'],
                           ['direction', 'east']])
+
+    result = Lexicon.scan("forward ahead")
+    assert_equal(result, [['direction', 'forward'],
+                          ['direction', 'ahead']])
   end
 
   def test_verbs
@@ -19,6 +23,11 @@ class TestLexicon < Test::Unit::TestCase
     assert_equal(result, [['verb', 'go'],
                           ['verb', 'kill'],
                           ['verb', 'eat']])
+
+    assert_equal(Lexicon.scan("take"), [['verb', 'take']])
+    assert_equal(Lexicon.scan("use"), [['verb', 'use']])
+    assert_equal(Lexicon.scan("open"), [['verb', 'open']])
+    assert_equal(Lexicon.scan("close"), [['verb', 'close']])
   end
 
   def test_stops
@@ -46,12 +55,43 @@ class TestLexicon < Test::Unit::TestCase
                           ['number', 91234]])
   end
 
-  def test_errors
-    assert_equal(Lexicon.scan("ASDFADFASDF"), [['error', 'ASDFADFASDF']])
+  def test_full_actions
+    result = Lexicon.scan("go to the left")
+    assert_equal(result, [['verb', 'go'],
+                          ['stop', 'to'],
+                          ['stop', 'the'],
+                          ['direction', 'left']])
 
-    result = Lexicon.scan("bear IAS princess")
+    result = Lexicon.scan("take the key")
+    assert_equal(result, [['verb', 'take'],
+                          ['stop', 'the'],
+                          ['noun', 'key']])
+
+    result = Lexicon.scan("use the key in the cabinet")
+    assert_equal(result, [['verb', 'use'],
+                          ['stop', 'the'],
+                          ['noun', 'key'],
+                          ['stop', 'in'],
+                          ['stop', 'the'],
+                          ['noun', 'cabinet']])
+  end
+
+  def test_case
+    assert_equal(Lexicon.scan("Go"), [['verb', 'go']])
+    assert_equal(Lexicon.scan("THE"), [['stop', 'the']])
+
+    result = Lexicon.scan("OPEN THE DOOR")
+    assert_equal(result, [['verb', 'open'],
+                          ['stop', 'the'],
+                          ['noun', 'door']])
+  end
+
+  def test_errors
+    assert_equal(Lexicon.scan("asdfadfasdf"), [['error', 'asdfadfasdf']])
+
+    result = Lexicon.scan("bear ias princess")
     assert_equal(result, [['noun', 'bear'],
-                          ['error', 'IAS'],
+                          ['error', 'ias'],
                           ['noun', 'princess']])
   end
 
