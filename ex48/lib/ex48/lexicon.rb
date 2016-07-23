@@ -57,6 +57,7 @@ class Lexicon
       # into the @pair array.
       # We push this pair into the @result array, we clean the @pair
       # array, we clean the @value_exists variable, and we start again.
+      # If the value doesn't exists, we simply push 'error' and the item.
       # If item is a number, we simply push 'number' and the 
       # converted number. 
 
