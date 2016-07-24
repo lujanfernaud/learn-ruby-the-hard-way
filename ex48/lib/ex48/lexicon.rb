@@ -5,7 +5,6 @@ class Lexicon
   # scan this hash with each item of the string-array, and every time
   # we find the item, we save the key ('verb') with the item ('go')
   # to an array. Then we save all those arrays into the @result array.
-
   @lexicon_hash = { "direction" => ["north",
                                     "south",
                                     "east",
@@ -60,7 +59,6 @@ class Lexicon
       # If the value doesn't exists, we simply push 'error' and the item.
       # If item is a number, we simply push 'number' and the 
       # converted number. 
-
       if self.convert_to_number(item) == nil
         @lexicon_hash.each_value do |value|
           @value_exists ||= value.include?(item)
