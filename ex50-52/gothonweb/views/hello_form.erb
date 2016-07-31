@@ -1,11 +1,13 @@
-<h1>Fill Out This Form</h1>
+<h1>Your Personalized Greeting</h1>
 
-<form action="/hello/" method="POST">
-  A Greeting: <input type="text" name="greeting" />
+<form action="/hello/" enctype="multipart/form-data" method="POST">
+  Greeting: <input type="text" name="greeting" />
   <br/>
   Your Name: <input type="text" name="name" />
   <br/>
-  Your Picture: <input type="file" name="picture" />
+  <br/>
+  Your Picture: 
+      <input type="file" name="picture" />
   <br/>
   <br/>
   <input type="submit" value="Submit" />

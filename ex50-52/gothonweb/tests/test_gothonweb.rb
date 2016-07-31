@@ -17,13 +17,12 @@ class MyAppTest < Test::Unit::TestCase
   def test_hello_form
     get '/hello/'
     assert last_response.ok?
-    assert last_response.body.include?('A Greeting')
+    assert last_response.body.include?('Greeting')
     assert last_response.body.include?('Your Name')
   end
 
   def test_hello_form_post
     post '/hello/', params={:name => 'Frank', :greeting => 'Hi'}
-    assert last_response.ok?
-    assert last_response.body.include?('I just wanted to say')
+    assert last_response.body.include?('Hi, Frank!')
   end
 end

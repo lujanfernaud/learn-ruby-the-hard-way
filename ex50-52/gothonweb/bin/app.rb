@@ -7,6 +7,12 @@ set :static, true
 set :public_folder, "static"
 set :views, "views"
 
+helpers do
+  def img(filename)
+    "<img src='/images/#{filename}' alt='#{filename}' />"
+  end
+end
+
 get '/' do
   "Hello world!"
 end
@@ -17,17 +23,14 @@ end
 
 post '/hello/' do
   greeting = params[:greeting] || "Hi there"
-  name = params[:name] || "Nobody"
+  name = params[:name] || "John Doe"
+  picture = params[:picture] || "No picture uploaded."
 
-  erb :index, :locals => {'greeting' => greeting, 'name' => name}
-end
-
-get '/upload/' do
-  erb :upload
-end
-
-post '/upload/' do
   tempfile = params[:picture][:tempfile]
   filename = params[:picture][:filename]
-  cp(tempfile.path, "static/uploads/#{filename}")
+  cp(tempfile.path, "static/images/#{filename}")
+
+  erb :index, :locals => {'greeting' => greeting, 
+                          'name' => name,
+                          'picture' => picture}
 end
