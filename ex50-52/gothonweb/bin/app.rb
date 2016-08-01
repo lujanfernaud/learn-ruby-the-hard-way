@@ -8,13 +8,17 @@ set :public_folder, "static"
 set :views, "views"
 
 helpers do
-  def img(filename)
-    "<img src='/images/#{filename}' alt='#{filename}' />"
+  def img(picture)
+    unless picture.is_a?(String)
+      "<img src='/images/#{picture[:filename]}' alt='#{picture[:filename]}' />"
+    else
+      "I can't greet you properly because you didn't upload your picture."
+    end
   end
 end
 
 get '/' do
-  "Hello world!"
+  erb :index
 end
 
 get '/hello/' do
@@ -26,11 +30,13 @@ post '/hello/' do
   name = params[:name] || "John Doe"
   picture = params[:picture] || "No picture uploaded."
 
-  tempfile = params[:picture][:tempfile]
-  filename = params[:picture][:filename]
-  cp(tempfile.path, "static/images/#{filename}")
+  unless picture.is_a?(String)
+    tempfile = params[:picture][:tempfile]
+    filename = params[:picture][:filename]
+    cp(tempfile.path, "static/images/#{filename}")
+  end
 
-  erb :index, :locals => {'greeting' => greeting, 
+  erb :greeting, :locals => {'greeting' => greeting, 
                           'name' => name,
                           'picture' => picture}
 end
