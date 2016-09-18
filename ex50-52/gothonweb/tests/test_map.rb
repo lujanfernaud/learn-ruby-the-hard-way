@@ -4,7 +4,7 @@ require "test/unit"
 class TestGame < Test::Unit::TestCase
 
   def test_room
-    gold = Room.new("GoldRoom",
+    gold = Map::Room.new("GoldRoom",
                     """This room has gold in it you can grab. There's a
                     door to the north.""")
     assert_equal("GoldRoom", gold.name)
@@ -14,9 +14,9 @@ class TestGame < Test::Unit::TestCase
   end
 
   def test_room_paths
-    center = Room.new("Center", "Test room in the center.")
-    north  = Room.new("North", "Test room in the north.")
-    south  = Room.new("South", "Test room in the south.")
+    center = Map::Room.new("Center", "Test room in the center.")
+    north  = Map::Room.new("North", "Test room in the north.")
+    south  = Map::Room.new("South", "Test room in the south.")
 
     center.add_paths({'north' => north, 'south' => south})
     assert_equal(north, center.go('north'))
@@ -24,9 +24,9 @@ class TestGame < Test::Unit::TestCase
   end
 
   def test_map
-    start = Room.new("Start", "You can go west and down a hole.")
-    west = Room.new("Trees", "There are trees here, you can go east.")
-    down = Room.new("Dungeon", "It's dark down here, you can go up.")
+    start = Map::Room.new("Start", "You can go west and down a hole.")
+    west = Map::Room.new("Trees", "There are trees here, you can go east.")
+    down = Map::Room.new("Dungeon", "It's dark down here, you can go up.")
 
     start.add_paths({'west' => west, 'down' => down})
     west.add_paths({'east' => start})
@@ -35,5 +35,33 @@ class TestGame < Test::Unit::TestCase
     assert_equal(west, start.go('west'))
     assert_equal(start, start.go('west').go('east'))
     assert_equal(start, start.go('down').go('up'))
+  end
+
+  def test_gothon_game_map
+    assert_equal(Map::GENERIC_DEATH, Map::START.go('shoot!'))
+    assert_equal(Map::GENERIC_DEATH, Map::START.go('dodge!'))
+    assert_equal(Map::ESCAPE_POD, Map::THE_BRIDGE.go('slowly place the bomb'))
+    assert_equal(Map::THE_END_LOSER, Map::ESCAPE_POD.go('*'))
+    assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go('2'))
+
+    room = Map::START.go('tell a joke')
+    assert_equal(Map::LASER_WEAPON_ARMORY, room)
+  end
+
+  def test_session_loading
+    session = {}
+
+    room = Map::load_room(session)
+    assert_equal(room, nil)
+
+    Map::save_room(session, Map::START)
+    room = Map::load_room(session)
+    assert_equal(room, Map::START)
+
+    room = room.go('tell a joke')
+    assert_equal(room, Map::LASER_WEAPON_ARMORY)
+
+    Map::save_room(session, room)
+    assert_equal(room, Map::LASER_WEAPON_ARMORY)
   end
 end
