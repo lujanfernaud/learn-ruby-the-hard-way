@@ -102,29 +102,84 @@ module Map
     into jam jelly.
     """)
 
+  SHOOT_DEATH = Room.new("Shoot death", 
+    """
+    Quick on the draw you yank out your blaster and fire it at the Gothon.
+    His clown costume is flowing and moving around his body, which throws
+    off your aim. Your laser hits his costume but misses him entirely. This
+    completely ruins his brand new costume his mother bought him, which
+    makes him fly into an insane rage and blast you repeatedly in the face until
+    you are dead. Then he eats you.
+    \n
+    """)
+  
+  DODGE_DEATH = Room.new("Dodge death", 
+    """
+    Like a world class boxer you dodge, weave, slip and slide right
+    as the Gothon's blaster cranks a laser past your head.
+    In the middle of your artful dodge your foot slips and you
+    bang your head on the metal wall and pass out.
+    You wake up shortly after only to die as the Gothon stomps on
+    your head and eats you.
+    \n
+    """)
+
+  WRONG_CODE_DEATH = Room.new("Wrong code death", 
+    """
+    The lock buzzes one last time and then you hear a sickening
+    melting sound as the mechanism is fused together.
+    You decide to sit there, and finally the Gothons blow up the
+    ship from their ship and you die.
+    \n
+    """)
+
+  BOMB_DEATH = Room.new("Bomb death", 
+    """
+    In a panic you throw the bomb at the group of Gothons
+    and make a leap for the door. Right as you drop it a
+    Gothon shoots you right in the back killing you.
+    \n
+    As you die you see how another Gothon frantically try to disarm
+    the bomb. You die knowing they will probably blow up when
+    it goes off.
+    \n
+    """)
+
+  # TO-DO: Implement this as a random last line when death occurs.
+  def last_death_line
+    @@quips = [
+      "You died. You kinda suck at this.",
+      "You died. Such a luser.",
+      "I have a small puppy that's better at this."
+    ]
+
+    @@quips[rand(0..(@@quips.length -1))]
+  end
+
+  # TO-DO: Delete this?
   GENERIC_DEATH = Room.new("Death", "You died.")
 
   # Now we connect the rooms using Room.add_paths(paths).
 
-  ESCAPE_POD.add_paths({
-    '2' => THE_END_WINNER,
-    '*' => THE_END_LOSER
-    })
-
-  THE_BRIDGE.add_paths({
-    'throw the bomb'        => GENERIC_DEATH,
-    'slowly place the bomb' => ESCAPE_POD
+  CENTRAL_CORRIDOR.add_paths({
+    'shoot!'      => SHOOT_DEATH,
+    'dodge!'      => DODGE_DEATH,
+    'tell a joke' => LASER_WEAPON_ARMORY
     })
 
   LASER_WEAPON_ARMORY.add_paths({
     '0132' => THE_BRIDGE,
-    '*'    => GENERIC_DEATH
+    '*'    => WRONG_CODE_DEATH
     })
 
-  CENTRAL_CORRIDOR.add_paths({
-    'shoot!'      => GENERIC_DEATH,
-    'dodge!'      => GENERIC_DEATH,
-    'tell a joke' => LASER_WEAPON_ARMORY
+  THE_BRIDGE.add_paths({
+    'throw the bomb'        => BOMB_DEATH,
+    'slowly place the bomb' => ESCAPE_POD
+    })
+
+  ESCAPE_POD.add_paths({
+    '2' => THE_END_WINNER,
+    '*' => THE_END_LOSER
     })
 
   START = CENTRAL_CORRIDOR

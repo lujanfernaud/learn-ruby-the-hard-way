@@ -38,8 +38,11 @@ class TestGame < Test::Unit::TestCase
   end
 
   def test_gothon_game_map
-    assert_equal(Map::GENERIC_DEATH, Map::START.go('shoot!'))
-    assert_equal(Map::GENERIC_DEATH, Map::START.go('dodge!'))
+    assert_equal(Map::SHOOT_DEATH, Map::START.go('shoot!'))
+    assert_equal(Map::DODGE_DEATH, Map::START.go('dodge!'))
+    assert_equal(Map::THE_BRIDGE, Map::LASER_WEAPON_ARMORY.go('0132'))
+    assert_equal(Map::BOMB_DEATH, Map::THE_BRIDGE.go('throw the bomb'))
+    assert_equal(Map::WRONG_CODE_DEATH, Map::LASER_WEAPON_ARMORY.go('*'))
     assert_equal(Map::ESCAPE_POD, Map::THE_BRIDGE.go('slowly place the bomb'))
     assert_equal(Map::THE_END_LOSER, Map::ESCAPE_POD.go('*'))
     assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go('2'))
