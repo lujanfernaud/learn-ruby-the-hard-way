@@ -2,10 +2,13 @@ require 'sinatra'
 
 include FileUtils::Verbose
 
-set :port, 8080
-set :static, true
-set :public_folder, "static"
-set :views, "views"
+configure do
+  set :port, 8080
+  set :static, true
+  set :public_folder, "static"
+  set :views, "views"
+  enable :sessions
+end
 
 helpers do
   def img(picture)
