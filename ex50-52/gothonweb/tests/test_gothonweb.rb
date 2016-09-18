@@ -9,10 +9,10 @@ class MyAppTest < Test::Unit::TestCase
     Sinatra::Application
   end
 
-  def test_my_default
-    get '/'
-    assert_equal 'Hello world!', last_response.body
-  end
+  # def test_my_default
+  #   get '/'
+  #   assert_equal 'Hello world!', last_response.body
+  # end
 
   def test_hello_form
     get '/hello/'
