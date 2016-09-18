@@ -101,4 +101,31 @@ module Map
     implodes as the hull ruptures, crushing your body
     into jam jelly.
     """)
+
+  GENERIC_DEATH = Room.new("Death", "You died.")
+
+  # Now we connect the rooms using Room.add_paths(paths).
+
+  ESCAPE_POD.add_paths({
+    '2' => THE_END_WINNER,
+    '*' => THE_END_LOSER
+    })
+
+  THE_BRIDGE.add_paths({
+    'throw the bomb'        => GENERIC_DEATH,
+    'slowly place the bomb' => ESCAPE_POD
+    })
+
+  LASER_WEAPON_ARMORY.add_paths({
+    '0132' => THE_BRIDGE,
+    '*'    => GENERIC_DEATH
+    })
+
+  CENTRAL_CORRIDOR.add_paths({
+    'shoot!'      => GENERIC_DEATH,
+    'dodge!'      => GENERIC_DEATH,
+    'tell a joke' => LASER_WEAPON_ARMORY
+    })
+
+  START = CENTRAL_CORRIDOR
 end
