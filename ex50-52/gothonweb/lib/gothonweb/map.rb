@@ -10,7 +10,7 @@ module Map
     attr_reader :name, :description, :paths
 
     def go(direction)
-      return @paths[direction]
+      @paths[direction]
     end
 
     def add_paths(paths)
@@ -128,4 +128,29 @@ module Map
     })
 
   START = CENTRAL_CORRIDOR
+
+  # A whitelist of allowed room names. We use this so that
+  # bad people on the internet can't access random variables
+  # with names. You can use Test::constants and Kernel.const_get
+  # too.
+  
+  ROOM_NAMES = {
+    'CENTRAL_CORRIDOR'    => CENTRAL_CORRIDOR,
+    'LASER_WEAPON_ARMORY' => LASER_WEAPON_ARMORY,
+    'THE_BRIDGE'          => THE_BRIDGE,
+    'ESCAPE_POD'          => ESCAPE_POD,
+    'THE_END_WINNER'      => THE_END_WINNER,
+    'THE_END_LOSER'       => THE_END_LOSER,
+    'START'               => START
+  }
+
+  def Map::load_room(session)
+    # Given a session this will return the right room or nil.
+    ROOM_NAMES[session[:room]]
+  end
+
+  def Map::save_room(session, room)
+    # Store the room in the session for later, using its name.
+    session[:room] = ROOM_NAMES.key(room)
+  end
 end
