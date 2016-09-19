@@ -1,6 +1,8 @@
 require 'sinatra'
 require './lib/gothonweb/map.rb'
 
+require 'pry'
+
 configure do
   set :port, 8080
   set :static, true
@@ -18,6 +20,7 @@ end
 
 get '/game' do
   room = Map::load_room(session)
+  Map::save_room(session, room)
 
   if room
     erb :show_room, :locals => {:room => room}
@@ -28,7 +31,7 @@ end
 
 post '/game' do
   room   = Map::load_room(session)
-  action = params[:action]
+  action = params[:action].downcase
 
   if room
     next_room = room.go(action) || room.go('*')

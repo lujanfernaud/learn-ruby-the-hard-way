@@ -1,3 +1,5 @@
+require 'pry'
+
 module Map
   class Room
 
@@ -196,6 +198,10 @@ module Map
     'ESCAPE_POD'          => ESCAPE_POD,
     'THE_END_WINNER'      => THE_END_WINNER,
     'THE_END_LOSER'       => THE_END_LOSER,
+    'SHOOT_DEATH'         => SHOOT_DEATH,
+    'DODGE_DEATH'         => DODGE_DEATH,
+    'WRONG_CODE_DEATH'    => WRONG_CODE_DEATH,
+    'BOMB_DEATH'          => BOMB_DEATH,
     'START'               => START
   }
 
