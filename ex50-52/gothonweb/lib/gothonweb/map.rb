@@ -1,5 +1,3 @@
-require 'pry'
-
 module Map
   class Room
 
@@ -12,7 +10,11 @@ module Map
     attr_reader :name, :description, :paths
 
     def go(direction)
-      @paths[direction]
+      if @paths.include?(direction)
+        @paths[direction]
+      else
+        "not compute"
+      end
     end
 
     def add_paths(paths)
@@ -44,13 +46,13 @@ module Map
     putting him down, then jump through the Weapon Armory door.
 
     You do a dive roll into the Weapon Armory, crouch and scan the room
-    for more Gothons that might be hiding.  It's dead quiet, too quiet.
-    You stand up and run to the far side of the room and find the
-    neutron bomb in its container.  There's a keypad lock on the box
-    and you need the code to get the bomb out.  If you get the code
-    wrong 10 times then the lock closes forever and you can't
-    get the bomb.  The code is 3 digits.
-    """)
+      for more Gothons that might be hiding.  It's dead quiet, too quiet.
+        You stand up and run to the far side of the room and find the
+        neutron bomb in its container.  There's a keypad lock on the box
+        and you need the code to get the bomb out.  If you get the code
+        wrong 10 times then the lock closes forever and you can't
+        get the bomb.  The code is 3 digits.
+        """)
 
   THE_BRIDGE = Room.new("The Bridge", 
     """
@@ -84,7 +86,7 @@ module Map
     now need to pick one to take.  Some of them could be damaged
     but you don't have time to look.  There's 5 pods, which one
     do you take?
-    """)
+      """)
 
   THE_END_WINNER = Room.new("The End",
     """
@@ -147,20 +149,6 @@ module Map
     \n
     """)
 
-  # TO-DO: Implement this as a random last line when death occurs.
-  def last_death_line
-    @@quips = [
-      "You died. You kinda suck at this.",
-      "You died. Such a luser.",
-      "I have a small puppy that's better at this."
-    ]
-
-    @@quips[rand(0..(@@quips.length -1))]
-  end
-
-  # TO-DO: Delete this?
-  GENERIC_DEATH = Room.new("Death", "You died.")
-
   # Now we connect the rooms using Room.add_paths(paths).
 
   CENTRAL_CORRIDOR.add_paths({
@@ -170,18 +158,21 @@ module Map
     })
 
   LASER_WEAPON_ARMORY.add_paths({
-    '0132' => THE_BRIDGE,
-    '*'    => WRONG_CODE_DEATH
+    '0132'  => THE_BRIDGE,
+    'next!' => THE_BRIDGE, 
+    '*'     => WRONG_CODE_DEATH
     })
 
   THE_BRIDGE.add_paths({
     'throw the bomb'        => BOMB_DEATH,
+    'next!'                 => ESCAPE_POD,
     'slowly place the bomb' => ESCAPE_POD
     })
 
   ESCAPE_POD.add_paths({
-    '2' => THE_END_WINNER,
-    '*' => THE_END_LOSER
+    '2'     => THE_END_WINNER,
+    'next!' => THE_END_WINNER,
+    '*'     => THE_END_LOSER
     })
 
   START = CENTRAL_CORRIDOR
