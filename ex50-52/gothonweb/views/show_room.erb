@@ -6,7 +6,14 @@
   <%= room.description %>
 </p>
 
-<% if room.name =~ /death/ || room.name == "The End" %>
+<% if does_not_compute? %>
+  <p>DOES NOT COMPUTE!</p>
+<% end %>
+
+<% if room.name =~ /death/ %>
+  <p><%= last_death_line %>
+  <p><a href="/">Play Again?</a></p>
+<% elsif room.name == "The End" %>
   <p><a href="/">Play Again?</a></p>
 <% else %>
   <p>
