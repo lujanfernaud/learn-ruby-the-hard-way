@@ -6,8 +6,8 @@
   <%= room.description %>
 </p>
 
-<% if does_not_compute? %>
-  <p>DOES NOT COMPUTE!</p>
+<% if room.show_actions %>
+  <p>Type 'actions' to see available actions.</p>
 <% end %>
 
 <% if room.show_actions %>
@@ -17,12 +17,16 @@
     <ul>
     <% room.paths.keys.each do |action| %>
       <% if action != "next!" %>
-        <li><%= "#{i}. #{action}" %></li>
+        <li><%= "#{-}. #{action}" %></li>
       <% end %>
       <% i += 1 %>
     <% end %>
     </ul>
   <% end %>
+<% end %>
+
+<% if does_not_compute? %>
+  <p>DOES NOT COMPUTE!</p>
 <% end %>
 
 <% if room.name =~ /death/ %>
