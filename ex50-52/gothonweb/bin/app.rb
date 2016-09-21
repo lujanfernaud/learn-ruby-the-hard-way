@@ -15,6 +15,7 @@ configure do
 
   @@action_does_not_exist = false
   @@activate_actions      = false
+  @@activate_hint         = false
 end
 
 helpers do
@@ -24,6 +25,10 @@ helpers do
 
   def show_actions?
     @@activate_actions
+  end
+
+  def show_hint?
+    @@activate_hint
   end
 
   def show_last_death_line
@@ -56,6 +61,7 @@ end
 post '/game' do
   @@action_does_not_exist = false
   @@activate_actions      = false
+  @@activate_hint         = false
 
   room   = Map::load_room(session)
   action = params[:action].downcase
@@ -63,6 +69,8 @@ post '/game' do
   if room
     if action == "actions"
       @@activate_actions = true
+    elsif action == "hint!"  
+      @@activate_hint = true
     elsif room.go(action) != "not compute"
       next_room = room.go(action) || room.go('*')
     else

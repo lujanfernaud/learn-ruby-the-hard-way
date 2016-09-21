@@ -17,11 +17,21 @@
     <ul>
     <% room.paths.keys.each do |action| %>
       <% if action != "next!" %>
-        <li><%= "#{-}. #{action}" %></li>
+        <li><%= "- #{action}" %></li>
       <% end %>
       <% i += 1 %>
     <% end %>
     </ul>
+  <% end %>
+<% end %>
+
+<% if room.keypad %>
+  <p>Type 'hint!' to receive a hint.</p>
+<% end %>
+
+<% if room.keypad %>
+  <% if show_hint? %>
+    <p>Hint!</p>
   <% end %>
 <% end %>
 

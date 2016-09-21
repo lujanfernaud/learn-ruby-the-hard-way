@@ -1,14 +1,15 @@
 module Map
   class Room
 
-    def initialize(name, description, show_actions=false)
+    def initialize(name, description, show_actions=false, keypad=false)
       @name         = name
       @description  = description
       @show_actions = show_actions
+      @keypad       = keypad
       @paths        = {}
     end
 
-    attr_reader :name, :description, :show_actions, :paths
+    attr_reader :name, :description, :show_actions, :keypad, :paths
 
     def go(direction)
       if @paths.include?(direction)
@@ -55,7 +56,8 @@ module Map
     wrong 10 times then the lock closes forever and you can't
     get the bomb.  The code is 3 digits.
     """,
-    false)
+    false,
+    true)
 
   THE_BRIDGE = Room.new("The Bridge", 
     """
@@ -91,7 +93,8 @@ module Map
     but you don't have time to look.  There's 5 pods, which one
     do you take?
     """,
-    false)
+    false,
+    true)
 
   THE_END_WINNER = Room.new("The End",
     """
