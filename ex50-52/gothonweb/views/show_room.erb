@@ -10,16 +10,29 @@
   <p>DOES NOT COMPUTE!</p>
 <% end %>
 
+<% if room.show_actions %>
+  <% if show_actions? %>
+    <% i = 1 %> 
+    <h2><%= "Actions: " %></h2>
+    <ul>
+    <% room.paths.keys.each do |action| %>
+      <% if action != "next!" %>
+        <li><%= "#{i}. #{action}" %></li>
+      <% end %>
+      <% i += 1 %>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 <% if room.name =~ /death/ %>
-  <p><%= last_death_line %>
+  <p><%= show_last_death_line %></p>
   <p><a href="/">Play Again?</a></p>
 <% elsif room.name == "The End" %>
   <p><a href="/">Play Again?</a></p>
 <% else %>
-  <p>
   <form action="/game" method="POST">
     <input type="text" name="action">
     <input type="submit">
   </form>
-  </p>
 <% end %>

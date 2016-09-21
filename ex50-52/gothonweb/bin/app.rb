@@ -13,15 +13,20 @@ configure do
   enable :sessions
   set    :session_secret, 'BADSECRET'
 
-  @@error = false
+  @@action_does_not_exist = false
+  @@activate_actions      = false
 end
 
 helpers do
   def does_not_compute?
-    @@error
+    @@action_does_not_exist
   end
 
-  def last_death_line
+  def show_actions?
+    @@activate_actions
+  end
+
+  def show_last_death_line
     quips = [
       "You died. You kinda suck at this.",
       "You died. Such a luser.",
@@ -49,16 +54,19 @@ get '/game' do
 end
 
 post '/game' do
-  @@error = false
+  @@action_does_not_exist = false
+  @@activate_actions      = false
 
   room   = Map::load_room(session)
   action = params[:action].downcase
 
   if room
-    if room.go(action) != "not compute"
+    if action == "actions"
+      @@activate_actions = true
+    elsif room.go(action) != "not compute"
       next_room = room.go(action) || room.go('*')
     else
-      @@error = true
+      @@action_does_not_exist = true
     end
 
     if next_room
