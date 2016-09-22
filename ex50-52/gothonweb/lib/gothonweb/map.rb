@@ -1,15 +1,19 @@
+require 'pry-byebug'
+require 'pry-inline'
+
 module Map
   class Room
 
     def initialize(name, description, show_actions=false, keypad=false)
-      @name         = name
-      @description  = description
-      @show_actions = show_actions
-      @keypad       = keypad
-      @paths        = {}
+      @name           = name
+      @description    = description
+      @show_actions   = show_actions
+      @keypad         = keypad
+      @code           = nil
+      @paths          = {}
     end
 
-    attr_reader :name, :description, :show_actions, :keypad, :paths
+    attr_reader :name, :description, :show_actions, :keypad, :code, :paths
 
     def go(direction)
       if @paths.include?(direction)
@@ -21,6 +25,10 @@ module Map
 
     def add_paths(paths)
       @paths.update(paths)
+    end
+
+    def generate_random_code
+      @code = "#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}"
     end
   end
 
@@ -37,7 +45,7 @@ module Map
     flowing around his hate filled body.  He's blocking the door to the
     Armory and about to pull a weapon to blast you.
     """,
-    true)
+    true) # show_actions
 
   LASER_WEAPON_ARMORY = Room.new("Laser Weapon Armory",
     """
@@ -56,8 +64,8 @@ module Map
     wrong 10 times then the lock closes forever and you can't
     get the bomb.  The code is 3 digits.
     """,
-    false,
-    true)
+    false, # show_actions
+    true)  # keypad
 
   THE_BRIDGE = Room.new("The Bridge", 
     """
@@ -72,7 +80,7 @@ module Map
     weapons out yet, as they see the active bomb under your
     arm and don't want to set it off.
     """,
-    true)
+    true) # show_actions
 
   ESCAPE_POD = Room.new("Escape Pod", 
     """
@@ -93,8 +101,8 @@ module Map
     but you don't have time to look.  There's 5 pods, which one
     do you take?
     """,
-    false,
-    true)
+    false, # show_actions
+    true)  # keypad
 
   THE_END_WINNER = Room.new("The End",
     """
@@ -157,18 +165,23 @@ module Map
     \n
     """)
 
+  # We generate the random code for the Laser Weapon Armory.
+  
+  LASER_WEAPON_ARMORY.generate_random_code
+
   # Now we connect the rooms using Room.add_paths(paths).
 
   CENTRAL_CORRIDOR.add_paths({
     'shoot!'      => SHOOT_DEATH,
     'dodge!'      => DODGE_DEATH,
-    'tell a joke' => LASER_WEAPON_ARMORY
+    'tell a joke' => LASER_WEAPON_ARMORY,
+    'next!'       => LASER_WEAPON_ARMORY 
     })
 
   LASER_WEAPON_ARMORY.add_paths({
-    '0132'  => THE_BRIDGE,
-    'next!' => THE_BRIDGE, 
-    '*'     => WRONG_CODE_DEATH
+    LASER_WEAPON_ARMORY.code => THE_BRIDGE,
+    'next!'                  => THE_BRIDGE, 
+    '*'                      => WRONG_CODE_DEATH
     })
 
   THE_BRIDGE.add_paths({
