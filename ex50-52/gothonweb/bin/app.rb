@@ -31,6 +31,31 @@ helpers do
     @@activate_hint
   end
 
+  def show_code_hint(code)
+    asterisk = rand(0..1)
+    # We want to know which round we are in in the loop.
+    # If we are in round 3 and we have asterisk = 0 (the previous character is a number),
+    # then we put another number. Otherwise we would have two asterisks and it would be
+    # too difficult to guess the number.
+    round = 0
+
+    hint = code.split("").collect do |n|
+      round += 1
+      # If there's an asterisk (asterisk = 1), it puts a number and sets asterisks to 0,
+      # else it puts an asterisk and sets asterisk to 1. This way we alternate them.
+      if asterisk == 1
+        asterisk = 0
+        n
+      elsif asterisk == 0 && round == 3
+        n
+      else
+        asterisk = 1
+        '*'
+      end
+    end
+    "Hint: #{hint.join}"
+  end
+
   def show_last_death_line
     quips = [
       "You died. You kinda suck at this.",

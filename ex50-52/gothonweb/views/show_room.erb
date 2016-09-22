@@ -31,7 +31,7 @@
 
 <% if room.keypad %>
   <% if show_hint? %>
-    <p><%= room.code %></p>
+    <p><%= show_code_hint(room.code) %></p>
   <% end %>
 <% end %>
 
