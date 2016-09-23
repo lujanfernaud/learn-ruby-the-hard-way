@@ -181,7 +181,7 @@ module Map
   LASER_WEAPON_ARMORY.add_paths({
     LASER_WEAPON_ARMORY.code => THE_BRIDGE,
     'next!'                  => THE_BRIDGE, 
-    '*'                      => WRONG_CODE_DEATH
+    'WRONG_CODE_DEATH'       => WRONG_CODE_DEATH
     })
 
   THE_BRIDGE.add_paths({

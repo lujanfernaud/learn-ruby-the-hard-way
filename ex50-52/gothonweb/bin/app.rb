@@ -16,6 +16,9 @@ configure do
   @@action_does_not_exist = false
   @@activate_actions      = false
   @@activate_hint         = false
+  @@activate_buzz         = false
+  @@hint_counter          = 0
+  @@guesses               = 0
 end
 
 helpers do
@@ -29,6 +32,14 @@ helpers do
 
   def show_hint?
     @@activate_hint
+  end
+
+  def hint_not_used?
+    @@hint_counter == 0
+  end
+
+  def buzzed?
+    @@activate_buzz
   end
 
   def show_code_hint(code)
@@ -54,6 +65,12 @@ helpers do
       end
     end
     "Hint: #{hint.join}"
+  end
+
+  def reset_buzz_guesses_and_hint
+    @@activate_buzz = false      
+    @@guesses = 0
+    @@hint_counter = 0
   end
 
   def show_last_death_line
@@ -88,18 +105,32 @@ post '/game' do
   @@activate_actions      = false
   @@activate_hint         = false
 
-  room   = Map::load_room(session)
-  action = params[:action].downcase
+  room    = Map::load_room(session)
+  action  = params[:action].downcase
 
   if room
-    if action == "actions"
-      @@activate_actions = true
-    elsif action == "hint!"  
-      @@activate_hint = true
-    elsif room.go(action) != "not compute"
-      next_room = room.go(action) || room.go('*')
+    if room.code    
+      if action == "hint!" && hint_not_used?
+        @@activate_hint = true      
+        @@hint_counter = 1
+      elsif action != room.code && @@guesses < 6
+        @@activate_buzz = true
+        @@guesses += 1
+      elsif action == room.code
+        next_room = room.go(action)
+        reset_buzz_guesses_and_hint
+      else
+        next_room = room.go('WRONG_CODE_DEATH')
+        reset_buzz_guesses_and_hint
+      end  
     else
-      @@action_does_not_exist = true
+      if action == "actions"
+        @@activate_actions = true
+      elsif room.go(action) != "not compute"
+        next_room = room.go(action) || room.go('*')
+      else
+        @@action_does_not_exist = true
+      end
     end
 
     if next_room

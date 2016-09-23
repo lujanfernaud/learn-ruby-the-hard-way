@@ -26,12 +26,21 @@
 <% end %>
 
 <% if room.keypad %>
-  <p>Type 'hint!' to receive a hint.</p>
-<% end %>
-
-<% if room.keypad %>
+  <% if hint_not_used? %>
+    <p>Type 'hint!' to receive a hint. You can only do it once.</p>
+  <% end %>
   <% if show_hint? %>
     <p><%= show_code_hint(room.code) %></p>
+  <% end %>
+  <% if room.code %>
+    <% if buzzed? %>
+      <p>BZZZZEDDD!</p>
+    <% end %>
+    <% if @@guesses > 0 && @@guesses != 6 %>
+      <p>Tries left: <%= 6 - @@guesses %></p>
+    <% elsif @@guesses == 6 %>
+      <p>Last try!</p>      
+    <% end %>
   <% end %>
 <% end %>
 
