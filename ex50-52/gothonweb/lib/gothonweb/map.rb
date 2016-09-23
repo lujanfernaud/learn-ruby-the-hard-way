@@ -4,16 +4,16 @@ require 'pry-inline'
 module Map
   class Room
 
-    def initialize(name, description, show_actions=false, keypad=false)
+    def initialize(name, description, actions=false, keypad=false)
       @name           = name
       @description    = description
-      @show_actions   = show_actions
+      @actions        = actions
       @keypad         = keypad
       @code           = nil
       @paths          = {}
     end
 
-    attr_reader :name, :description, :show_actions, :keypad, :code, :paths
+    attr_reader :name, :description, :actions, :keypad, :code, :paths
 
     def go(direction)
       if @paths.include?(direction)
@@ -45,7 +45,7 @@ module Map
     flowing around his hate filled body.  He's blocking the door to the
     Armory and about to pull a weapon to blast you.
     """,
-    true) # show_actions
+    true) # actions
 
   LASER_WEAPON_ARMORY = Room.new("Laser Weapon Armory",
     """
@@ -64,7 +64,7 @@ module Map
     wrong 10 times then the lock closes forever and you can't
     get the bomb.  The code is 3 digits.
     """,
-    false, # show_actions
+    false, # actions
     true)  # keypad
 
   THE_BRIDGE = Room.new("The Bridge", 
@@ -80,7 +80,7 @@ module Map
     weapons out yet, as they see the active bomb under your
     arm and don't want to set it off.
     """,
-    true) # show_actions
+    true) # actions
 
   ESCAPE_POD = Room.new("Escape Pod", 
     """
@@ -101,7 +101,7 @@ module Map
     but you don't have time to look.  There's 5 pods, which one
     do you take?
     """,
-    false, # show_actions
+    false, # actions
     true)  # keypad
 
   THE_END_WINNER = Room.new("The End",

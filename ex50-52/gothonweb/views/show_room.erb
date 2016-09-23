@@ -6,18 +6,16 @@
   <%= room.description %>
 </p>
 
-<% if room.show_actions %>
+<% if room.actions %>
+  <% if !show_actions? %>
   <p>Type 'actions' to see available actions.</p>
-<% end %>
-
-<% if room.show_actions %>
-  <% if show_actions? %>
+  <% else %>
     <% i = 1 %> 
     <h2><%= "Actions: " %></h2>
     <ul>
     <% room.paths.keys.each do |action| %>
       <% if action != "next!" %>
-        <li><%= "- #{action}" %></li>
+        <li><%= "#{action}" %></li>
       <% end %>
       <% i += 1 %>
     <% end %>
