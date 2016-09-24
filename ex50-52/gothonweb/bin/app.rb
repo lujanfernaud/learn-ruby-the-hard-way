@@ -156,7 +156,7 @@ post '/game' do
         @@door_locked = true
         @@guesses += 1
       else
-        next_room = room.go('WRONG_CODE_DEATH')
+        next_room = room.go('THE_END_LOSER_2')
         reset_buzz_guesses_hint_and_door
       end  
     else

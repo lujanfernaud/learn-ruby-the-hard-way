@@ -44,7 +44,8 @@
       <p><%= "A door that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
     <% end %>
     <% if door_did_not_open? %>
-      <p>The door is locked!</p>
+      <p>The pod is locked.</p>
+      <p>This is your last try!</p>
     <% end %>  
   <% end %>
 <% end %>
