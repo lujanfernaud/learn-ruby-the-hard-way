@@ -17,6 +17,7 @@ configure do
   @@activate_actions      = false
   @@activate_hint         = false
   @@activate_buzz         = false
+  @@door_locked           = false
   @@hint_counter          = 0
   @@guesses               = 0
 end
@@ -40,6 +41,10 @@ helpers do
 
   def buzzed?
     @@activate_buzz
+  end
+
+  def door_did_not_open?
+    @@door_locked
   end
 
   def show_code_hint(code)
@@ -67,10 +72,27 @@ helpers do
     "Hint: #{hint.join}"
   end
 
-  def reset_buzz_guesses_and_hint
+  def show_door_hint(good_door, bad_door=nil, total_doors)
+    good_door_number = [good_door.to_i]
+    bad_door_number  = [bad_door.to_i] if bad_door
+    doors_array      = [*1..total_doors]
+    hint             = doors_array - good_door_number - bad_door_number
+    switch           = rand(0..1)
+
+    if switch == 0
+      hint.shift
+    else
+      hint.pop
+    end
+
+    hint.join(", ")
+  end
+
+  def reset_buzz_guesses_hint_and_door
     @@activate_buzz = false      
-    @@guesses = 0
-    @@hint_counter = 0
+    @@guesses       = 0
+    @@hint_counter  = 0
+    @@door_locked   = false
   end
 
   def show_last_death_line
@@ -113,15 +135,29 @@ post '/game' do
       if action == "hint!" && hint_not_used?
         @@activate_hint = true      
         @@hint_counter = 1
+      elsif room.go(action) != "not compute"
+        next_room = room.go(action)
+        reset_buzz_guesses_hint_and_door
       elsif action != room.code && @@guesses < 6
         @@activate_buzz = true
         @@guesses += 1
-      elsif action == room.code
-        next_room = room.go(action)
-        reset_buzz_guesses_and_hint
       else
         next_room = room.go('WRONG_CODE_DEATH')
-        reset_buzz_guesses_and_hint
+        reset_buzz_guesses_hint_and_door
+      end
+    elsif room.doors
+      if action == "hint!" && hint_not_used?
+        @@activate_hint = true      
+        @@hint_counter = 1
+      elsif room.go(action) != "not compute"
+        next_room = room.go(action)
+        reset_buzz_guesses_hint_and_door
+      elsif room.go(action) == "not compute" && @@guesses < 1
+        @@door_locked = true
+        @@guesses += 1
+      else
+        next_room = room.go('WRONG_CODE_DEATH')
+        reset_buzz_guesses_hint_and_door
       end  
     else
       if action == "actions"

@@ -10,10 +10,13 @@ module Map
       @actions        = actions
       @keypad         = keypad
       @code           = nil
+      @doors          = nil
+      @good_door      = nil
+      @bad_door       = nil
       @paths          = {}
     end
 
-    attr_reader :name, :description, :actions, :keypad, :code, :paths
+    attr_reader :name, :description, :actions, :keypad, :code, :doors, :good_door, :bad_door, :paths
 
     def go(direction)
       if @paths.include?(direction)
@@ -29,6 +32,17 @@ module Map
 
     def generate_random_code
       @code = "#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}"
+    end
+
+    def generate_random_doors(maximum_doors)
+      @doors     = maximum_doors
+      @good_door = "#{rand(1..maximum_doors)}"
+      @bad_door  = "#{rand(1..maximum_doors)}"
+
+      # Check if bad_door is the same as good_door, and generate a new one if needed.
+      while @bad_door == @good_door
+        @bad_door = "#{rand(1..maximum_doors)}"
+      end
     end
   end
 
@@ -67,6 +81,8 @@ module Map
     false, # actions
     true)  # keypad
 
+  LASER_WEAPON_ARMORY.generate_random_code
+
   THE_BRIDGE = Room.new("The Bridge", 
     """
     The container clicks open and the seal breaks, letting gas out.
@@ -104,9 +120,11 @@ module Map
     false, # actions
     true)  # keypad
 
+  ESCAPE_POD.generate_random_doors(5)
+
   THE_END_WINNER = Room.new("The End",
     """
-    You jump into pod 2 and hit the eject button.
+    You jump into pod #{ESCAPE_POD.good_door} and hit the eject button.
     The pod easily slides out into space heading to
     the planet below.  As it flies to the planet, you look
     back and see your ship implode then explode like a
@@ -114,7 +132,7 @@ module Map
     time.  You won!
     """)
 
-  THE_END_LOSER = Room.new("The End",
+  THE_END_LOSER_1 = Room.new("Dead",
     """
     You jump into a random pod and hit the eject button.
     The pod escapes out into the void of space, then
@@ -122,7 +140,12 @@ module Map
     into jam jelly.
     """)
 
-  SHOOT_DEATH = Room.new("Shoot death", 
+  THE_END_LOSER_2 = Room.new("Dead",
+    """
+    The ship explodes.
+    """)
+
+  SHOOT_DEATH = Room.new("Dead", 
     """
     Quick on the draw you yank out your blaster and fire it at the Gothon.
     His clown costume is flowing and moving around his body, which throws
@@ -133,7 +156,7 @@ module Map
     \n
     """)
   
-  DODGE_DEATH = Room.new("Dodge death", 
+  DODGE_DEATH = Room.new("Dead", 
     """
     Like a world class boxer you dodge, weave, slip and slide right
     as the Gothon's blaster cranks a laser past your head.
@@ -144,7 +167,7 @@ module Map
     \n
     """)
 
-  WRONG_CODE_DEATH = Room.new("Wrong code death", 
+  WRONG_CODE_DEATH = Room.new("Dead", 
     """
     The lock buzzes one last time and then you hear a sickening
     melting sound as the mechanism is fused together.
@@ -153,7 +176,7 @@ module Map
     \n
     """)
 
-  BOMB_DEATH = Room.new("Bomb death", 
+  BOMB_DEATH = Room.new("Dead", 
     """
     In a panic you throw the bomb at the group of Gothons
     and make a leap for the door. Right as you drop it a
@@ -165,35 +188,32 @@ module Map
     \n
     """)
 
-  # We generate the random code for the Laser Weapon Armory.
-  
-  LASER_WEAPON_ARMORY.generate_random_code
-
   # Now we connect the rooms using Room.add_paths(paths).
 
   CENTRAL_CORRIDOR.add_paths({
     'shoot!'      => SHOOT_DEATH,
     'dodge!'      => DODGE_DEATH,
     'tell a joke' => LASER_WEAPON_ARMORY,
-    'next!'       => LASER_WEAPON_ARMORY 
+    'next!!'      => LASER_WEAPON_ARMORY 
     })
 
   LASER_WEAPON_ARMORY.add_paths({
     LASER_WEAPON_ARMORY.code => THE_BRIDGE,
-    'next!'                  => THE_BRIDGE, 
+    'next!!'                 => THE_BRIDGE, 
     'WRONG_CODE_DEATH'       => WRONG_CODE_DEATH
     })
 
   THE_BRIDGE.add_paths({
     'throw the bomb'        => BOMB_DEATH,
-    'next!'                 => ESCAPE_POD,
+    'next!!'                => ESCAPE_POD,
     'slowly place the bomb' => ESCAPE_POD
     })
 
   ESCAPE_POD.add_paths({
-    '2'     => THE_END_WINNER,
-    'next!' => THE_END_WINNER,
-    '*'     => THE_END_LOSER
+    ESCAPE_POD.good_door => THE_END_WINNER,
+    'next!!'             => THE_END_WINNER,
+    ESCAPE_POD.bad_door  => THE_END_LOSER_1,
+    'THE_END_LOSER_2'    => THE_END_LOSER_2
     })
 
   START = CENTRAL_CORRIDOR
@@ -209,7 +229,8 @@ module Map
     'THE_BRIDGE'          => THE_BRIDGE,
     'ESCAPE_POD'          => ESCAPE_POD,
     'THE_END_WINNER'      => THE_END_WINNER,
-    'THE_END_LOSER'       => THE_END_LOSER,
+    'THE_END_LOSER_1'     => THE_END_LOSER_1,
+    'THE_END_LOSER_2'     => THE_END_LOSER_2,
     'SHOOT_DEATH'         => SHOOT_DEATH,
     'DODGE_DEATH'         => DODGE_DEATH,
     'WRONG_CODE_DEATH'    => WRONG_CODE_DEATH,

@@ -14,7 +14,7 @@
     <h2><%= "Actions: " %></h2>
     <ul>
     <% room.paths.keys.each do |action| %>
-      <% if action != "next!" %>
+      <% if action != "next!!" %>
         <li><%= "#{action}" %></li>
       <% end %>
       <% i += 1 %>
@@ -25,12 +25,12 @@
 
 <% if room.keypad %>
   <% if hint_not_used? %>
-    <p>Type 'hint!' to receive a hint. You can only do it once.</p>
-  <% end %>
-  <% if show_hint? %>
-    <p><%= show_code_hint(room.code) %></p>
+    <p>Type 'hint!' to receive a hint. You can only do it once in this room.</p>
   <% end %>
   <% if room.code %>
+    <% if show_hint? %>
+      <p><%= show_code_hint(room.code) %></p>
+    <% end %>
     <% if buzzed? %>
       <p>BZZZZEDDD!</p>
     <% end %>
@@ -39,6 +39,13 @@
     <% elsif @@guesses == 6 %>
       <p>Last try!</p>      
     <% end %>
+  <% elsif room.doors %>
+    <% if show_hint? %>
+      <p><%= "A door that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
+    <% end %>
+    <% if door_did_not_open? %>
+      <p>The door is locked!</p>
+    <% end %>  
   <% end %>
 <% end %>
 
@@ -46,7 +53,7 @@
   <p>DOES NOT COMPUTE!</p>
 <% end %>
 
-<% if room.name =~ /death/ %>
+<% if room.name == "Dead" || room.name =~ /death/ %>
   <p><%= show_last_death_line %></p>
   <p><a href="/">Play Again?</a></p>
 <% elsif room.name == "The End" %>
