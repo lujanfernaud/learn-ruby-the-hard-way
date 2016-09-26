@@ -12,14 +12,12 @@
   <% if !show_actions? %>
   <p>Type 'actions' to see available actions.</p>
   <% else %>
-    <% i = 1 %> 
     <h2><%= "Actions: " %></h2>
     <ul>
     <% room.paths.keys.each do |action| %>
       <% if action != "next!!" %>
         <li><%= "#{action}" %></li>
       <% end %>
-      <% i += 1 %>
     <% end %>
     </ul>
   <% end %>
@@ -31,7 +29,7 @@
   <% end %>
   <% if room.code %>
     <% if show_hint? %>
-      <p><%= show_code_hint(room.code) %></p>
+      <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
     <% end %>
     <% if buzzed? %>
       <p>BZZZZEDDD!</p>

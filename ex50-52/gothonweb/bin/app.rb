@@ -69,7 +69,7 @@ helpers do
         '*'
       end
     end
-    "Hint: #{hint.join}"
+    hint.join.to_s
   end
 
   def show_door_hint(good_door, bad_door=nil, total_doors)
