@@ -1,4 +1,4 @@
-module Variables
+module ClassVariables
 
   @@action_does_not_exist = false
   @@activate_actions      = false

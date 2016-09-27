@@ -1,7 +1,7 @@
-require './bin/variables.rb'
+require './bin/class_variables.rb'
 
 module Helpers
-  include Variables
+  include ClassVariables
 
   def does_not_compute?
     @@action_does_not_exist
@@ -55,8 +55,14 @@ module Helpers
     good_door_number = [good_door.to_i]
     bad_door_number  = [bad_door.to_i] if bad_door
     doors_array      = [*1..total_doors]
-    hint             = doors_array - good_door_number - bad_door_number
-    switch           = rand(0..1)
+    
+    if bad_door
+      hint = doors_array - good_door_number - bad_door_number
+    else
+      hint = doors_array - good_door_number
+    end
+    
+    switch = rand(0..1)
 
     if switch == 0
       hint.shift

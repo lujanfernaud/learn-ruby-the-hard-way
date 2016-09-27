@@ -1,7 +1,7 @@
 require 'sinatra'
 
 require './lib/gothonweb/map.rb'
-require './bin/variables.rb'
+require './bin/class_variables.rb'
 require './helpers/helpers.rb'
 
 require 'pry-byebug'
@@ -17,7 +17,7 @@ configure do
   set    :session_secret, "BADSECRET"
 end
 
-include Variables
+include ClassVariables
 
 helpers Helpers
 
