@@ -182,8 +182,6 @@ module Map
     </p>
     """)
   
-  THE_END_LOSER_1.player_dies
-
   THE_END_LOSER_2 = Room.new("Escape Pod",
     """
     <p>
@@ -191,8 +189,6 @@ module Map
     </p>
     """)
   
-  THE_END_LOSER_2.player_dies
-
   SHOOT_DEATH = Room.new("Central Corridor", 
     """
     <p>
@@ -204,8 +200,6 @@ module Map
     you are dead. Then he eats you.
     </p>
     """)
-  
-  SHOOT_DEATH.player_dies
   
   DODGE_DEATH = Room.new("Central Corridor", 
     """
@@ -221,8 +215,6 @@ module Map
     </p>
     """)
 
-  DODGE_DEATH.player_dies
-
   WRONG_CODE_DEATH = Room.new("Laser Weapon Armory", 
     """
     <p>
@@ -234,8 +226,6 @@ module Map
     ship from their ship and you die.
     </p>
     """)
-
-  WRONG_CODE_DEATH.player_dies
 
   BOMB_DEATH = Room.new("The Bridge", 
     """
@@ -251,7 +241,23 @@ module Map
     </p>
     """)
 
-  BOMB_DEATH.player_dies
+  DEATH_ROOMS = [
+    THE_END_LOSER_1,
+    THE_END_LOSER_2,
+    SHOOT_DEATH,
+    DODGE_DEATH,
+    WRONG_CODE_DEATH,
+    BOMB_DEATH
+  ]
+
+  DEATH_ROOMS.each do |room|
+    room.player_dies
+  end
+
+  BYE = Room.new("Bye",
+    """
+    Bye!
+    """)
 
   # Now we connect the rooms using Room.add_paths(paths).
 
@@ -283,6 +289,13 @@ module Map
 
   START = CENTRAL_CORRIDOR
 
+  DEATH_ROOMS.each do |room|
+    room.add_paths({
+      'yes' => START,
+      'no'  => BYE
+      })
+  end
+
   # A whitelist of allowed room names. We use this so that
   # bad people on the internet can't access random variables
   # with names. You can use Test::constants and Kernel.const_get
@@ -300,7 +313,8 @@ module Map
     'DODGE_DEATH'         => DODGE_DEATH,
     'WRONG_CODE_DEATH'    => WRONG_CODE_DEATH,
     'BOMB_DEATH'          => BOMB_DEATH,
-    'START'               => START
+    'START'               => START,
+    'BYE'                 => BYE
   }
 
   def Map::load_room(session)
