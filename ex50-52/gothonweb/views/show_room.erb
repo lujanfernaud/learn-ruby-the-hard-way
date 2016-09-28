@@ -56,10 +56,11 @@
 
 <% if !room.player_alive %>
   <p><%= show_last_death_line %></p>
-  <p><a href="/">Play Again?</a></p>
+  <p>Play Again?</p>
 <% elsif room.name == "The End" %>
-  <p><a href="/">Play Again?</a></p>
-<% else %>
+  <p>Play Again?</p>
+<% end %>
+<% if room.name != "Bye" %>
   <form action="/game" method="POST">
     <input type="text" name="action">
     <input type="submit">
