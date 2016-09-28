@@ -4,11 +4,12 @@ require 'pry-inline'
 module Map
   class Room
 
-    def initialize(name, description, actions=false, keypad=false)
+    def initialize(name, description, actions=false, keypad=false, player_alive=true)
       @name           = name
       @description    = description
       @actions        = actions
       @keypad         = keypad
+      @player_alive   = player_alive
       @code           = nil
       @doors          = nil
       @good_door      = nil
@@ -16,7 +17,7 @@ module Map
       @paths          = {}
     end
 
-    attr_reader :name, :description, :actions, :keypad, :code, :doors, :good_door, :bad_door, :paths
+    attr_reader   :name, :description, :actions, :keypad, :player_alive, :code, :doors, :good_door, :bad_door, :paths
 
     def go(direction)
       if @paths.include?(direction)
@@ -44,6 +45,10 @@ module Map
         @bad_door = "#{rand(1..maximum_doors)}"
       end
     end
+
+    def player_dies
+      @player_alive = false
+    end
   end
 
   CENTRAL_CORRIDOR = Room.new("Central Corridor",
@@ -62,7 +67,7 @@ module Map
     Armory and about to pull a weapon to blast you.
     </p>
     """,
-    true) # actions
+    actions = true)
 
   LASER_WEAPON_ARMORY = Room.new("Laser Weapon Armory",
     """
@@ -92,8 +97,8 @@ module Map
     The code is 3 digits.
     </p>
     """,
-    false, # actions
-    true)  # keypad
+    actions = false,
+    keypad  = true)
 
   LASER_WEAPON_ARMORY.generate_random_code
 
@@ -118,7 +123,7 @@ module Map
     arm and don't want to set it off.
     </p>
     """,
-    true) # actions
+    actions = true)
 
   ESCAPE_POD = Room.new("Escape Pod", 
     """
@@ -146,8 +151,8 @@ module Map
     There are 5 pods, which one do you take?
     </p> 
     """,
-    false, # actions
-    true)  # keypad
+    actions = false,
+    keypad  = true)
 
   ESCAPE_POD.generate_random_doors(5)
 
@@ -167,7 +172,7 @@ module Map
     <h2>You won!</h2>
     """)
 
-  THE_END_LOSER_1 = Room.new("Dead",
+  THE_END_LOSER_1 = Room.new("Pod",
     """
     <p>
     You jump into a random pod and hit the eject button.
@@ -176,15 +181,19 @@ module Map
     into jam jelly.
     </p>
     """)
+  
+  THE_END_LOSER_1.player_dies
 
-  THE_END_LOSER_2 = Room.new("Dead",
+  THE_END_LOSER_2 = Room.new("Escape Pod",
     """
     <p>
     The ship explodes.
     </p>
     """)
+  
+  THE_END_LOSER_2.player_dies
 
-  SHOOT_DEATH = Room.new("Dead", 
+  SHOOT_DEATH = Room.new("Central Corridor", 
     """
     <p>
     Quick on the draw you yank out your blaster and fire it at the Gothon.
@@ -196,7 +205,9 @@ module Map
     </p>
     """)
   
-  DODGE_DEATH = Room.new("Dead", 
+  SHOOT_DEATH.player_dies
+  
+  DODGE_DEATH = Room.new("Central Corridor", 
     """
     <p>
     Like a world class boxer you dodge, weave, slip and slide right
@@ -210,7 +221,9 @@ module Map
     </p>
     """)
 
-  WRONG_CODE_DEATH = Room.new("Dead", 
+  DODGE_DEATH.player_dies
+
+  WRONG_CODE_DEATH = Room.new("Laser Weapon Armory", 
     """
     <p>
     The lock buzzes one last time and then you hear a sickening
@@ -222,7 +235,9 @@ module Map
     </p>
     """)
 
-  BOMB_DEATH = Room.new("Dead", 
+  WRONG_CODE_DEATH.player_dies
+
+  BOMB_DEATH = Room.new("The Bridge", 
     """
     <p>
     In a panic you throw the bomb at the group of Gothons
@@ -235,6 +250,8 @@ module Map
     it goes off.
     </p>
     """)
+
+  BOMB_DEATH.player_dies
 
   # Now we connect the rooms using Room.add_paths(paths).
 

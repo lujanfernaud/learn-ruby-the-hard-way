@@ -54,7 +54,7 @@
   <p>DOES NOT COMPUTE!</p>
 <% end %>
 
-<% if room.name == "Dead" %>
+<% if !room.player_alive %>
   <p><%= show_last_death_line %></p>
   <p><a href="/">Play Again?</a></p>
 <% elsif room.name == "The End" %>

@@ -108,6 +108,15 @@ class TestGame < Test::Unit::TestCase
     assert_equal("not compute", Map::ESCAPE_POD.go('asas'))
   end
 
+  def test_check_if_player_is_alive
+    assert_equal(false, Map::THE_END_LOSER_1.player_alive)
+    assert_equal(false, Map::THE_END_LOSER_2.player_alive)
+    assert_equal(false, Map::SHOOT_DEATH.player_alive)
+    assert_equal(false, Map::DODGE_DEATH.player_alive)
+    assert_equal(false, Map::WRONG_CODE_DEATH.player_alive)
+    assert_equal(false, Map::BOMB_DEATH.player_alive)
+  end
+
   def test_session_loading
     session = {}
 
