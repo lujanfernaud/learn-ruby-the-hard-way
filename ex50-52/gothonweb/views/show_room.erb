@@ -53,7 +53,7 @@
 <% if !room.player_alive %>
   <p><%= show_last_death_line %></p>
   <p>Play Again?</p>
-<% elsif room.name == "The End" %>
+<% elsif room.player_won %>
   <p>Play Again?</p>
 <% end %>
 

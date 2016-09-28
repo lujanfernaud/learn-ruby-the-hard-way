@@ -4,12 +4,13 @@ require 'pry-inline'
 module Map
   class Room
 
-    def initialize(name, description, actions=false, keypad=false, player_alive=true)
+    def initialize(name, description, actions=false, keypad=false)
       @name           = name
       @description    = description
       @actions        = actions
       @keypad         = keypad
-      @player_alive   = player_alive
+      @player_alive   = true
+      @player_won     = false
       @code           = nil
       @doors          = nil
       @good_door      = nil
@@ -17,7 +18,7 @@ module Map
       @paths          = {}
     end
 
-    attr_reader   :name, :description, :actions, :keypad, :player_alive, :code, :doors, :good_door, :bad_door, :paths
+    attr_reader   :name, :description, :actions, :keypad, :player_alive, :player_won, :code, :doors, :good_door, :bad_door, :paths
 
     def go(direction)
       if @paths.include?(direction)
@@ -48,6 +49,10 @@ module Map
 
     def player_dies
       @player_alive = false
+    end
+
+    def player_wins
+      @player_won = true
     end
   end
 
@@ -171,7 +176,7 @@ module Map
 
   ESCAPE_POD.generate_random_doors(5)
 
-  THE_END_WINNER = Room.new("The End",
+  THE_END_WINNER = Room.new("Pod #{ESCAPE_POD.good_door}",
     """
     <p>
     You jump into pod #{ESCAPE_POD.good_door} and hit the eject button.
@@ -187,10 +192,12 @@ module Map
     <h2>You won!</h2>
     """)
 
-  THE_END_LOSER_1 = Room.new("Pod",
+  THE_END_WINNER.player_wins
+
+  THE_END_LOSER_1 = Room.new("Pod #{ESCAPE_POD.bad_door}",
     """
     <p>
-    You jump into a random pod and hit the eject button.
+    You jump into pod #{ESCAPE_POD.bad_door} and hit the eject button.
     The pod escapes out into the void of space, then
     implodes as the hull ruptures, crushing your body
     into jam jelly.
@@ -318,6 +325,11 @@ module Map
     })
 
   START = CENTRAL_CORRIDOR
+
+  THE_END_WINNER.add_paths({
+    'yes' => START,
+    'no'  => BYE
+    })
 
   DEATH_ROOMS.each do |room|
     room.add_paths({
