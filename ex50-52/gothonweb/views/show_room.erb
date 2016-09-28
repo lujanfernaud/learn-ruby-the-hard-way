@@ -9,7 +9,7 @@
 </p>
 
 <% if room.actions %>
-  <% if !show_actions? %>
+  <% if !show_actions? && !show_actions_by_default? %>
   <p>Type 'actions' to see available actions.</p>
   <% else %>
     <h2><%= "Actions: " %></h2>

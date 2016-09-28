@@ -11,6 +11,10 @@ module Helpers
     @@activate_actions
   end
 
+  def show_actions_by_default?
+    @@activate_actions_by_default
+  end
+
   def show_hint?
     @@activate_hint
   end
