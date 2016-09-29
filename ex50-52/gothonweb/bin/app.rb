@@ -24,6 +24,13 @@ class App < Sinatra::Base
   helpers Helpers
 
   get '/' do
+    @@action_does_not_exist       = false
+    @@activate_actions            = false
+    @@activate_actions_by_default = true
+    @@activate_hint               = false
+    @@activate_buzz               = false
+    reset_buzz_guesses_hint_and_door
+
     session[:room] = 'START'
     redirect '/game'
   end

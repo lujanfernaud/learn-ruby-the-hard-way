@@ -4,9 +4,11 @@
   </h1>
 <% end %>
 
-<p>
-  <%= room.description %>
-</p>
+<% if !buzzed? %>
+  <p>
+    <%= room.description %>
+  </p>
+<% end %>
 
 <% if room.actions %>
   <% if !show_actions? && !show_actions_by_default? %>
