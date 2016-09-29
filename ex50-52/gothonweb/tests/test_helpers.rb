@@ -1,11 +1,10 @@
-require './bin/app.rb'
 require './helpers/helpers.rb'
 require 'test/unit'
 
 require 'pry-byebug'
 require 'pry-inline'
 
-class TestApp < Test::Unit::TestCase
+class TestHelpers < Test::Unit::TestCase
   include Helpers
 
   def test_show_code_hint
