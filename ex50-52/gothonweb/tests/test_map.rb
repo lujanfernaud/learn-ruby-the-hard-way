@@ -117,6 +117,11 @@ class TestGame < Test::Unit::TestCase
     assert_equal(false, Map::BOMB_DEATH.player_alive)
   end
 
+  def test_if_player_won
+    Map::THE_END_WINNER.player_wins
+    assert_equal(true, Map::THE_END_WINNER.player_won)
+  end
+
   def test_session_loading
     session = {}
 
