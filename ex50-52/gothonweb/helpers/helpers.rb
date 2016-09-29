@@ -31,6 +31,18 @@ module Helpers
     @@door_locked
   end
 
+  def guesses?
+    @@guesses > 0
+  end
+
+  def check_guesses
+    if @@guesses > 0 && @@guesses != 6
+      "<p>Tries left: #{6 - @@guesses}</p>"
+    elsif @@guesses == 6
+      "<p>Last try!</p>"
+    end
+  end
+
   def show_code_hint(code)
     asterisk = rand(0..1)
     round    = 0

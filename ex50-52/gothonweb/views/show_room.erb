@@ -34,10 +34,8 @@
     <% if buzzed? %>
       <p>BZZZZEDDD!</p>
     <% end %>
-    <% if @@guesses > 0 && @@guesses != 6 %>
-      <p>Tries left: <%= 6 - @@guesses %></p>
-    <% elsif @@guesses == 6 %>
-      <p>Last try!</p>      
+    <% if guesses? %>
+      <%= check_guesses %>
     <% end %>
   <% elsif room.doors %>
     <% if show_hint? %>
