@@ -5,6 +5,8 @@ module ClassVariables
   @@activate_actions_by_default = true
   @@activate_hint               = false
   @@activate_buzz               = false
+  @@previous_bzed               = nil
+  @@bzed                        = nil
   @@door_locked                 = false
   @@hint_counter                = 0
   @@guesses                     = 0

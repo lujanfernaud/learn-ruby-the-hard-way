@@ -32,7 +32,7 @@
       <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
     <% end %>
     <% if buzzed? %>
-      <p>BZZZZEDDD!</p>
+      <%= buzz %>
     <% end %>
     <% if guesses? %>
       <%= check_guesses %>

@@ -27,6 +27,21 @@ module Helpers
     @@activate_buzz
   end
 
+  def buzz
+    while @@bzed == @@previous_bzed
+      b = "B"
+      z = "Z" * rand(4..6)
+      e = "E"
+      d = "D" * 2
+
+      @@bzed = b + z + e + d
+    end
+
+    @@previous_bzed = @@bzed
+
+    "<p>#{@@bzed}</p>"
+  end
+
   def door_did_not_open?
     @@door_locked
   end
