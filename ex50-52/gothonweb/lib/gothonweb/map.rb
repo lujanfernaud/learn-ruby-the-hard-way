@@ -182,7 +182,7 @@ module Map
     bright star, taking out the Gothon ship at the same
     time.
     </p>
-    <h2>You won!</h2>
+    You won!
     """)
 
   THE_END_WINNER.player_wins
