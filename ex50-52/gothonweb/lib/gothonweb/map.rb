@@ -73,7 +73,7 @@ module Map
     """,
     actions = true)
 
-  LASER_WEAPON_ARMORY = Room.new("Laser Weapon Armory",
+  CENTRAL_CORRIDOR_2 = Room.new("Central Corridor",
     """
     <p>
     Lucky for you they made you learn Gothon insults in the academy.
@@ -86,6 +86,11 @@ module Map
     The Gothon stops, tries not to laugh, then busts out laughing and can't move. 
     While he's laughing you run up and shoot him square in the head putting him down.
     </p>
+    """,
+    actions = true)
+
+  LASER_WEAPON_ARMORY = Room.new("Laser Weapon Armory",
+    """
     <p>
     You do a dive roll into the Weapon Armory, crouch and scan the room
     for more Gothons that might be hiding. It's dead quiet, too quiet.
@@ -105,7 +110,7 @@ module Map
 
   LASER_WEAPON_ARMORY.generate_random_code
 
-  THE_BRIDGE = Room.new("The Bridge", 
+  LASER_WEAPON_ARMORY_2 = Room.new("Laser Weapon Armory",
     """
     <p>
     CLICK!
@@ -115,6 +120,11 @@ module Map
     You grab the neutron bomb and run as fast as you can to the
     bridge where you must place it in the right spot.
     </p>
+    """,
+    actions = true)
+
+  THE_BRIDGE = Room.new("The Bridge", 
+    """
     <p>
     You burst onto the Bridge with the netron destruct bomb
     under your arm and surprise 5 Gothons who are trying to
@@ -126,7 +136,7 @@ module Map
     """,
     actions = true)
 
-  ESCAPE_POD = Room.new("Escape Pod", 
+  THE_BRIDGE_2 = Room.new("The Bridge", 
     """
     <p>
     You point your blaster at the bomb under your arm
@@ -135,9 +145,16 @@ module Map
     place the bomb on the floor, pointing your blaster at it.
     You then jump back through the door, punch the close button
     and blast the lock so the Gothons can't get out.
+    </p>
+    <p>
     Now that the bomb is placed you run to the escape pod to
     get off this tin can.
     </p>
+    """,
+    actions = true)
+
+  ESCAPE_POD = Room.new("Escape Pod", 
+    """
     <p>
     You rush through the ship desperately trying to make it to
     the escape pod before the whole ship explodes. It seems like
@@ -226,7 +243,7 @@ module Map
     </p>
     <p>
     You decide to sit there, and finally the Gothons blow up the
-    ship from their ship and you die.
+    ship from their ship.
     </p>
     """)
 
@@ -267,20 +284,32 @@ module Map
   CENTRAL_CORRIDOR.add_paths({
     'shoot!'      => SHOOT_DEATH,
     'dodge!'      => DODGE_DEATH,
-    'tell a joke' => LASER_WEAPON_ARMORY,
-    'next!!'      => LASER_WEAPON_ARMORY 
+    'tell a joke' => CENTRAL_CORRIDOR_2,
+    'next!!'      => CENTRAL_CORRIDOR_2 
+    })
+
+  CENTRAL_CORRIDOR_2.add_paths({
+    'run' => LASER_WEAPON_ARMORY
     })
 
   LASER_WEAPON_ARMORY.add_paths({
-    LASER_WEAPON_ARMORY.code => THE_BRIDGE,
-    'next!!'                 => THE_BRIDGE, 
+    LASER_WEAPON_ARMORY.code => LASER_WEAPON_ARMORY_2,
+    'next!!'                 => LASER_WEAPON_ARMORY_2, 
     'WRONG_CODE_DEATH'       => WRONG_CODE_DEATH
+    })
+
+  LASER_WEAPON_ARMORY_2.add_paths({
+    'run' => THE_BRIDGE
     })
 
   THE_BRIDGE.add_paths({
     'throw the bomb'        => BOMB_DEATH,
-    'next!!'                => ESCAPE_POD,
-    'slowly place the bomb' => ESCAPE_POD
+    'next!!'                => THE_BRIDGE_2,
+    'slowly place the bomb' => THE_BRIDGE_2
+    })
+
+  THE_BRIDGE_2.add_paths({
+    'run' => ESCAPE_POD
     })
 
   ESCAPE_POD.add_paths({
@@ -306,23 +335,25 @@ module Map
 
   # A whitelist of allowed room names. We use this so that
   # bad people on the internet can't access random variables
-  # with names. You can use Test::constants and Kernel.const_get
-  # too.
+  # with names.
   
   ROOM_NAMES = {
-    'CENTRAL_CORRIDOR'    => CENTRAL_CORRIDOR,
-    'LASER_WEAPON_ARMORY' => LASER_WEAPON_ARMORY,
-    'THE_BRIDGE'          => THE_BRIDGE,
-    'ESCAPE_POD'          => ESCAPE_POD,
-    'THE_END_WINNER'      => THE_END_WINNER,
-    'THE_END_LOSER_1'     => THE_END_LOSER_1,
-    'THE_END_LOSER_2'     => THE_END_LOSER_2,
-    'SHOOT_DEATH'         => SHOOT_DEATH,
-    'DODGE_DEATH'         => DODGE_DEATH,
-    'WRONG_CODE_DEATH'    => WRONG_CODE_DEATH,
-    'BOMB_DEATH'          => BOMB_DEATH,
-    'START'               => START,
-    'BYE'                 => BYE
+    'CENTRAL_CORRIDOR'      => CENTRAL_CORRIDOR,
+    'CENTRAL_CORRIDOR_2'    => CENTRAL_CORRIDOR_2,
+    'LASER_WEAPON_ARMORY'   => LASER_WEAPON_ARMORY,
+    'LASER_WEAPON_ARMORY_2' => LASER_WEAPON_ARMORY_2,
+    'THE_BRIDGE'            => THE_BRIDGE,
+    'THE_BRIDGE_2'          => THE_BRIDGE_2,
+    'ESCAPE_POD'            => ESCAPE_POD,
+    'THE_END_WINNER'        => THE_END_WINNER,
+    'THE_END_LOSER_1'       => THE_END_LOSER_1,
+    'THE_END_LOSER_2'       => THE_END_LOSER_2,
+    'SHOOT_DEATH'           => SHOOT_DEATH,
+    'DODGE_DEATH'           => DODGE_DEATH,
+    'WRONG_CODE_DEATH'      => WRONG_CODE_DEATH,
+    'BOMB_DEATH'            => BOMB_DEATH,
+    'START'                 => START,
+    'BYE'                   => BYE
   }
 
   def Map::load_room(session)
