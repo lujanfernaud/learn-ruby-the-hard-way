@@ -29,12 +29,9 @@ module Helpers
 
   def buzz
     while @@bzed == @@previous_bzed
-      b = "B"
       z = "Z" * rand(4..6)
-      e = "E"
-      d = "D" * 2
 
-      @@bzed = b + z + e + d
+      @@bzed = "B" + z + "ED"
     end
 
     @@previous_bzed = @@bzed
