@@ -14,7 +14,7 @@
   <% if !show_actions? && !show_actions_by_default? %>
   <p>Type 'actions' to see available actions.</p>
   <% else %>
-    <h2><%= "Actions: " %></h2>
+    <h2 class="actions"><%= "Actions: " %></h2>
     <ul>
     <% room.paths.keys.each do |action| %>
       <% if action != "next!!" %>
@@ -63,7 +63,7 @@
 
 <% if room.name != "Bye" %>
   <form action="/game" method="POST">
-    <input type="text" name="action">
-    <input type="submit">
+    <input type="text" name="action" class="input-text">
+    <input type="submit" value=">" class="input-submit">
   </form>
 <% end %>
