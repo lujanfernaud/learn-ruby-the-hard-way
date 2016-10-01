@@ -131,6 +131,11 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
+.score {
+    float: right;
+    width: 20%;
+}
+
 h2.actions {
     font-size: 20px;
 }
@@ -192,12 +197,7 @@ h2.actions {
     WIDE: CSS3 Effects
    ==================== */
 
-    .header-container,
-    .main aside {
-        -webkit-box-shadow: 0 5px 10px #aaa;
-           -moz-box-shadow: 0 5px 10px #aaa;
-                box-shadow: 0 5px 10px #aaa;
-    }
+
 
 /* ============
     WIDE: Menu

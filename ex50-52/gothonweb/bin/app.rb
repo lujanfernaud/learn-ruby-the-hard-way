@@ -24,11 +24,13 @@ class App < Sinatra::Base
   helpers Helpers
 
   get '/' do
-    @@action_does_not_exist       = false
-    @@activate_actions            = false
-    @@activate_hint               = false
-    @@activate_buzz               = false
+    reset_score
     reset_buzz_guesses_hint_and_door
+
+    @@action_does_not_exist = false
+    @@activate_actions      = false
+
+    @@activate_hint         = false
 
     session[:room] = 'START'
     redirect '/game'
@@ -48,6 +50,7 @@ class App < Sinatra::Base
   post '/game' do
     @@action_does_not_exist = false
     @@activate_actions      = false
+    
     @@activate_hint         = false
 
     room    = Map::load_room(session)
@@ -58,12 +61,16 @@ class App < Sinatra::Base
         if action == "hint!" && hint_not_used?
           @@activate_hint = true      
           @@hint_counter = 1
-        elsif room.go(action) != "not compute"
+          @@score -= 3
+        elsif action == room.code || action == "next!!"
           next_room = room.go(action)
+          add_score_checking_guesses
           reset_buzz_guesses_hint_and_door
         elsif action != room.code && @@guesses < 6
           @@activate_buzz = true
           @@guesses += 1
+          @@hint_counter = 1
+          @@score -= 2
         else
           next_room = room.go('WRONG_CODE_DEATH')
           reset_buzz_guesses_hint_and_door
@@ -72,23 +79,38 @@ class App < Sinatra::Base
         if action == "hint!" && hint_not_used?
           @@activate_hint = true      
           @@hint_counter = 1
-        elsif room.go(action) != "not compute"
+          @@score -= 3
+        elsif action == room.good_door || action == "next!!"
           next_room = room.go(action)
+          add_score_checking_guesses
           reset_buzz_guesses_hint_and_door
+        elsif action == room.bad_door
+          next_room = room.go(action)
+          reset_buzz_guesses_hint_and_door          
         elsif room.go(action) == "not compute" && @@guesses < 1
           @@door_locked = true
           @@guesses += 1
+          @@score -= 2
         else
           next_room = room.go('THE_END_LOSER_2')
           reset_buzz_guesses_hint_and_door
+          @@score -= 10
         end  
       else
         if action == "actions"
           @@activate_actions = true
+        # If the room we are going is a death room.  
+        elsif Map::DEATH_ROOMS.include?(room.go(action))
+          next_room = room.go(action)
+        # If the room we are going is the good one.
         elsif room.go(action) != "not compute"
-          next_room = room.go(action) || room.go('*')
+          next_room = room.go(action)
+          # We add score if the room we are in is not a death room or the winning room.
+          # We do this to avoid adding score when we want to play again.
+          @@score += 20 if !Map::DEATH_ROOMS.include?(room) && !room.player_won
         else
           @@action_does_not_exist = true
+          @@score -= 1
         end
       end
 

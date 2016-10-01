@@ -1,8 +1,13 @@
-<% if room.name != "Dead" && room.name != "The End" %>
-  <h1>
-    <%= room.name %>
-  </h1>
-<% end %>
+<div class="header-container">
+  <header class="wrapper clearfix">    
+    <h1>
+      <%= room.name %>
+    </h1>
+    <div class="score">
+      <p>Score: <%= show_score %></p>
+    </div>
+  </header>
+</div>
 
 <% if !buzzed? %>
   <p>
@@ -41,10 +46,10 @@
     <% end %>
   <% elsif room.doors %>
     <% if show_hint? %>
-      <p><%= "A door that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
+      <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
     <% end %>
     <% if door_did_not_open? %>
-      <p>The pod is locked.</p>
+      <p>The pod is locked!</p>
       <p>You're running out of time. This is your last try!</p>
     <% end %>  
   <% end %>
@@ -53,8 +58,10 @@
 <% if !room.player_alive %>
   <p><%= show_last_death_line %></p>
   <p>Play Again?</p>
+  <% reset_score %>
 <% elsif room.player_won %>
   <p>Play Again?</p>
+  <% reset_score %>
 <% end %>
 
 <% if does_not_compute? %>

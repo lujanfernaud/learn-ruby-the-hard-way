@@ -3,6 +3,22 @@ require './bin/class_variables.rb'
 module Helpers
   include ClassVariables
 
+  def show_score
+    @@score
+  end
+
+  def reset_score
+    @@score = 0
+  end
+
+  def add_score_checking_guesses
+    case @@guesses
+      when 0 then @@score += 50
+      when 1 then @@score += 30
+      else @@score += 20
+    end
+  end
+
   def does_not_compute?
     @@action_does_not_exist
   end
