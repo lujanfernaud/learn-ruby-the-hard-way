@@ -61,8 +61,8 @@ module Map
     The Gothons of Planet Percal #25 have invaded your ship and destroyed
     your entire crew. You are the last surviving member and your last
     mission is to get the neutron destruct bomb from the Weapons Armory,
-    put it in the bridge, and blow the ship up after getting into an 
-    escape pod.
+    put it in The Bridge, and blow the ship up after getting into an 
+    Escape Pod.
     </p>
     <p>
     You're running down the central corridor to the Weapons Armory when
@@ -117,8 +117,8 @@ module Map
     </p>
     <p>
     The container clicks open and the seal breaks, letting gas out.
-    You grab the neutron bomb and run as fast as you can to the
-    bridge where you must place it in the right spot.
+    You grab the neutron bomb and run as fast as you can to The
+    Bridge where you must place it in the right spot.
     </p>
     """,
     actions = true)
@@ -126,7 +126,7 @@ module Map
   THE_BRIDGE = Room.new("The Bridge", 
     """
     <p>
-    You burst onto the Bridge with the netron destruct bomb
+    You burst onto The Bridge with the netron destruct bomb
     under your arm and surprise 5 Gothons who are trying to
     take control of the ship. Each of them has an even uglier
     clown costume than the last. They haven't pulled their
@@ -147,7 +147,7 @@ module Map
     and blast the lock so the Gothons can't get out.
     </p>
     <p>
-    Now that the bomb is placed you run to the escape pod to
+    Now that the bomb is placed you run to the Escape Pod to
     get off this tin can before it explodes.
     </p>
     """,
