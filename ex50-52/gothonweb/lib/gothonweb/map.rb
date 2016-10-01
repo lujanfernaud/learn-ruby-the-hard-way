@@ -284,7 +284,8 @@ module Map
     })
 
   CENTRAL_CORRIDOR_2.add_paths({
-    'run' => LASER_WEAPON_ARMORY
+    'do a dive roll' => LASER_WEAPON_ARMORY,
+    'next!!'         => LASER_WEAPON_ARMORY 
     })
 
   LASER_WEAPON_ARMORY.add_paths({
@@ -294,17 +295,17 @@ module Map
     })
 
   LASER_WEAPON_ARMORY_2.add_paths({
-    'run' => THE_BRIDGE
+    'run!' => THE_BRIDGE
     })
 
   THE_BRIDGE.add_paths({
-    'throw the bomb'        => BOMB_DEATH,
+    'throw the bomb!'        => BOMB_DEATH,
     'next!!'                => THE_BRIDGE_2,
     'slowly place the bomb' => THE_BRIDGE_2
     })
 
   THE_BRIDGE_2.add_paths({
-    'run' => ESCAPE_POD
+    'run!' => ESCAPE_POD
     })
 
   ESCAPE_POD.add_paths({

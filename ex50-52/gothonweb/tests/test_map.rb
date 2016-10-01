@@ -88,7 +88,8 @@ class TestGame < Test::Unit::TestCase
     assert_equal(Map::CENTRAL_CORRIDOR_2, Map::START.go('next!!'))
     assert_equal("not compute", Map::START.go('asdas'))
 
-    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('run'))
+    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('do a dive roll'))
+    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('next!!'))
     
     # LASER_WEAPON_ARMORY
     assert_equal(Map::LASER_WEAPON_ARMORY_2, Map::LASER_WEAPON_ARMORY.go(Map::LASER_WEAPON_ARMORY.code))
@@ -96,15 +97,15 @@ class TestGame < Test::Unit::TestCase
     assert_equal(Map::WRONG_CODE_DEATH, Map::LASER_WEAPON_ARMORY.go('WRONG_CODE_DEATH'))
     assert_equal("not compute", Map::LASER_WEAPON_ARMORY.go('sdasd'))
 
-    assert_equal(Map::THE_BRIDGE, Map::LASER_WEAPON_ARMORY_2.go('run'))
+    assert_equal(Map::THE_BRIDGE, Map::LASER_WEAPON_ARMORY_2.go('run!'))
     
     # THE_BRIDGE
-    assert_equal(Map::BOMB_DEATH, Map::THE_BRIDGE.go('throw the bomb'))
+    assert_equal(Map::BOMB_DEATH, Map::THE_BRIDGE.go('throw the bomb!'))
     assert_equal(Map::THE_BRIDGE_2, Map::THE_BRIDGE.go('next!!'))
     assert_equal(Map::THE_BRIDGE_2, Map::THE_BRIDGE.go('slowly place the bomb'))
     assert_equal("not compute", Map::THE_BRIDGE.go('asdas'))
 
-    assert_equal(Map::ESCAPE_POD, Map::THE_BRIDGE_2.go('run'))
+    assert_equal(Map::ESCAPE_POD, Map::THE_BRIDGE_2.go('run!'))
     
     # ESCAPE_POD
     assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go(Map::ESCAPE_POD.good_door))
