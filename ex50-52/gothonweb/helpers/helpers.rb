@@ -124,6 +124,11 @@ module Helpers
     @@door_locked   = false
   end
 
+  def reset_actions
+    @@action_does_not_exist = false
+    @@activate_actions      = false
+  end
+
   def show_last_death_line
     quips = [
       "You died. You kinda suck at this.",
