@@ -1,21 +1,13 @@
 <div class="row">
-  <div class=col-sm-6>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress_percentage %>%;">
-        <span class="sr-only"><%= "#{progress_percentage}%" %></span>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-2 col-sm-offset-4">
-    <p class="text-right">Score: <%= show_score %></p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-12">    
-    <h1>
+  <div class="col-sm-10">    
+    <h1 class="h2">
       <%= room.name %>
     </h1>
+  </div>
+  <div class="col-sm-2">
+    <p class="score">
+      Score: <%= show_score %>
+    </p>
   </div>
 </div>
 
@@ -29,7 +21,7 @@
   <% if !show_actions? && !show_actions_by_default? %>
   <p>Type 'actions' to see available actions.</p>
   <% else %>
-    <h2 class="actions"><%= "Actions: " %></h2>
+    <h2 class="h3"><%= "Actions:" %></h2>
     <ul>
     <% room.paths.keys.each do |action| %>
       <% if action != "next!!" %>

@@ -1,7 +1,6 @@
 module ClassVariables
 
   @@score                       = 0
-  @@progress                    = 0
   @@action_does_not_exist       = false
   @@activate_actions            = false
   @@activate_actions_by_default = true
