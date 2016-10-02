@@ -1,9 +1,13 @@
 <div class="row">
-  <div class=col-sm-8>
-    <p>Progress Bar</p>
+  <div class=col-sm-6>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+        <span class="sr-only">20%</span>
+      </div>
+    </div>
   </div>
-  <div class="col-sm-4">
-    <p>Score: <%= show_score %></p>
+  <div class="col-sm-2 col-sm-offset-4">
+    <p class="text-right">Score: <%= show_score %></p>
   </div>
 </div>
 
@@ -75,8 +79,13 @@
 <% end %>
 
 <% if room.name != "Bye" %>
-  <form action="/game" method="POST">
-    <input type="text" name="action" class="input-text">
-    <input type="submit" value=">" class="input-submit">
+  <form action="/game" method="POST" class="form-horizontal">
+    <div class="input-group">
+      <label class="sr-only" for="input-text">Action</label>
+      <input type="text" name="action" class="form-control" id="input-text">
+      <span class="input-group-btn">
+        <input type="submit" value=">" class="btn btn-default">
+      </span>
+    </div>
   </form>
 <% end %>
