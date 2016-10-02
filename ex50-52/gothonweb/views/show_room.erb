@@ -57,20 +57,18 @@
   <% end %>
 <% end %>
 
-<% if !room.player_alive %>
-  <p><%= show_last_death_line %></p>
-  <p>Play Again?</p>
-  <% reset_score %>
-<% elsif room.player_won %>
-  <p>Play Again?</p>
-  <% reset_score %>
-<% end %>
-
 <% if does_not_compute? %>
   <p>DOES NOT COMPUTE!</p>
 <% end %>
 
-<% if room.name != "Bye" %>
+<% if !room.player_alive %>
+  <p><%= show_last_death_line %></p>
+  <a href="/" class="btn btn-default btn-block" role="button">Play Again</a>
+  <% reset_score %>
+<% elsif room.player_won %>
+  <a href="/" class="btn btn-default btn-block" role="button">Play Again</a>
+  <% reset_score %>
+<% else %>
   <form action="/game" method="POST" class="form-horizontal">
     <div class="input-group">
       <label class="sr-only" for="input-text">Action</label>

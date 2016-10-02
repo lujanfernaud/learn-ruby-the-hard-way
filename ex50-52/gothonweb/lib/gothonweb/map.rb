@@ -269,11 +269,6 @@ module Map
     room.player_dies
   end
 
-  BYE = Room.new("Bye",
-    """
-    Bye!
-    """)
-
   # Now we connect the rooms using Room.add_paths(paths).
 
   CENTRAL_CORRIDOR.add_paths({
@@ -317,18 +312,6 @@ module Map
 
   START = CENTRAL_CORRIDOR
 
-  THE_END_WINNER.add_paths({
-    'yes' => START,
-    'no'  => BYE
-    })
-
-  DEATH_ROOMS.each do |room|
-    room.add_paths({
-      'yes' => START,
-      'no'  => BYE
-      })
-  end
-
   # A whitelist of allowed room names. We use this so that
   # bad people on the internet can't access random variables
   # with names.
@@ -348,8 +331,7 @@ module Map
     'DODGE_DEATH'           => DODGE_DEATH,
     'WRONG_CODE_DEATH'      => WRONG_CODE_DEATH,
     'BOMB_DEATH'            => BOMB_DEATH,
-    'START'                 => START,
-    'BYE'                   => BYE
+    'START'                 => START
   }
 
   def Map::load_room(session)
