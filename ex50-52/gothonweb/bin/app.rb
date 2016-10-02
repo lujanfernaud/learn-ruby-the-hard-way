@@ -58,7 +58,7 @@ class App < Sinatra::Base
         if action == "hint!" && hint_not_used?
           @@activate_hint = true      
           @@hint_counter  = 1
-          @@score        -= 3
+          @@score        -= rand(2..4)
 
         elsif action == room.code || action == "next!!"
           next_room = room.go(action)
@@ -69,7 +69,7 @@ class App < Sinatra::Base
           @@activate_buzz = true
           @@guesses      += 1
           @@hint_counter  = 1
-          @@score        -= 2
+          @@score        -= rand(1..3)
 
         else
           next_room = room.go('WRONG_CODE_DEATH')
@@ -82,7 +82,7 @@ class App < Sinatra::Base
         if action == "hint!" && hint_not_used?
           @@activate_hint = true      
           @@hint_counter  = 1
-          @@score        -= 3
+          @@score        -= rand(2..4)
 
         elsif action == room.good_door || action == "next!!"
           next_room = room.go(action)
@@ -96,7 +96,7 @@ class App < Sinatra::Base
         elsif room.go(action) == "not compute" && @@guesses < 1
           @@door_locked = true
           @@guesses    += 1
-          @@score      -= 2
+          @@score      -= rand(1..3)
 
         else
           next_room = room.go('THE_END_LOSER_2')
@@ -118,11 +118,11 @@ class App < Sinatra::Base
           next_room = room.go(action)
           # We add score if the room we are in is not a death room or the winning room.
           # We do this to avoid increasing the score when we want to play again.
-          @@score += 20 if !Map::DEATH_ROOMS.include?(room) && !room.player_won
+          @@score += rand(18..20) if !Map::DEATH_ROOMS.include?(room) && !room.player_won
 
         else
           @@action_does_not_exist = true
-          @@score -= 1
+          @@score -= rand(1..3) if @@score != 0
         end
       end
 
