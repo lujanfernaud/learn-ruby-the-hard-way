@@ -12,6 +12,12 @@ body {
   margin-top: 30px;
 }
 
+/* Bootstrap modifications */
+
+.voffset {
+  margin-top: 10px;
+}
+
 /*.input-text {
   padding: 5px;
    width: 688px;

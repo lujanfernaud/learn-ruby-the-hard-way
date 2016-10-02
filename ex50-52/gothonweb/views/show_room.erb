@@ -11,71 +11,82 @@
   </div>
 </div>
 
-<% if !buzzed? %>
-  <p>
-    <%= room.description %>
-  </p>
-<% end %>
+<div class="row">
+  <div class="col-sm-12">    
+    <% if !buzzed? %>
+      <p>
+        <%= room.description %>
+      </p>
+    <% end %>
 
-<% if room.actions %>
-  <% if !show_actions? && !show_actions_by_default? %>
-  <p>Type 'actions' to see available actions.</p>
-  <% else %>
-    <h2 class="h3"><%= "Actions:" %></h2>
-    <ul>
-    <% room.paths.keys.each do |action| %>
-      <% if action != "next!!" %>
-        <li><%= "#{action}" %></li>
+    <% if room.actions %>
+      <% if !show_actions? && !show_actions_by_default? %>
+      <p>Type 'actions' to see available actions.</p>
+      <% else %>
+        <h2 class="h3"><%= "Actions:" %></h2>
+        <ul>
+        <% room.paths.keys.each do |action| %>
+          <% if action != "next!!" %>
+            <li><%= "#{action}" %></li>
+          <% end %>
+        <% end %>
+        </ul>
       <% end %>
     <% end %>
-    </ul>
-  <% end %>
-<% end %>
 
-<% if room.keypad %>
-  <% if hint_not_used? %>
-    <p>Type 'hint!' to receive a hint.</p>
-  <% end %>
-  <% if room.code %>
-    <% if show_hint? %>
-      <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
+    <% if room.keypad %>
+      <% if hint_not_used? %>
+        <p>Type 'hint!' to receive a hint.</p>
+      <% end %>
+      <% if room.code %>
+        <% if show_hint? %>
+          <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
+        <% end %>
+        <% if buzzed? %>
+          <p><%= buzz %></p>
+        <% end %>
+        <% if guesses? %>
+          <%= check_guesses %>
+        <% end %>
+      <% elsif room.doors %>
+        <% if show_hint? %>
+          <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
+        <% end %>
+        <% if door_did_not_open? %>
+          <p>The pod is locked!</p>
+          <p>You're running out of time. This is your last try!</p>
+        <% end %>  
+      <% end %>
     <% end %>
-    <% if buzzed? %>
-      <%= buzz %>
-    <% end %>
-    <% if guesses? %>
-      <%= check_guesses %>
-    <% end %>
-  <% elsif room.doors %>
-    <% if show_hint? %>
-      <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
-    <% end %>
-    <% if door_did_not_open? %>
-      <p>The pod is locked!</p>
-      <p>You're running out of time. This is your last try!</p>
-    <% end %>  
-  <% end %>
-<% end %>
 
-<% if does_not_compute? %>
-  <p>DOES NOT COMPUTE!</p>
-<% end %>
+    <% if does_not_compute? %>
+      <p>DOES NOT COMPUTE!</p>
+    <% end %>
 
-<% if !room.player_alive %>
-  <p><%= show_last_death_line %></p>
-  <a href="/" class="btn btn-default btn-block" role="button">Play Again</a>
-  <% reset_score %>
-<% elsif room.player_won %>
-  <a href="/" class="btn btn-default btn-block" role="button">Play Again</a>
-  <% reset_score %>
-<% else %>
-  <form action="/game" method="POST" class="form-horizontal">
-    <div class="input-group">
-      <label class="sr-only" for="input-text">Action</label>
-      <input type="text" name="action" class="form-control" id="input-text">
-      <span class="input-group-btn">
-        <input type="submit" value=">" class="btn btn-default">
-      </span>
-    </div>
-  </form>
-<% end %>
+    <% if !room.player_alive %>
+      <p><%= show_last_death_line %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="row voffset">
+  <div class="col-sm-12">
+    <% if !room.player_alive %>
+      <a href="/" class="btn btn-default btn-block" role="button">Play Again</a>
+      <% reset_score %>
+    <% elsif room.player_won %>
+      <a href="/" class="btn btn-default btn-block" role="button">Play Again</a>
+      <% reset_score %>
+    <% else %>
+      <form action="/game" method="POST" class="form-horizontal">
+        <div class="input-group">
+          <label class="sr-only" for="input-text">Action</label>
+          <input type="text" name="action" class="form-control" id="input-text">
+          <span class="input-group-btn">
+            <input type="submit" value=">" class="btn btn-default">
+          </span>
+        </div>
+      </form>
+    <% end %>
+  </div>
+</div>
