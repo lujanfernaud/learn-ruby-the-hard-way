@@ -19,6 +19,18 @@ module Helpers
     end
   end
 
+  def increase_progress
+    @@progress += 14.5
+  end
+
+  def reset_progress
+    @@progress = 0
+  end
+
+  def progress_percentage
+    @@progress
+  end
+
   def does_not_compute?
     @@action_does_not_exist
   end

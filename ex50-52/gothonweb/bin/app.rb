@@ -23,6 +23,7 @@ class App < Sinatra::Base
   helpers Helpers
 
   get '/' do
+    reset_progress
     reset_score
     reset_buzz_guesses_hint_and_door
     reset_actions
@@ -63,6 +64,7 @@ class App < Sinatra::Base
         elsif action == room.code || action == "next!!"
           next_room = room.go(action)
           add_score_checking_guesses
+          increase_progress
           reset_buzz_guesses_hint_and_door
 
         elsif action != room.code && @@guesses < 6
@@ -74,6 +76,7 @@ class App < Sinatra::Base
         else
           next_room = room.go('WRONG_CODE_DEATH')
           reset_buzz_guesses_hint_and_door
+          reset_progress
         end
 
       # If the room requires us to choose a door.
@@ -87,6 +90,7 @@ class App < Sinatra::Base
         elsif action == room.good_door || action == "next!!"
           next_room = room.go(action)
           add_score_checking_guesses
+          increase_progress
           reset_buzz_guesses_hint_and_door
 
         elsif action == room.bad_door
@@ -101,6 +105,7 @@ class App < Sinatra::Base
         else
           next_room = room.go('THE_END_LOSER_2')
           reset_buzz_guesses_hint_and_door
+          reset_progress
         end  
 
       # Else, the room is a normal room with actions.
@@ -117,8 +122,13 @@ class App < Sinatra::Base
         elsif room.go(action) != "not compute"
           next_room = room.go(action)
           # We add score if the room we are in is not a death room or the winning room.
-          # We do this to avoid adding score when we want to play again.
-          @@score += 20 if !Map::DEATH_ROOMS.include?(room) && !room.player_won
+          # We do this to avoid increasing the score and progress when we want to play again.
+          if !Map::DEATH_ROOMS.include?(room) && !room.player_won
+            @@score += 20
+            increase_progress
+          else
+            reset_progress
+          end
         
         else
           @@action_does_not_exist = true
