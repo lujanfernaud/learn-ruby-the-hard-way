@@ -19,6 +19,10 @@ module Helpers
     end
   end
 
+  def show_total_time
+    @@total_time
+  end
+
   def does_not_compute?
     @@action_does_not_exist
   end

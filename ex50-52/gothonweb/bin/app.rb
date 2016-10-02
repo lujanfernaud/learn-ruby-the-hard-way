@@ -28,6 +28,8 @@ class App < Sinatra::Base
     reset_actions
     @@activate_hint = false
 
+    @@start_time = Time.now.to_i
+
     session[:room] = 'START'
     redirect '/game'
   end
@@ -88,6 +90,9 @@ class App < Sinatra::Base
           next_room = room.go(action)
           add_score_checking_guesses
           reset_buzz_guesses_hint_and_door
+
+          @@end_time   = Time.now.to_i
+          @@total_time = @@end_time - @@start_time
 
         elsif action == room.bad_door
           next_room = room.go(action)
