@@ -141,5 +141,3 @@ class App < Sinatra::Base
     end
   end
 end
-
-App.run!

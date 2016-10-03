@@ -1,0 +1,12 @@
+source "https://rubygems.org"
+
+# Sing along.
+gem "sinatra"
+# Use SQLite as the database engine.
+gem "sqlite3"
+# Use Sequel as the ORM.
+gem "sequel"
+# Use Pry as REPL and debugger.
+gem "pry"
+gem "pry-byebug"
+gem "pry-inline"
