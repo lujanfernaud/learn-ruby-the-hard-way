@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-12">   
+    <h2>High Scores</h2>
+  </div>
+</div>  
+<div class="row">
+  <div class="col-sm-12">   
+    <ul>
+      <% @scores.each do |score| %>
+      <li>
+        <%= score[:user_name] %>
+        <%= score[:date] %>
+        <%= score[:total_time] %>
+        <%= score[:score] %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

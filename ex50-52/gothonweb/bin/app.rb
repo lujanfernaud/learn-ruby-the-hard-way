@@ -30,8 +30,15 @@ class App < Sinatra::Base
 
     @@start_time = Time.now.to_i
 
+    @@user = "Test"
+
     session[:room] = 'START'
     redirect '/game'
+  end
+
+  get '/scores' do
+    @scores = Score.all
+    erb :high_scores
   end
 
   get '/game' do
@@ -85,7 +92,8 @@ class App < Sinatra::Base
           @@activate_hint = true      
           @@hint_counter  = 1
           @@score        -= rand(2..4)
-
+        
+        # Winning room.
         elsif action == room.good_door || action == "next!!"
           next_room = room.go(action)
           add_score_checking_guesses
@@ -93,6 +101,14 @@ class App < Sinatra::Base
 
           @@end_time   = Time.now.to_i
           @@total_time = @@end_time - @@start_time
+
+          # Add information to the database.
+          user_score = Score.new
+          user_score[:user_name]  = @@user
+          user_score[:total_time] = @@total_time
+          user_score[:score]      = @@score
+          user_score[:date]       = Time.now.utc
+          user_score.save
 
         elsif action == room.bad_door
           next_room = room.go(action)
