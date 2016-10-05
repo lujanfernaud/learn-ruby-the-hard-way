@@ -2,18 +2,30 @@
   <div class="col-sm-12">   
     <h2>High Scores</h2>
   </div>
-</div>  
+</div>
+
 <div class="row">
-  <div class="col-sm-12">   
-    <ul>
+  <div class="col-sm-12">
+
+    <table class="table table-striped">
+      <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Score</th>
+      </tr>
+      <% i = 0 %>
       <% @scores.each do |score| %>
-      <li>
-        <%= score[:user_name] %>
-        <%= score[:date] %>
-        <%= score[:total_time] %>
-        <%= score[:score] %>
-      </li>
+        <tr>
+          <td><%= i += 1 %></td>
+          <td><%= score[:user_name] %></td>
+          <td><%= score[:date] %></td>
+          <td><%= score[:total_time] %></td>
+          <td><%= score[:score] %></td>
+        </tr>
       <% end %>
-    </ul>
+    </table>
+  
   </div>
 </div>
