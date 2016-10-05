@@ -18,6 +18,10 @@ body {
   margin-top: 10px;
 }
 
+.voffset-2 {
+  margin-top: 20px;
+}
+
 /*.input-text {
   padding: 5px;
    width: 688px;
