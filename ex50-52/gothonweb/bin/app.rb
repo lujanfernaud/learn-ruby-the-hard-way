@@ -101,13 +101,14 @@ class App < Sinatra::Base
 
           @@end_time   = Time.now.to_i
           @@total_time = @@end_time - @@start_time
+          @@total_time = "%02d:%02d" % [@@total_time / 60 % 60, @@total_time % 60]
 
           # Add information to the database.
           user_score = Score.new
           user_score[:user_name]  = @@user
           user_score[:total_time] = @@total_time
           user_score[:score]      = @@score
-          user_score[:date]       = Time.now.utc
+          user_score[:date]       = Time.now.strftime("%d %b %Y")
           user_score.save
 
         elsif action == room.bad_door
