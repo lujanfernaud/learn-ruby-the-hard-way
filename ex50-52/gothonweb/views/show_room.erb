@@ -69,7 +69,7 @@
 
     <% if room.player_won %>
       <p><%= "Score: #{show_score}" %></p>
-      <p><%= "Time: #{"%02d:%02d" % [show_total_time / 60 % 60, show_total_time % 60]}" %></p>      
+      <p><%= "Time: #{show_total_time}" %></p>      
     <% end %>
   </div>
 </div>
