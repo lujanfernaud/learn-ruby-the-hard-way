@@ -58,13 +58,6 @@ module Map
   CENTRAL_CORRIDOR = Room.new("Central Corridor",
     """
     <p>
-    The Gothons of Planet Percal #25 have invaded your ship and destroyed
-    your entire crew. You are the last surviving member and your last
-    mission is to get the neutron destruct bomb from the Weapons Armory,
-    put it in The Bridge, and blow the ship up after getting into an 
-    Escape Pod.
-    </p>
-    <p>
     You're running down the central corridor to the Weapons Armory when
     a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume
     flowing around his hate filled body. He's blocking the door to the
@@ -126,8 +119,8 @@ module Map
   THE_BRIDGE = Room.new("The Bridge", 
     """
     <p>
-    You burst onto The Bridge with the netron destruct bomb
-    under your arm and surprise 5 Gothons who are trying to
+    You burst onto The Bridge with the neutron bomb
+    under your arm and surprise #{rand(4..6)} Gothons who are trying to
     take control of the ship. Each of them has an even uglier
     clown costume than the last. They haven't pulled their
     weapons out yet, as they see the active bomb under your
