@@ -22,14 +22,20 @@ body {
   margin-top: 20px;
 }
 
-/*.input-text {
-  padding: 5px;
-   width: 688px;
-  line-height: 1.4;
+@media screen and (min-width: 400px) {
+  .btn-fluid-block {
+    display: inline-block;
+    width: 49%;
+  }
 }
 
-.input-submit {
-  padding: 5px;
-  width: 50px;
-  line-height: 1.4;
-}*/
+@media screen and (max-width: 399px) {
+  .btn-fluid-block {
+    display: block;
+    width: 100%;
+  }
+
+  .btn-fluid-block + .btn-fluid-block {
+    margin-top: 5px;
+  }
+}
