@@ -85,15 +85,15 @@ class TestGame < Test::Unit::TestCase
     assert_equal(Map::SHOOT_DEATH, Map::START.go('shoot!'))
     assert_equal(Map::DODGE_DEATH, Map::START.go('dodge!'))
     assert_equal(Map::CENTRAL_CORRIDOR_2, Map::START.go('tell a joke'))
-    assert_equal(Map::CENTRAL_CORRIDOR_2, Map::START.go('next!!'))
+    assert_equal(Map::CENTRAL_CORRIDOR_2, Map::START.go('n!!'))
     assert_equal("not compute", Map::START.go('asdas'))
 
     assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('do a dive roll'))
-    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('next!!'))
+    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('n!!'))
     
     # LASER_WEAPON_ARMORY
     assert_equal(Map::LASER_WEAPON_ARMORY_2, Map::LASER_WEAPON_ARMORY.go(Map::LASER_WEAPON_ARMORY.code))
-    assert_equal(Map::LASER_WEAPON_ARMORY_2, Map::LASER_WEAPON_ARMORY.go('next!!'))
+    assert_equal(Map::LASER_WEAPON_ARMORY_2, Map::LASER_WEAPON_ARMORY.go('n!!'))
     assert_equal(Map::WRONG_CODE_DEATH, Map::LASER_WEAPON_ARMORY.go('WRONG_CODE_DEATH'))
     assert_equal("not compute", Map::LASER_WEAPON_ARMORY.go('sdasd'))
 
@@ -101,7 +101,7 @@ class TestGame < Test::Unit::TestCase
     
     # THE_BRIDGE
     assert_equal(Map::BOMB_DEATH, Map::THE_BRIDGE.go('throw the bomb!'))
-    assert_equal(Map::THE_BRIDGE_2, Map::THE_BRIDGE.go('next!!'))
+    assert_equal(Map::THE_BRIDGE_2, Map::THE_BRIDGE.go('n!!'))
     assert_equal(Map::THE_BRIDGE_2, Map::THE_BRIDGE.go('slowly place the bomb'))
     assert_equal("not compute", Map::THE_BRIDGE.go('asdas'))
 
@@ -109,7 +109,7 @@ class TestGame < Test::Unit::TestCase
     
     # ESCAPE_POD
     assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go(Map::ESCAPE_POD.good_door))
-    assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go('next!!'))
+    assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go('n!!'))
     assert_equal(Map::THE_END_LOSER_1, Map::ESCAPE_POD.go(Map::ESCAPE_POD.bad_door))
     assert_equal(Map::THE_END_LOSER_2, Map::ESCAPE_POD.go('THE_END_LOSER_2'))
     assert_equal("not compute", Map::ESCAPE_POD.go('asas'))
