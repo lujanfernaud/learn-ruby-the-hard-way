@@ -68,7 +68,7 @@ class App < Sinatra::Base
           @@hint_counter  = 1
           @@score        -= rand(2..4)
 
-        elsif action == room.code || action == "next!!"
+        elsif action == room.code || action == "n!!"
           next_room = room.go(action)
           add_score_checking_guesses
           reset_buzz_guesses_hint_and_door
@@ -93,7 +93,7 @@ class App < Sinatra::Base
           @@score        -= rand(2..4)
         
         # Winning room.
-        elsif action == room.good_door || action == "next!!"
+        elsif action == room.good_door || action == "n!!"
           next_room = room.go(action)
           add_score_checking_guesses
           reset_buzz_guesses_hint_and_door

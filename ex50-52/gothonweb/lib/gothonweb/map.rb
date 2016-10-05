@@ -268,17 +268,17 @@ module Map
     'shoot!'      => SHOOT_DEATH,
     'dodge!'      => DODGE_DEATH,
     'tell a joke' => CENTRAL_CORRIDOR_2,
-    'n!!'      => CENTRAL_CORRIDOR_2 
+    'n!!'         => CENTRAL_CORRIDOR_2 
     })
 
   CENTRAL_CORRIDOR_2.add_paths({
     'do a dive roll' => LASER_WEAPON_ARMORY,
-    'n!!'         => LASER_WEAPON_ARMORY 
+    'n!!'            => LASER_WEAPON_ARMORY 
     })
 
   LASER_WEAPON_ARMORY.add_paths({
     LASER_WEAPON_ARMORY.code => LASER_WEAPON_ARMORY_2,
-    'n!!'                 => LASER_WEAPON_ARMORY_2, 
+    'n!!'                    => LASER_WEAPON_ARMORY_2, 
     'WRONG_CODE_DEATH'       => WRONG_CODE_DEATH
     })
 
@@ -287,8 +287,8 @@ module Map
     })
 
   THE_BRIDGE.add_paths({
-    'throw the bomb!'        => BOMB_DEATH,
-    'n!!'                => THE_BRIDGE_2,
+    'throw the bomb!'       => BOMB_DEATH,
+    'n!!'                   => THE_BRIDGE_2,
     'slowly place the bomb' => THE_BRIDGE_2
     })
 
@@ -298,7 +298,7 @@ module Map
 
   ESCAPE_POD.add_paths({
     ESCAPE_POD.good_door => THE_END_WINNER,
-    'n!!'             => THE_END_WINNER,
+    'n!!'                => THE_END_WINNER,
     ESCAPE_POD.bad_door  => THE_END_LOSER_1,
     'THE_END_LOSER_2'    => THE_END_LOSER_2
     })
