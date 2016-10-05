@@ -27,18 +27,17 @@ class App < Sinatra::Base
     reset_buzz_guesses_hint_and_door
     reset_actions
     @@activate_hint = false
-
-    @@start_time = Time.now.to_i
-
-    @@user = "Test"
-
+    
     session[:room] = 'START'
-    redirect '/game'
+
+    erb :show_index
   end
 
-  get '/scores' do
-    @scores = Score.all
-    erb :high_scores
+  post '/' do
+    @@start_time = Time.now.to_i
+    @@user_name  = params[:action]
+
+    redirect '/game'
   end
 
   get '/game' do
@@ -105,7 +104,7 @@ class App < Sinatra::Base
 
           # Add information to the database.
           user_score = Score.new
-          user_score[:user_name]  = @@user
+          user_score[:user_name]  = @@user_name
           user_score[:total_time] = @@total_time
           user_score[:score]      = @@score
           user_score[:date]       = Time.now.strftime("%d %b %Y")
@@ -156,5 +155,10 @@ class App < Sinatra::Base
     else
       erb :you_died
     end
+  end
+
+  get '/scores' do
+    @scores = Score.all
+    erb :high_scores
   end
 end

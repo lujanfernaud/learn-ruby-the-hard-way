@@ -1,6 +1,6 @@
 module ClassVariables
 
-  @@user                        = nil
+  @@user_name                   = nil
   @@score                       = 0
   @@start_time                  = 0
   @@end_time                    = 0
