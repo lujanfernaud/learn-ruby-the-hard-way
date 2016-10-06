@@ -98,6 +98,7 @@ class TestGame < Test::Unit::TestCase
     assert_equal("not compute", Map::LASER_WEAPON_ARMORY.go('sdasd'))
 
     assert_equal(Map::THE_BRIDGE, Map::LASER_WEAPON_ARMORY_2.go('run!'))
+    assert_equal(Map::THE_BRIDGE, Map::LASER_WEAPON_ARMORY_2.go('n!!'))
     
     # THE_BRIDGE
     assert_equal(Map::BOMB_DEATH, Map::THE_BRIDGE.go('throw the bomb!'))
@@ -106,6 +107,7 @@ class TestGame < Test::Unit::TestCase
     assert_equal("not compute", Map::THE_BRIDGE.go('asdas'))
 
     assert_equal(Map::ESCAPE_POD, Map::THE_BRIDGE_2.go('run!'))
+    assert_equal(Map::ESCAPE_POD, Map::THE_BRIDGE_2.go('n!!'))
     
     # ESCAPE_POD
     assert_equal(Map::THE_END_WINNER, Map::ESCAPE_POD.go(Map::ESCAPE_POD.good_door))

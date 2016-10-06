@@ -283,7 +283,8 @@ module Map
     })
 
   LASER_WEAPON_ARMORY_2.add_paths({
-    'run!' => THE_BRIDGE
+    'run!' => THE_BRIDGE,
+    'n!!'  => THE_BRIDGE
     })
 
   THE_BRIDGE.add_paths({
@@ -293,7 +294,8 @@ module Map
     })
 
   THE_BRIDGE_2.add_paths({
-    'run!' => ESCAPE_POD
+    'run!' => ESCAPE_POD,
+    'n!!'  => ESCAPE_POD
     })
 
   ESCAPE_POD.add_paths({
