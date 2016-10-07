@@ -3,6 +3,20 @@ require './bin/class_variables.rb'
 module Helpers
   include ClassVariables
 
+  def name_error?
+    @@activate_name_error || @@activate_name_length_error
+  end
+
+  def show_name_error
+    return "Please write your name:" if @@activate_name_error
+    return "The name is too long!"   if @@activate_name_length_error
+  end
+
+  def reset_name_errors
+    @@activate_name_error        = false
+    @@activate_name_length_error = false
+  end
+
   def show_score
     @@score
   end

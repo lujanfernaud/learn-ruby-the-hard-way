@@ -27,17 +27,26 @@ class App < Sinatra::Base
     reset_buzz_guesses_hint_and_door
     reset_actions
     @@activate_hint = false
-    
+
     session[:room] = 'START'
 
     erb :show_index
   end
 
   post '/' do
+    reset_name_errors
     @@start_time = Time.now.to_i
-    @@user_name  = params[:action]
 
-    redirect '/game'
+    if params[:action].size > 12
+      @@activate_name_length_error = true
+      redirect '/'
+    elsif params[:action] =~ /\w+/
+      @@user_name = params[:action]
+      redirect '/game'
+    else
+      @@activate_name_error = true
+      redirect '/'
+    end
   end
 
   get '/game' do

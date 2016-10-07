@@ -18,7 +18,11 @@
 
 <div class="row voffset">
   <div class="col-sm-12">
-    <p>To start playing, introduce your name:</p>
+    <% if name_error? %>
+      <p><%= show_name_error %></p>
+    <% else %>
+      <p>Introduce your name to start playing:</p>
+    <% end %>
     <form action="/" method="POST" class="form-horizontal">
       <div class="input-group">
         <label class="sr-only" for="input-text">Name</label>

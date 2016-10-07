@@ -6,6 +6,8 @@ module ClassVariables
   @@end_time                    = 0
   @@total_time                  = 0
 
+  @@activate_name_error         = false
+  @@activate_name_length_error  = false
   @@action_does_not_exist       = false
   @@activate_actions            = false
   @@activate_actions_by_default = true
