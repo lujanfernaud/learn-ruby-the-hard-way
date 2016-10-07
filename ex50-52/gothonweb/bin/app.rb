@@ -158,7 +158,7 @@ class App < Sinatra::Base
   end
 
   get '/scores' do
-    @scores = Score.all
+    @scores = Score.reverse_order(:score).limit(10)
     erb :high_scores
   end
 end
