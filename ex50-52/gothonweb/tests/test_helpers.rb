@@ -1,4 +1,4 @@
-require './helpers/helpers.rb'
+require './bin/helpers.rb'
 require 'test/unit'
 
 require 'pry-byebug'

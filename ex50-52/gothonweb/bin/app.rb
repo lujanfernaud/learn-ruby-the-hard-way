@@ -2,7 +2,7 @@ require 'sinatra/base'
 
 require './lib/gothonweb/map.rb'
 require './bin/class_variables.rb'
-require './helpers/helpers.rb'
+require './bin/helpers.rb'
 
 require 'pry-byebug'
 require 'pry-inline'
