@@ -26,6 +26,8 @@ class App < Sinatra::Base
     reset_score
     reset_buzz_guesses_hint_and_door
     reset_actions
+
+    @@user_data     = nil
     @@activate_hint = false
 
     session[:room] = 'START'
@@ -112,12 +114,12 @@ class App < Sinatra::Base
           @@total_time = "%02d:%02d" % [@@total_time / 60 % 60, @@total_time % 60]
 
           # Add information to the database.
-          user_score = Score.new
-          user_score[:user_name]  = @@user_name
-          user_score[:total_time] = @@total_time
-          user_score[:score]      = @@score
-          user_score[:date]       = Time.now.strftime("%d %b %Y")
-          user_score.save
+          @@user_data = Score.new
+          @@user_data[:user_name]  = @@user_name
+          @@user_data[:total_time] = @@total_time
+          @@user_data[:score]      = @@score
+          @@user_data[:date]       = Time.now.strftime("%d %b %Y")
+          @@user_data.save
 
         elsif action == room.bad_door
           next_room = room.go(action)
@@ -167,7 +169,10 @@ class App < Sinatra::Base
   end
 
   get '/scores' do
-    @scores = Score.reverse_order(:score).limit(10)
+    @scores             = Score.reverse_order(:score).limit(10)
+    @maximum_score_data = @scores.first
+    @current_user_data  = @@user_data
+
     erb :high_scores
   end
 end

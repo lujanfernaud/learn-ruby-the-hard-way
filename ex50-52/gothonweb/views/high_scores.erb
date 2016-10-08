@@ -16,13 +16,21 @@
         <th>Score</th>
       </tr>
       <% i = 0 %>
-      <% @scores.each do |score| %>
-        <tr>
+      <% @scores.each do |data| %>
+        <% if data == @current_user_data %>
+          <% if data == @maximum_score_data %>
+            <tr class="success">
+          <% else %>
+            <tr class="info">
+          <% end %>
+        <% else %>
+          <tr>
+        <% end %>
           <td><%= i += 1 %></td>
-          <td><%= score[:user_name] %></td>
-          <td><%= score[:date] %></td>
-          <td><%= score[:total_time] %></td>
-          <td><%= score[:score] %></td>
+          <td><%= data[:user_name] %></td>
+          <td><%= data[:date] %></td>
+          <td><%= data[:total_time] %></td>
+          <td><%= data[:score] %></td>
         </tr>
       <% end %>
     </table>
