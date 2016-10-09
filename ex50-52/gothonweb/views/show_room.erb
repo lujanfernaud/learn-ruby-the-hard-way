@@ -11,10 +11,10 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row voffset">
   <div class="col-sm-12">    
     <% if !buzzed? %>
-      <div class="panel panel-default voffset">
+      <div class="panel panel-default">
         <div class="panel-body">
           <p>
             <%= room.description %>
@@ -52,6 +52,7 @@
             <p><%= buzz %></p>
           <% end %>
           <% if guesses? %>
+            <p>&nbsp;</p>
             <%= check_guesses %>
           <% end %>
         <% elsif room.doors %>
@@ -60,6 +61,7 @@
           <% end %>
           <% if door_did_not_open? %>
             <p>The pod is locked!</p>
+            <p>&nbsp;</p>
             <p>You're running out of time. This is your last try!</p>
           <% end %>  
         <% end %>
@@ -71,11 +73,13 @@
 
       <% if !room.player_alive %>
         <p><%= show_last_death_line %></p>
+        <p>&nbsp;</p>
         <p><%= "Score: #{show_score}" %></p>
       <% end %>
 
       <% if room.player_won %>
         <p>You won!</p>
+        <p>&nbsp;</p>
         <p><%= "Time: #{show_total_time}" %></p>      
         <p><%= "Score: #{show_score}" %></p>
       <% end %>

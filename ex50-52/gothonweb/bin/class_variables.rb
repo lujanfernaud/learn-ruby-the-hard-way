@@ -2,7 +2,7 @@ module ClassVariables
 
   @@user_name                   = nil
   @@user_data                   = nil
-  
+
   @@score                       = 0
   @@start_time                  = 0
   @@end_time                    = 0
@@ -17,6 +17,8 @@ module ClassVariables
   @@activate_buzz               = false
   @@previous_bzed               = nil
   @@bzed                        = nil
+  @@error_message               = nil
+  @@previous_error_message      = nil
   @@door_locked                 = false
   
   @@hint_counter                = 0

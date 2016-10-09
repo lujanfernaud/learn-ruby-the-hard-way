@@ -82,10 +82,36 @@ module Helpers
   end
 
   def check_guesses
+
+    def find_error_message
+      @@error_messages_list = [
+        "If you do what you always did, you will get what you always got.",
+        "That's not the code.",
+        "Success is walking from failure to failure with no loss of enthusiasm.",
+        "Wrong!",
+        "You may be disappointed if you fail, but you are doomed if you don't try.",
+        "You're running out of opportunities."
+      ]
+
+      @@error_message = @@error_messages_list.sample
+
+      while @@error_message == @@previous_error_message
+        @@error_message = @@error_messages_list.sample
+      end
+
+      @@previous_error_message = @@error_message
+
+      @@error_message
+    end
+
     if @@guesses > 0 && @@guesses != 6
-      "<p>Tries left: #{6 - @@guesses}</p>"
+      "<p>#{find_error_message}</p>
+      <p>&nbsp;</p>
+      <p>Tries left: #{6 - @@guesses}</p>"
     elsif @@guesses == 6
-      "<p>Last try!</p>"
+      "<p>#{find_error_message}</p>
+      <p>&nbsp;</p>
+      <p>Last try!</p>"
     end
   end
 
