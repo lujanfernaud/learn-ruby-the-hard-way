@@ -4,22 +4,175 @@
    Author's custom styles
    ========================================================================== */
 
+html {
+/*  font-family: monospace;*/
+}
+
 body {
-  font-size: 16px;
+/*  font-family: monospace;*/
+/*  font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 21px;
+  line-height: 1.58;
+  letter-spacing: -.003em;*/
+  font-size: 18px;
+  color: #ebebeb;
+  background-color: #2b3e50;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: monospace;
 }
 
 .score {
   margin-top: 30px;
+  font-family: monospace;
+  font-size: 16px;
 }
 
+.actions-info {
+  padding: 8px 8px 1px 8px;
+  margin-bottom: 10px;
+  font-family: monospace;
+  color: #ebebeb;
+  font-size: 14px;
+  background-color: #4e5d6c;
+}
+
+/***************************/
 /* Bootstrap modifications */
+/***************************/
 
 .voffset {
   margin-top: 10px;
 }
-
 .voffset-2 {
   margin-top: 20px;
+}
+
+.panel {
+  color: #333;
+  border: none;
+}
+
+.alert {
+  border: none;
+}
+.alert-info {
+  font-family: monospace;
+  font-size: 14px;
+  color: #ebebeb;
+  background-color: #4e5d6c;
+  border-color: none;
+}
+
+input {
+  font-family: monospace;
+}
+
+.btn {
+  font-family: monospace;
+}
+.btn-default {
+  color: #ffffff;
+  background-color: #4e5d6c;
+  border-color: transparent;
+  border-left-color: #2b3e50;
+}
+.btn-default:focus,
+.btn-default.focus {
+  color: #ffffff;
+  background-color: #39444e;
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-default:hover {
+  color: #ffffff;
+  background-color: #39444e;
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  color: #ffffff;
+  background-color: #39444e;
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open > .dropdown-toggle.btn-default:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.open > .dropdown-toggle.btn-default:focus,
+.btn-default:active.focus,
+.btn-default.active.focus,
+.open > .dropdown-toggle.btn-default.focus {
+  color: #ffffff;
+  background-color: #2a323a;
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus {
+  background-color: #4e5d6c;
+  border-color: transparent;
+}
+.btn-default .badge {
+  color: #4e5d6c;
+  background-color: #ffffff;
+}
+
+.input-group .form-control:not(:first-child):not(:last-child) {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-control {
+  color: #ebebeb;
+  font-size: 14px;
+  background-color: #4e5d6c;
+  border: 1px solid transparent;
+  /*border-color: #263747;*/
+}
+.form-control:focus {
+  border-color: transparent;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.table {
+  font-size: 16px;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px;
+}
+.table > thead > tr > th {
+  font-family: monospace;
 }
 
 @media screen and (min-width: 400px) {

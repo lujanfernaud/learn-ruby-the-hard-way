@@ -14,76 +14,82 @@
 <div class="row">
   <div class="col-sm-12">    
     <% if !buzzed? %>
-      <p>
-        <%= room.description %>
-      </p>
+      <div class="panel panel-default voffset">
+        <div class="panel-body">
+          <p>
+            <%= room.description %>
+          </p>
+        </div>
+      </div>
     <% end %>
-
-    <% if room.actions %>
-      <% if !show_actions? && !show_actions_by_default? %>
-      <p>Type 'actions' to see available actions.</p>
-      <% else %>
-        <h2 class="h3"><%= "Actions:" %></h2>
-        <ul>
-        <% room.paths.keys.each do |action| %>
-          <% if action != "n!!" %>
-            <li><%= "#{action}" %></li>
+    
+    <div class="alert alert-info">
+      <% if room.actions %>
+        <% if !show_actions? && !show_actions_by_default? %>
+        <p>Type 'actions' to see available actions.</p>
+        <% else %>
+          <p><%= "Actions:" %></p>
+          <ul class="list-unstyled">
+            <li>&nbsp;</li>
+          <% room.paths.keys.each do |action| %>
+            <% if action != "n!!" %>
+              <li><%= "- #{action}" %></li>
+            <% end %>
           <% end %>
+          </ul>
         <% end %>
-        </ul>
       <% end %>
-    <% end %>
 
-    <% if room.keypad %>
-      <% if hint_not_used? %>
-        <p>Type 'hint!' to receive a hint.</p>
+      <% if room.keypad %>
+        <% if hint_not_used? %>
+          <p>Type 'hint!' to receive a hint.</p>
+        <% end %>
+        <% if room.code %>
+          <% if show_hint? %>
+            <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
+          <% end %>
+          <% if buzzed? %>
+            <p><%= buzz %></p>
+          <% end %>
+          <% if guesses? %>
+            <%= check_guesses %>
+          <% end %>
+        <% elsif room.doors %>
+          <% if show_hint? %>
+            <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
+          <% end %>
+          <% if door_did_not_open? %>
+            <p>The pod is locked!</p>
+            <p>You're running out of time. This is your last try!</p>
+          <% end %>  
+        <% end %>
       <% end %>
-      <% if room.code %>
-        <% if show_hint? %>
-          <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
-        <% end %>
-        <% if buzzed? %>
-          <p><%= buzz %></p>
-        <% end %>
-        <% if guesses? %>
-          <%= check_guesses %>
-        <% end %>
-      <% elsif room.doors %>
-        <% if show_hint? %>
-          <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
-        <% end %>
-        <% if door_did_not_open? %>
-          <p>The pod is locked!</p>
-          <p>You're running out of time. This is your last try!</p>
-        <% end %>  
+
+      <% if does_not_compute? %>
+        <p>DOES NOT COMPUTE!</p>
       <% end %>
-    <% end %>
 
-    <% if does_not_compute? %>
-      <p>DOES NOT COMPUTE!</p>
-    <% end %>
+      <% if !room.player_alive %>
+        <p><%= show_last_death_line %></p>
+        <p><%= "Score: #{show_score}" %></p>
+      <% end %>
 
-    <% if !room.player_alive %>
-      <p><%= show_last_death_line %></p>
-      <p><%= "Score: #{show_score}" %></p>
-    <% end %>
-
-    <% if room.player_won %>
-      <p><%= "Time: #{show_total_time}" %></p>      
-      <p><%= "Score: #{show_score}" %></p>
-    <% end %>
+      <% if room.player_won %>
+        <p>You won!</p>
+        <p><%= "Time: #{show_total_time}" %></p>      
+        <p><%= "Score: #{show_score}" %></p>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<div class="row voffset">
+<div class="row">
   <div class="col-sm-12">
-    <% if !room.player_alive %>
-      <a href="/" class="btn btn-default btn-fluid-block" role="button">Play Again</a>
-      <a href="/scores" class="btn btn-default btn-fluid-block" role="button">See High Scores</a>
-      <% reset_score %>
-    <% elsif room.player_won %>
-      <a href="/" class="btn btn-default btn-fluid-block" role="button">Play Again</a>
-      <a href="/scores" class="btn btn-default btn-fluid-block" role="button">See High Scores</a>
+    <% if !room.player_alive || room.player_won %>
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <a href="/" class="btn btn-default" role="button">Play Again</a>
+        <a href="/scores" class="btn btn-default" role="button">High Scores</a>
+      </div>
       <% reset_score %>
     <% else %>
       <form action="/game" method="POST" class="form-horizontal">
@@ -91,7 +97,7 @@
           <label class="sr-only" for="input-text">Action</label>
           <input type="text" name="action" class="form-control" id="input-text">
           <span class="input-group-btn">
-            <input type="submit" value=">" class="btn btn-default">
+            <input type="submit" value="Send" class="btn btn-default">
           </span>
         </div>
       </form>

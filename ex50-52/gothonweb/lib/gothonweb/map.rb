@@ -72,9 +72,11 @@ module Map
     Lucky for you they made you learn Gothon insults in the academy.
     You tell the one Gothon joke you know:
     </p>
+    <blockquote>
     <p>
     <i>Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr, fur fvgf nebhaq gur ubhfr.</i>
     </p>
+    </blockquote>
     <p>
     The Gothon stops, tries not to laugh, then busts out laughing and can't move. 
     While he's laughing you run up and shoot him square in the head putting him down.
@@ -92,10 +94,10 @@ module Map
     </p>
     <p>
     There's a keypad lock on the box and you need the code to get the bomb out. If you get the code
-    wrong 6 times then the lock closes forever and you can't get the bomb.
+    wrong <em>6 times</em> then the lock closes forever and you can't get the bomb.
     </p>
     <p>
-    The code is 3 digits.
+    The code is <em>3 digits</em>.
     </p>
     """,
     actions = false,
@@ -154,7 +156,7 @@ module Map
     but you don't have time to look.
     </p>
     <p>
-    There are 5 pods, which one do you take?
+    There are <em>5 pods</em>, which one do you take?
     </p> 
     """,
     actions = false,
@@ -175,7 +177,6 @@ module Map
     bright star, taking out the Gothon ship at the same
     time.
     </p>
-    You won!
     """)
 
   THE_END_WINNER.player_wins

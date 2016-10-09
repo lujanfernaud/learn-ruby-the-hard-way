@@ -5,7 +5,9 @@
 </div>
 
 <div class="row voffset">
-  <div class="col-sm-12">   
+  <div class="col-sm-12">
+  <div class="panel panel-default">
+  <div class="panel-body">   
     <p>
     The Gothons of Planet Percal #25 have invaded your ship and destroyed
     your entire crew. You are the last surviving member and your last
@@ -14,21 +16,25 @@
     Escape Pod.
     </p>
   </div>
+  </div>
+  </div>
 </div>
 
-<div class="row voffset">
+<div class="row">
   <div class="col-sm-12">
+    <div class="alert alert-info">
     <% if name_error? %>
       <p><%= show_name_error %></p>
     <% else %>
       <p>Introduce your name to start playing:</p>
     <% end %>
+    </div>
     <form action="/" method="POST" class="form-horizontal">
       <div class="input-group">
         <label class="sr-only" for="input-text">Name</label>
         <input type="text" name="action" class="form-control" id="input-text">
         <span class="input-group-btn">
-          <input type="submit" value=">" class="btn btn-default">
+          <input type="submit" value="Send" class="btn btn-default">
         </span>
       </div>
     </form>

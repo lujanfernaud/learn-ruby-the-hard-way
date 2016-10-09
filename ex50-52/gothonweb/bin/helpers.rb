@@ -70,7 +70,7 @@ module Helpers
 
     @@previous_bzed = @@bzed
 
-    "<p>#{@@bzed}</p>"
+    @@bzed
   end
 
   def door_did_not_open?
