@@ -46,10 +46,10 @@
         <% end %>
         <% if room.code %>
           <% if show_hint? %>
-            <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
+            <p><%= "Remember well: #{show_code_hint(room.code)}" %></p>
           <% end %>
           <% if buzzed? %>
-            <p><%= buzz %></p>
+            <p class="shake"><%= buzz %></p>
           <% end %>
           <% if guesses? %>
             <p>&nbsp;</p>
