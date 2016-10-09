@@ -34,6 +34,11 @@ h6,
   font-family: monospace;
 }
 
+.h2-room-title {
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
 .score {
   margin-top: 30px;
   font-family: monospace;
