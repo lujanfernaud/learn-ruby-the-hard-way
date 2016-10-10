@@ -273,8 +273,8 @@ module Map
     })
 
   CENTRAL_CORRIDOR_2.add_paths({
-    'do a dive roll' => LASER_WEAPON_ARMORY,
-    'n!!'            => LASER_WEAPON_ARMORY 
+    'go ahead' => LASER_WEAPON_ARMORY,
+    'n!!'      => LASER_WEAPON_ARMORY 
     })
 
   LASER_WEAPON_ARMORY.add_paths({

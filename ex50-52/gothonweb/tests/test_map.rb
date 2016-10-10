@@ -88,7 +88,7 @@ class TestGame < Test::Unit::TestCase
     assert_equal(Map::CENTRAL_CORRIDOR_2, Map::START.go('n!!'))
     assert_equal("not compute", Map::START.go('asdas'))
 
-    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('do a dive roll'))
+    assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('go ahead'))
     assert_equal(Map::LASER_WEAPON_ARMORY, Map::CENTRAL_CORRIDOR_2.go('n!!'))
     
     # LASER_WEAPON_ARMORY
