@@ -83,15 +83,24 @@ module Helpers
 
   def check_guesses
 
-    def find_error_message
+    def find_error_message(last_messages=false)
       @@error_messages_list = [
-        "If you do what you always did, you will get what you always got.",
-        "That's not the code.",
-        "Success is walking from failure to failure with no loss of enthusiasm.",
-        "Wrong!",
-        "You may be disappointed if you fail, but you are doomed if you don't try.",
-        "You're running out of opportunities."
+        "If you do what you always did, you will get what you always got.",                        #[0]
+        "That's not the code.",                                                                    #[1]
+        "Success is walking from failure to failure with no loss of enthusiasm.",                  #[2]
+        "Wrong!",                                                                                  #[3]
+        # Last messages used when the last_message modifier is true:
+        "Time is a drug. Too much of it kills you.",                                               #[-4]
+        "Million-to-one chances...crop up nine times out of ten.",                                 #[-3]
+        "In the space between chaos and shape there was another chance.",                          #[-2]
+        "You're running out of opportunities."                                                     #[-1]
       ]
+
+      if last_messages
+        @@error_messages_list = @@error_messages_list[-4..-1]
+      else
+        @@error_messages_list = @@error_messages_list[0..3]
+      end
 
       @@error_message = @@error_messages_list.sample
 
@@ -109,7 +118,7 @@ module Helpers
       <p>&nbsp;</p>
       <p>Tries left: #{6 - @@guesses}</p>"
     elsif @@guesses == 6
-      "<p>#{find_error_message}</p>
+      "<p>#{find_error_message(last_messages=true)}</p>
       <p>&nbsp;</p>
       <p>Last try!</p>"
     end
@@ -174,12 +183,12 @@ module Helpers
   end
 
   def show_last_death_line
-    quips = [
+    death_lines = [
       "You died. You kinda suck at this.",
       "You died. Such a luser.",
       "I have a small puppy that's better at this."
     ]
 
-    quips[rand(0..(quips.length-1))]
+    death_lines.sample
   end
 end
