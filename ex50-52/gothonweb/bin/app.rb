@@ -113,13 +113,13 @@ class App < Sinatra::Base
           @@total_time = @@end_time - @@start_time
           @@total_time = "%02d:%02d" % [@@total_time / 60 % 60, @@total_time % 60]
 
-          # Add information to the database.
+          # Save user data to the database.
           @@user_data = Score.new
           @@user_data[:user_name]  = @@user_name
           @@user_data[:total_time] = @@total_time
           @@user_data[:score]      = @@score
           @@user_data[:date]       = Time.now.strftime("%d %b %Y")
-          @@user_data.save
+          @@user_data.save        
 
         elsif action == room.bad_door
           next_room = room.go(action)
@@ -169,8 +169,8 @@ class App < Sinatra::Base
   end
 
   get '/scores' do
-    @scores             = Score.reverse_order(:score).limit(10)
-    @maximum_score_data = @scores.first
+    @high_scores        = Score.reverse_order(:score).limit(10)
+    @maximum_score_data = @high_scores.first
     @current_user_data  = @@user_data
 
     erb :high_scores
