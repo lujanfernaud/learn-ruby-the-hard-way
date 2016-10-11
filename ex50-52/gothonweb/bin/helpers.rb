@@ -115,11 +115,9 @@ module Helpers
 
     if @@guesses > 0 && @@guesses != 6
       "<p>#{find_error_message}</p>
-      <p>&nbsp;</p>
       <p>Tries left: #{6 - @@guesses}</p>"
     elsif @@guesses == 6
       "<p>#{find_error_message(last_messages=true)}</p>
-      <p>&nbsp;</p>
       <p>Last try!</p>"
     end
   end

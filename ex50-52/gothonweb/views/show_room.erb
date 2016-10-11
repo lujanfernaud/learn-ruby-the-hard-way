@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-10">    
+  <div class="col-sm-10">
     <h1 class="h2 h2-room-title">
       <%= room.name %>
     </h1>
@@ -12,17 +12,19 @@
 </div>
 
 <div class="row voffset">
-  <div class="col-sm-12">    
+  <div class="col-sm-12">
     <% if !buzzed? %>
       <div class="panel panel-default">
         <div class="panel-body">
-          <p>
-            <%= room.description %>
-          </p>
+          <%= room.description %>
         </div>
       </div>
     <% end %>
+  </div>
+</div>
     
+<div class="row">
+  <div class="col-sm-12">    
     <div class="alert alert-info">
       <% if room.actions %>
         <% if !show_actions? && !show_actions_by_default? %>
@@ -30,7 +32,6 @@
         <% else %>
           <p><%= "Actions:" %></p>
           <ul class="list-unstyled">
-            <li>&nbsp;</li>
           <% room.paths.keys.each do |action| %>
             <% if action != "n!!" %>
               <li><%= "- #{action}" %></li>
@@ -47,25 +48,21 @@
         <% if room.code %>
           <% if show_hint? %>
             <p>Remember well.</p>
-            <p>&nbsp;</p>
             <p><%= "Hint: #{show_code_hint(room.code)}" %></p>
           <% end %>
           <% if buzzed? %>
             <p class="shake"><%= buzz %></p>
           <% end %>
           <% if guesses? %>
-            <p>&nbsp;</p>
             <%= check_guesses %>
           <% end %>
         <% elsif room.doors %>
           <% if show_hint? %>
             <p>Remember well.</p>
-            <p>&nbsp;</p>
             <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
           <% end %>
           <% if door_did_not_open? %>
             <p>The pod is locked!</p>
-            <p>&nbsp;</p>
             <p>You're running out of time. This is your last try!</p>
           <% end %>  
         <% end %>
@@ -77,13 +74,11 @@
 
       <% if !room.player_alive %>
         <p><%= show_last_death_line %></p>
-        <p>&nbsp;</p>
         <p><%= "Score: #{show_score}" %></p>
       <% end %>
 
       <% if room.player_won %>
         <p>You won!</p>
-        <p>&nbsp;</p>
         <p><%= "Time: #{show_total_time}" %></p>      
         <p><%= "Score: #{show_score}" %></p>
       <% end %>
