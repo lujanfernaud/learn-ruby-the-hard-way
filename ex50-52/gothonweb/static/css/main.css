@@ -17,7 +17,7 @@ body {
   font-size: 18px;
   line-height: 1.6;
   color: #ebebeb;
-  background-color: #2b3e50;
+  background-color: #212529;
 }
 
 h1,
@@ -94,17 +94,16 @@ h6,
 p {
   margin: 0 0 15px;
 }
-
 .alert > p {
   margin-bottom: inherit;
 }
-
 p:last-child {
   margin-bottom: 0;
 }
 
 .panel {
   color: #333;
+  background-color: #f8f9fa;
   border: none;
 }
 
@@ -114,8 +113,8 @@ p:last-child {
 .alert-info {
   font-family: monospace;
   font-size: 15px;
-  color: #ebebeb;
-  background-color: #4e5d6c;
+  color: #f8f9fa;
+  background-color: #495057;
   border-color: none;
 }
 
@@ -129,26 +128,26 @@ input {
   font-size: 15px;
 }
 .btn-default {
-  color: #ffffff;
-  background-color: #4e5d6c;
+  color: #f8f9fa;
+  background-color: #495057;
   border-color: transparent;
   border-left-color: #2b3e50;
 }
 .btn-default:focus,
 .btn-default.focus {
-  color: #ffffff;
+  color: #f8f9fa;
   background-color: #39444e;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-default:hover {
-  color: #ffffff;
+  color: #f8f9fa;
   background-color: #39444e;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #ffffff;
+  color: #f8f9fa;
   background-color: #39444e;
   border-color: rgba(0, 0, 0, 0);
 }
@@ -161,7 +160,7 @@ input {
 .btn-default:active.focus,
 .btn-default.active.focus,
 .open > .dropdown-toggle.btn-default.focus {
-  color: #ffffff;
+  color: #f8f9fa;
   background-color: #2a323a;
   border-color: rgba(0, 0, 0, 0);
 }
@@ -193,9 +192,9 @@ fieldset[disabled] .btn-default.focus {
 }
 .form-control {
   height: 40px;
-  color: #ebebeb;
+  color: #f8f9fa;
   font-size: 15px;
-  background-color: #4e5d6c;
+  background-color: #495057;
   border: 1px solid transparent;
   /*border-color: #263747;*/
 }
@@ -208,6 +207,10 @@ fieldset[disabled] .btn-default.focus {
 
 .table {
   font-size: 16px;
+  background-color: #f8f9fa;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f1f3f5;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
