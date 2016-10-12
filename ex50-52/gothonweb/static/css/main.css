@@ -105,10 +105,12 @@ p:last-child, ul:last-child {
   color: #333;
   background-color: #f8f9fa;
   border: none;
+  border-radius: 0;
 }
 
 .alert {
   border: none;
+  border-radius: 0;
 }
 .alert-info {
   font-family: monospace;
@@ -126,6 +128,7 @@ input {
   height: 40px;
   font-family: monospace;
   font-size: 15px;
+  border-radius: 0;
 }
 .btn-default {
   color: #f8f9fa;
@@ -187,8 +190,8 @@ fieldset[disabled] .btn-default.focus {
 }
 
 .input-group .form-control:not(:first-child):not(:last-child) {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+/*  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;*/
 }
 .form-control {
   height: 40px;
@@ -196,6 +199,7 @@ fieldset[disabled] .btn-default.focus {
   font-size: 15px;
   background-color: #495057;
   border: 1px solid transparent;
+  border-radius: 0;
   /*border-color: #263747;*/
 }
 .form-control:focus {
