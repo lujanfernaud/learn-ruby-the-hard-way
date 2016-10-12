@@ -83,7 +83,7 @@ module Helpers
 
   def check_guesses
 
-    def find_error_message(last_messages=false)
+    def find_error_message(first_messages=false, last_messages=false)
       @@error_messages_list = [
         "If you do what you always did, you will get what you always got.",                        #[0]
         "That's not the code.",                                                                    #[1]
@@ -96,7 +96,9 @@ module Helpers
         "You're running out of opportunities."                                                     #[-1]
       ]
 
-      if last_messages
+      if first_messages
+        @@error_messages_list = [@@error_messages_list[1], @@error_messages_list[3]]
+      elsif last_messages
         @@error_messages_list = @@error_messages_list[-4..-1]
       else
         @@error_messages_list = @@error_messages_list[0..3]
@@ -113,11 +115,14 @@ module Helpers
       @@error_message
     end
 
-    if @@guesses > 0 && @@guesses != 6
+    if @@guesses == 1
+      "<p>#{find_error_message(first_messages=true)}</p>
+      <p>Tries left: #{6 - @@guesses}</p>"
+    elsif @@guesses > 0 && @@guesses != 6
       "<p>#{find_error_message}</p>
       <p>Tries left: #{6 - @@guesses}</p>"
     elsif @@guesses == 6
-      "<p>#{find_error_message(last_messages=true)}</p>
+      "<p>#{find_error_message(first_messages=false, last_messages=true)}</p>
       <p>Last try!</p>"
     end
   end
