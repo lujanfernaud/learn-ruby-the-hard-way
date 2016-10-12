@@ -92,10 +92,10 @@ h6,
 }
 
 p {
-  margin: 0 0 15px;
+  margin: 0 0 20px;
 }
 .alert > p, .alert > ul {
-  margin-bottom: inherit;
+  margin-bottom: 20px;
 }
 p:last-child, ul:last-child {
   margin-bottom: 0;
