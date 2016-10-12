@@ -46,14 +46,14 @@ h6,
   font-size: 16px;
 }
 
-.actions-info {
+/*.actions-info {
   padding: 8px 8px 1px 8px;
   margin-bottom: 10px;
   font-family: monospace;
   color: #ebebeb;
   font-size: 15px;
   background-color: #4e5d6c;
-}
+}*/
 
 .shake {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
@@ -94,10 +94,10 @@ h6,
 p {
   margin: 0 0 15px;
 }
-.alert > p {
+.alert > p, .alert > ul {
   margin-bottom: inherit;
 }
-p:last-child {
+p:last-child, ul:last-child {
   margin-bottom: 0;
 }
 

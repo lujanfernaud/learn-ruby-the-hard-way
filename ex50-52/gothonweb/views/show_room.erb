@@ -45,6 +45,7 @@
         <% if hint_not_used? %>
           <p>Type 'hint!' to receive a hint.</p>
         <% end %>
+
         <% if room.code %>
           <% if show_hint? %>
             <p>Remember well.</p>
@@ -56,6 +57,7 @@
           <% if guesses? %>
             <%= check_guesses %>
           <% end %>
+
         <% elsif room.doors %>
           <% if show_hint? %>
             <p>Remember well.</p>
@@ -69,7 +71,7 @@
       <% end %>
 
       <% if does_not_compute? %>
-        <p>DOES NOT COMPUTE!</p>
+        <p>INVALID ACTION</p>
       <% end %>
 
       <% if !room.player_alive %>
