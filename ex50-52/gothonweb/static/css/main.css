@@ -42,8 +42,53 @@ h6,
 
 .score {
   margin-top: 34px;
+  margin-bottom: 0;
+  text-align: right;
   font-family: monospace;
   font-size: 16px;
+}
+.score-change {
+  position: absolute;
+  top: 34px;
+  right: 15px;
+  font-family: monospace;
+  font-size: 16px;
+  color: transparent;
+}
+
+.score-change-positive {
+  animation: rise-up-positive 3s ease-in-out 1;
+}
+.score-change-negative {
+  animation: rise-up-negative 3s ease-in-out 1;
+}
+
+@keyframes rise-up-positive {
+  0% {
+    top: 34px;
+    color: transparent;
+  }
+  50% {
+    color: green;
+  }
+  100% {
+    top: 0;
+    color: transparent;
+  }
+}
+
+@keyframes rise-up-negative {
+  0% {
+    top: 34px;
+    color: transparent;
+  }
+  50% {
+    color: orange;
+  }
+  100% {
+    top: 0;
+    color: transparent;
+  }
 }
 
 /*.actions-info {

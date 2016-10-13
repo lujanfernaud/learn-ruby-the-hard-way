@@ -24,6 +24,7 @@ class App < Sinatra::Base
 
   get '/' do
     reset_score
+    reset_score_change
     reset_buzz_guesses_hint_and_door
     reset_actions
 
@@ -64,7 +65,7 @@ class App < Sinatra::Base
 
   post '/game' do
     reset_actions
-    @@activate_hint = false
+    @@activate_hint = false    
 
     room   = Map::load_room(session)
     action = params[:action].downcase
@@ -77,7 +78,9 @@ class App < Sinatra::Base
         if action == "hint!" && hint_not_used?
           @@activate_hint = true      
           @@hint_counter  = 1
-          @@score        -= rand(2..4)
+          @@score_change  = rand(2..4)
+          @@score        -= @@score_change
+          @@score_change  = "-#{@@score_change}"
 
         elsif action == room.code || action == "n!!"
           next_room = room.go(action)
@@ -88,7 +91,9 @@ class App < Sinatra::Base
           @@activate_buzz = true
           @@guesses      += 1
           @@hint_counter  = 1
-          @@score        -= rand(1..3)
+          @@score_change  = rand(1..3)
+          @@score        -= @@score_change
+          @@score_change  = "-#{@@score_change}"
 
         else
           next_room = room.go('WRONG_CODE_DEATH')
@@ -101,7 +106,9 @@ class App < Sinatra::Base
         if action == "hint!" && hint_not_used?
           @@activate_hint = true      
           @@hint_counter  = 1
-          @@score        -= rand(2..4)
+          @@score_change  = rand(2..4)
+          @@score        -= @@score_change
+          @@score_change  = "-#{@@score_change}"
         
         # Winning room.
         elsif action == room.good_door || action == "n!!"
@@ -126,9 +133,11 @@ class App < Sinatra::Base
           reset_buzz_guesses_hint_and_door          
 
         elsif room.go(action) == "not compute" && @@guesses < 1
-          @@door_locked = true
-          @@guesses    += 1
-          @@score      -= rand(1..3)
+          @@door_locked   = true
+          @@guesses      += 1
+          @@score_change  = rand(1..3) 
+          @@score        -= @@score_change
+          @@score_change  = "-#{@@score_change}"
 
         else
           next_room = room.go('THE_END_LOSER_2')
@@ -150,11 +159,21 @@ class App < Sinatra::Base
           next_room = room.go(action)
           # We add score if the room we are in is not a death room or the winning room.
           # We do this to avoid increasing the score when we want to play again.
-          @@score += rand(18..20) if !Map::DEATH_ROOMS.include?(room) && !room.player_won
+          if !Map::DEATH_ROOMS.include?(room) && !room.player_won
+            @@score_change  = rand(18..20)
+            @@score        += @@score_change
+            @@score_change  = "+#{@@score_change}"
+          end
 
+        # Else, the action is invalid.
         else
           @@action_does_not_exist = true
-          @@score -= rand(1..3) if @@score != 0
+
+          if @@score != 0
+            @@score_change  = rand(1..3)
+            @@score        -= @@score_change
+            @@score_change  = "-#{@@score_change}"
+          end
         end
       end
 

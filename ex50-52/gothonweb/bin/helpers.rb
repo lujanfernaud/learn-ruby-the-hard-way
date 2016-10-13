@@ -25,11 +25,25 @@ module Helpers
     @@score = 0
   end
 
+  def score_change
+    @@score_change
+  end
+
+  def reset_score_change
+    @@score_change = 0
+  end
+
   def add_score_checking_guesses
     case @@guesses
-      when 0 then @@score += 50
-      when 1 then @@score += 30
-      else @@score += 20
+    when 0 
+      @@score += 50
+      @@score_change = "+50"
+    when 1
+      @@score += 30
+      @@score_change = "+30"
+    else 
+      @@score += 20
+      @@score_change = "+20"
     end
   end
 

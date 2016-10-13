@@ -8,6 +8,15 @@
     <p class="score">
       Score: <%= show_score %>
     </p>
+    <% if score_change.to_i != 0 %>
+      <% if score_change.to_i > 0 %>
+        <p class="score-change score-change-positive">
+      <% else %>
+        <p class="score-change score-change-negative">
+      <% end %>
+        <%= score_change %>
+      </p>
+    <% end %>
   </div>
 </div>
 
@@ -26,7 +35,7 @@
 <div class="row">
   <div class="col-sm-12">    
     <div class="alert alert-info">
-    
+
       <% if room.actions %>
         <% if !show_actions? && !show_actions_by_default? %>
         <p>Type 'actions' to see available actions.</p>

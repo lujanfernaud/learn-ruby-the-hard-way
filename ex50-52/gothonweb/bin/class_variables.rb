@@ -4,6 +4,7 @@ module ClassVariables
   @@user_data                   = nil
 
   @@score                       = 0
+  @@score_change                = 0
   @@start_time                  = 0
   @@end_time                    = 0
   @@total_time                  = 0
