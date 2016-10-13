@@ -240,6 +240,7 @@ fieldset[disabled] .btn-default.focus {
 }
 .form-control {
   height: 40px;
+  padding-left: 10px;
   color: #f8f9fa;
   font-size: 15px;
   background-color: #495057;
@@ -252,6 +253,16 @@ fieldset[disabled] .btn-default.focus {
   outline: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+.input-group-addon {
+  padding-left: 14px;
+  padding-right: 0;
+  font-size: 15px;
+  font-family: monospace;
+  color: #f8f9fa;
+  background-color: #495057;
+  border: 1px solid transparent;
+  border-radius: 0;
 }
 
 .table {
