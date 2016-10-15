@@ -33,6 +33,7 @@ h6,
 .h5,
 .h6 {
   font-family: monospace;
+  margin-left: -2px;
 }
 
 .h2-room-title {
@@ -41,52 +42,49 @@ h6,
 }
 
 .score {
-  margin-top: 34px;
-  margin-bottom: 0;
-  text-align: right;
+  display: inline-block;
+  margin-bottom: 12px;
   font-family: monospace;
   font-size: 16px;
 }
+p.score:last-child {
+  margin-bottom: 12px;
+}
 .score-change {
-  position: absolute;
-  top: 34px;
-  right: 15px;
+  display: inline-block;
+  margin-left: 3px;
   font-family: monospace;
   font-size: 16px;
   color: transparent;
 }
 
 .score-change-positive {
-  animation: rise-up-positive 3s ease-in-out 1;
+  animation: color-change-positive 3s ease-in-out 1;
 }
 .score-change-negative {
-  animation: rise-up-negative 3s ease-in-out 1;
+  animation: color-change-negative 3s ease-in-out 1;
 }
 
-@keyframes rise-up-positive {
+@keyframes color-change-positive {
   0% {
-    top: 34px;
     color: transparent;
   }
   50% {
     color: green;
   }
   100% {
-    top: 0;
     color: transparent;
   }
 }
 
-@keyframes rise-up-negative {
+@keyframes color-change-negative {
   0% {
-    top: 34px;
     color: transparent;
   }
   50% {
     color: orange;
   }
   100% {
-    top: 0;
     color: transparent;
   }
 }
@@ -282,22 +280,4 @@ fieldset[disabled] .btn-default.focus {
 }
 .table > thead > tr > th {
   font-family: monospace;
-}
-
-@media screen and (min-width: 400px) {
-  .btn-fluid-block {
-    display: inline-block;
-    width: 49%;
-  }
-}
-
-@media screen and (max-width: 399px) {
-  .btn-fluid-block {
-    display: block;
-    width: 100%;
-  }
-
-  .btn-fluid-block + .btn-fluid-block {
-    margin-top: 5px;
-  }
 }
