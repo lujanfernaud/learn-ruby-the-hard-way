@@ -170,7 +170,7 @@ input {
 }
 
 .btn {
-  height: 40px;
+  height: 54px;
   font-family: monospace;
   font-size: 15px;
   border-radius: 0;
@@ -239,7 +239,7 @@ fieldset[disabled] .btn-default.focus {
   border-bottom-left-radius: 4px;*/
 }
 .form-control {
-  height: 40px;
+  height: 54px;
   padding-left: 10px;
   color: #f8f9fa;
   font-size: 15px;
@@ -278,7 +278,7 @@ fieldset[disabled] .btn-default.focus {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
+  padding: 12px;
 }
 .table > thead > tr > th {
   font-family: monospace;
