@@ -36,10 +36,11 @@
 </div>
     
 <div class="row">
-  <div class="col-sm-12">    
+  <div class="col-sm-12">
     <div class="alert alert-info">
 
       <% if room.actions %>
+
         <% if !show_actions? && !show_actions_by_default? %>
         <p>Type 'actions' to see available actions.</p>
         <% else %>
@@ -52,6 +53,7 @@
           <% end %>
           </ul>
         <% end %>
+
       <% end %>
 
       <% if room.keypad %>
@@ -77,11 +79,12 @@
             <p>The pod is locked!</p>
             <p>You're running out of time. This is your last try!</p>
           <% end %>  
-        <% end %>
+        <% end %> 
 
-        <% if hint_not_used? %>
+        <% if hint_not_used? && !door_did_not_open? %>
           <p>Type 'hint!' to receive a hint.</p>
         <% end %>
+
       <% end %>
 
       <% if !room.player_alive %>
@@ -94,9 +97,20 @@
         <p><%= "Time: #{show_total_time}" %></p>      
         <p><%= "Score: #{show_score}" %></p>
       <% end %>
+
     </div>
   </div>
 </div>
+
+<% if door_did_not_open? && hint_not_used? %>
+  <div class="row">
+    <div class="col-sm-12">  
+      <div class="alert alert-info">
+        <p>Type 'hint!' to receive a hint.</p>
+      </div>   
+    </div>
+  </div>
+<% end %>
 
 <% if does_not_compute? %>
   <div class="row">
