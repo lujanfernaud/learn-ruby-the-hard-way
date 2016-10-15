@@ -184,19 +184,19 @@ input {
 .btn-default:focus,
 .btn-default.focus {
   color: #f8f9fa;
-  background-color: #39444e;
+  background-color: #343a40;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-default:hover {
   color: #f8f9fa;
-  background-color: #39444e;
+  background-color: #343a40;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
   color: #f8f9fa;
-  background-color: #39444e;
+  background-color: #343a40;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-default:active:hover,
@@ -209,7 +209,7 @@ input {
 .btn-default.active.focus,
 .open > .dropdown-toggle.btn-default.focus {
   color: #f8f9fa;
-  background-color: #2a323a;
+  background-color: #343a40;
   border-color: rgba(0, 0, 0, 0);
 }
 .btn-default:active,
