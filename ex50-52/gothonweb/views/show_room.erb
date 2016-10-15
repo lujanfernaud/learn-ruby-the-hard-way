@@ -25,7 +25,7 @@
 
 <div class="row voffset">
   <div class="col-sm-12">
-    <% if !buzzed? %>
+    <% if !buzzed? && !show_hint? && !door_did_not_open? %>
       <div class="panel panel-default">
         <div class="panel-body">
           <%= room.description %>
@@ -55,9 +55,6 @@
       <% end %>
 
       <% if room.keypad %>
-        <% if hint_not_used? %>
-          <p>Type 'hint!' to receive a hint.</p>
-        <% end %>
 
         <% if room.code %>
           <% if show_hint? %>
@@ -76,10 +73,14 @@
             <p>Remember well.</p>
             <p><%= "A pod that is not: #{show_door_hint(room.good_door, room.bad_door, room.doors)}" %></p>
           <% end %>
-          <% if door_did_not_open? %>
+          <% if door_did_not_open? && !show_hint? %>
             <p>The pod is locked!</p>
             <p>You're running out of time. This is your last try!</p>
           <% end %>  
+        <% end %>
+
+        <% if hint_not_used? %>
+          <p>Type 'hint!' to receive a hint.</p>
         <% end %>
       <% end %>
 
