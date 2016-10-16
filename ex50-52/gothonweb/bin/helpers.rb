@@ -22,7 +22,8 @@ module Helpers
   end
 
   def reset_score
-    @@score = 0
+    @@score            = 0
+    @@time_bonus       = 0
     @@bonus_multiplier = 0
   end
 
