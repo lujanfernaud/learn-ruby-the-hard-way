@@ -118,6 +118,26 @@ class App < Sinatra::Base
 
           @@end_time   = Time.now.to_i
           @@total_time = @@end_time - @@start_time
+
+          # Add bonus points depending on total time.
+          # We create @@time_bonus and @@bonus_multiplier to show them separately in the view.          
+          if @@total_time < 60
+
+            @@time_bonus = 60 - @@total_time
+
+            case @@total_time         
+            when 30..39 then @@bonus_mutiplier = 2
+            when 20..29 then @@bonus_mutiplier = 3
+            when 10..19 then @@bonus_mutiplier = 4
+            end
+
+            if @@bonus_mutiplier == 0
+              @@score += @@time_bonus
+            else
+              @@score += @@time_bonus * @@bonus_mutiplier
+            end
+          end
+
           @@total_time = "%02d:%02d" % [@@total_time / 60 % 60, @@total_time % 60]
 
           # Save user data to the database.

@@ -23,6 +23,7 @@ module Helpers
 
   def reset_score
     @@score = 0
+    @@bonus_multiplier = 0
   end
 
   def score_change
