@@ -57,12 +57,23 @@ p.score:last-child {
   font-size: 16px;
   color: transparent;
 }
+.time-bonus {
+  display: inline-block;
+  margin-left: 3px;
+  font-family: monospace;
+  font-size: 16px;
+  color: transparent;
+}
 
 .score-change-positive {
   animation: color-change-positive 3s ease-in-out 1;
 }
 .score-change-negative {
   animation: color-change-negative 3s ease-in-out 1;
+}
+.score-change-time-bonus {
+  animation: color-change-positive 3s ease-in-out 1;
+  animation-delay: 1.3s;
 }
 
 @keyframes color-change-positive {
