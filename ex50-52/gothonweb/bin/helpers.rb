@@ -24,6 +24,7 @@ module Helpers
   def reset_score
     @@score            = 0
     @@time_bonus       = 0
+    @@total_time_bonus = 0
     @@bonus_multiplier = 0
   end
 
@@ -55,6 +56,10 @@ module Helpers
 
   def time_bonus
     @@time_bonus
+  end
+
+  def total_time_bonus
+    @@total_time_bonus
   end
 
   def bonus_multiplier?

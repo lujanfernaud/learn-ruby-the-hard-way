@@ -120,7 +120,8 @@ class App < Sinatra::Base
           @@total_time = @@end_time - @@start_time
 
           # Add bonus points depending on total time.
-          # We create @@time_bonus and @@bonus_multiplier to show them separately in the view.          
+          # We create @@time_bonus, @@total_time_bonus and @@bonus_multiplier
+          # to show them separately in the view and improve the experience.
           if @@total_time < 60
 
             @@time_bonus = 60 - @@total_time
@@ -135,7 +136,8 @@ class App < Sinatra::Base
             if @@bonus_multiplier == 0
               @@score += @@time_bonus
             else
-              @@score += @@time_bonus * @@bonus_multiplier
+              @@total_time_bonus = @@time_bonus * @@bonus_multiplier
+              @@score           += @@total_time_bonus
             end
           end
 

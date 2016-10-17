@@ -6,6 +6,7 @@ module ClassVariables
   @@score                       = 0
   @@score_change                = 0
   @@time_bonus                  = 0
+  @@total_time_bonus            = 0
   @@bonus_multiplier            = 0
   
   @@start_time                  = 0
