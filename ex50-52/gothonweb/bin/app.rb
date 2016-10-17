@@ -126,15 +126,15 @@ class App < Sinatra::Base
             @@time_bonus = 60 - @@total_time
 
             case @@total_time         
-            when 30..39 then @@bonus_mutiplier = 2
-            when 20..29 then @@bonus_mutiplier = 3
-            when 10..19 then @@bonus_mutiplier = 4
+            when 30..39 then @@bonus_multiplier = 2
+            when 20..29 then @@bonus_multiplier = 3
+            when 10..19 then @@bonus_multiplier = 4
             end
 
             if @@bonus_multiplier == 0
               @@score += @@time_bonus
             else
-              @@score += @@time_bonus * @@bonus_mutiplier
+              @@score += @@time_bonus * @@bonus_multiplier
             end
           end
 
