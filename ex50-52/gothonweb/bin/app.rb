@@ -129,6 +129,7 @@ class App < Sinatra::Base
             when 30..39 then @@bonus_multiplier = 2
             when 20..29 then @@bonus_multiplier = 3
             when 10..19 then @@bonus_multiplier = 4
+            when  0..9  then @@bonus_multiplier = 8
             end
 
             if @@bonus_multiplier == 0
