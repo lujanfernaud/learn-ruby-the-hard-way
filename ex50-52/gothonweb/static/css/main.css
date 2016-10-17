@@ -66,14 +66,14 @@ p.score:last-child {
 }
 
 .score-change-positive {
-  animation: color-change-positive 3s ease-in-out 1;
+  animation: color-change-positive 3.3s ease-in-out 1;
 }
 .score-change-negative {
-  animation: color-change-negative 3s ease-in-out 1;
+  animation: color-change-negative 3.3s ease-in-out 1;
 }
 .score-change-time-bonus {
-  animation: color-change-positive 3s ease-in-out 1;
-  animation-delay: 1.3s;
+  animation: color-change-positive 4.3s ease-in-out 1;
+  animation-delay: 1.5s;
 }
 
 @keyframes color-change-positive {
