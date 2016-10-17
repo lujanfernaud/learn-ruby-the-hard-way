@@ -131,7 +131,7 @@ class App < Sinatra::Base
             when 10..19 then @@bonus_mutiplier = 4
             end
 
-            if @@bonus_mutiplier == 0
+            if @@bonus_multiplier == 0
               @@score += @@time_bonus
             else
               @@score += @@time_bonus * @@bonus_mutiplier

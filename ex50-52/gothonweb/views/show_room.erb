@@ -20,6 +20,13 @@
         <%= score_change %>
       </p>
     <% end %>
+    <% if time_bonus? %>
+      <% if bonus_multiplier? %>
+        <p class="time-bonus score-change-time-bonus"><%= "+#{time_bonus} Time bonus x #{bonus_multiplier}!" %></p>
+      <% else %>
+        <p class="time-bonus score-change-time-bonus"><%= "+#{time_bonus} Time bonus!" %></p>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

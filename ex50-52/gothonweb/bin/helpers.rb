@@ -49,6 +49,22 @@ module Helpers
     end
   end
 
+  def time_bonus?
+    @@time_bonus != 0
+  end
+
+  def time_bonus
+    @@time_bonus
+  end
+
+  def bonus_multiplier?
+    @@bonus_multiplier != 0
+  end
+
+  def bonus_multiplier
+    @@bonus_multiplier
+  end
+
   def show_total_time
     @@total_time
   end
