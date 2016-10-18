@@ -53,6 +53,7 @@ p.score:last-child {
 .score-change {
   display: inline-block;
   margin-left: 3px;
+  margin-bottom: 12px;
   font-family: monospace;
   font-size: 16px;
   color: transparent;
