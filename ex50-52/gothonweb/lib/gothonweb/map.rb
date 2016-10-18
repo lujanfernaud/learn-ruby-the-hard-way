@@ -143,7 +143,7 @@ module Map
     </p>
     <p>
     Now that the bomb is placed you run to the Escape Pod to
-    get off this tin can before it explodes.
+    get off the ship before it explodes.
     </p>
     """,
     actions = true)
@@ -202,11 +202,10 @@ module Map
     """
     <p>
     Quick on the draw you yank out your blaster and fire it at the Gothon.
-    His clown costume is flowing and moving around his body, which throws
-    off your aim. Your laser hits his costume but misses him entirely. This
+    Your laser hits his getup but misses him entirely. This
     completely ruins his brand new costume his mother bought him, which
     makes him fly into an insane rage and blast you repeatedly in the face until
-    you are dead. Then he eats you.
+    you are dead.
     </p>
     """)
   
@@ -220,7 +219,7 @@ module Map
     </p>
     <p>
     You wake up shortly after only to die as the Gothon stomps on
-    your head and eats you.
+    your head.
     </p>
     """)
 
@@ -232,7 +231,7 @@ module Map
     </p>
     <p>
     You decide to sit there, and finally the Gothons blow up the
-    ship from their ship.
+    ship from their vessel.
     </p>
     """)
 
