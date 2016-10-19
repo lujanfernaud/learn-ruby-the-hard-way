@@ -41,6 +41,11 @@ h6,
   margin-bottom: 12px;
 }
 
+.bonus-table-title {
+  margin-top: -3px;
+  margin-bottom: 15px;
+}
+
 .score {
   display: inline-block;
   margin-bottom: 12px;

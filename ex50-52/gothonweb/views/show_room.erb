@@ -109,6 +109,30 @@
   </div>
 </div>
 
+<% if room.player_won %>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="bonus-table-title">Bonus points</h3>
+      <div class="panel panel-default">
+        <table class="table table-striped">
+          <tbody>
+            <% bonus_points.each do |key, value| %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= value %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td>Total</td>
+              <td><%= total_bonus_points %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <% if door_did_not_open? && hint_not_used? %>
   <div class="row">
     <div class="col-sm-12">  
