@@ -70,6 +70,14 @@ module Helpers
     @@bonus_multiplier
   end
 
+  def bonus_points
+    @@bonus_points_hash
+  end
+
+  def total_bonus_points
+    @@bonus_points_hash.values.inject(:+)
+  end
+
   def show_total_time
     @@total_time
   end
