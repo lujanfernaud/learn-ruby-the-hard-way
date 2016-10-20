@@ -157,8 +157,16 @@ p:last-child, ul:last-child {
 }
 
 .panel {
-  color: #333;
+  color: #212529;
   background-color: #f8f9fa;
+  border: none;
+  border-radius: 0;
+}
+.panel-dark {
+  color: #f8f9fa;
+  background-color: #495057;
+  font-family: monospace;
+  font-size: 15px;
   border: none;
   border-radius: 0;
 }
@@ -277,10 +285,10 @@ fieldset[disabled] .btn-default.focus {
 
 .table {
   font-size: 16px;
-  background-color: #f8f9fa;
+  background-color: #495057;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #f1f3f5;
+  background-color: #343a40;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -289,7 +297,12 @@ fieldset[disabled] .btn-default.focus {
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
   padding: 12px;
+  border-top: 1px solid transparent;
 }
 .table > thead > tr > th {
   font-family: monospace;
+  border-bottom: 2px solid transparent;
+}
+.table > tbody + tbody {
+  border-top: 2px solid transparent;
 }
