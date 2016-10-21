@@ -8,17 +8,14 @@ module ClassVariables
 
   @@time_bonus                    = 0
   @@total_time_bonus              = 0
-  @@bonus_multiplier              = 0
+  @@time_bonus_multiplier         = 0
+  @@guesses_bonus                 = 0
   @@less_than_three_guesses_bonus = 0
+  @@no_hints_used                 = true
   @@no_hints_bonus                = 0
+  @@no_invalid_actions            = true
   @@no_invalid_actions_bonus      = 0
-  
-  @@bonus_points_hash = {
-    "Less than one minute"    => @@time_bonus,
-    "Less than three guesses" => @@less_than_three_guesses_bonus,
-    "No hints used"           => @@no_hints_bonus,
-    "No invalid actions"      => @@no_invalid_actions_bonus
-  }
+  @@bonus_points_hash             = nil
   
   @@start_time                  = 0
   @@end_time                    = 0

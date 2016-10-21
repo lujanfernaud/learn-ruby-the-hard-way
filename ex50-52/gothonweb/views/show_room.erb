@@ -21,8 +21,8 @@
       </p>
     <% end %>
     <% if time_bonus? %>
-      <% if bonus_multiplier? %>
-        <p class="time-bonus score-change-time-bonus"><%= "+#{total_time_bonus} Time bonus x #{bonus_multiplier}!" %></p>
+      <% if time_bonus_multiplier? %>
+        <p class="time-bonus score-change-time-bonus"><%= "+#{total_time_bonus} Time bonus x #{time_bonus_multiplier}!" %></p>
       <% else %>
         <p class="time-bonus score-change-time-bonus"><%= "+#{time_bonus} Time bonus!" %></p>
       <% end %>
@@ -116,15 +116,34 @@
       <div class="panel panel-default">
         <table class="table table-striped">
           <tbody>
+            <% create_bonus_points_hash %>
             <% bonus_points.each do |key, value| %>
               <tr>
-                <td><%= key %></td>
-                <td><%= value %></td>
+                <% if key == bonus_points.keys[0] && time_bonus_multiplier? %>
+                  <td><%= "#{key} (x#{time_bonus_multiplier}!)" %></td>
+                <% else %>
+                  <td><%= key %></td>
+                <% end %>
+                <% if value != 0 %>
+                <td class="text-right text-color-green">
+                  <%= "+#{value}" %>
+                <% else %>
+                <td class="text-right text-color-red">
+                  <%= value %>
+                <% end %>
+                </td>
               </tr>
             <% end %>
             <tr>
-              <td>Total</td>
-              <td><%= total_bonus_points %></td>
+              <td>Total bonus points</td>
+              <% if total_bonus_points != 0 %>
+              <td class="text-right text-color-green">
+                <%= "+#{total_bonus_points}" %>
+              <% else %>
+              <td class="text-right text-color-red">
+                <%= total_bonus_points %>
+              <% end %>
+              </td>
             </tr>
           </tbody>
         </table>

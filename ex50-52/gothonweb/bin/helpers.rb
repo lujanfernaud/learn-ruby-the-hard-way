@@ -22,10 +22,20 @@ module Helpers
   end
 
   def reset_score
-    @@score            = 0
-    @@time_bonus       = 0
-    @@total_time_bonus = 0
-    @@bonus_multiplier = 0
+    @@score = 0
+    reset_bonus_points
+  end
+
+  def reset_bonus_points
+    @@time_bonus                    = 0
+    @@total_time_bonus              = 0
+    @@time_bonus_multiplier         = 0
+    @@guesses_bonus                 = 0
+    @@less_than_three_guesses_bonus = 0
+    @@no_hints_used                 = true
+    @@no_hints_bonus                = 0
+    @@no_invalid_actions            = true
+    @@no_invalid_actions_bonus      = 0
   end
 
   def score_change
@@ -39,15 +49,18 @@ module Helpers
   def add_score_checking_guesses
     case @@guesses
     when 0 
-      @@score += 50
-      @@score_change = "+50"
+      @@guesses_bonus = 30
     when 1
-      @@score += 30
-      @@score_change = "+30"
+      @@guesses_bonus = 10
     else 
-      @@score += 20
-      @@score_change = "+20"
+      @@guesses_bonus = 0
     end
+    
+    @@less_than_three_guesses_bonus += @@guesses_bonus
+
+    @@score_change  = rand(18..20) + @@guesses_bonus
+    @@score        += @@score_change
+    @@score_change  = "+#{@@score_change}"
   end
 
   def time_bonus?
@@ -62,12 +75,12 @@ module Helpers
     @@total_time_bonus
   end
 
-  def bonus_multiplier?
-    @@bonus_multiplier != 0
+  def time_bonus_multiplier?
+    @@time_bonus_multiplier != 0
   end
 
-  def bonus_multiplier
-    @@bonus_multiplier
+  def time_bonus_multiplier
+    @@time_bonus_multiplier
   end
 
   def bonus_points
@@ -76,6 +89,15 @@ module Helpers
 
   def total_bonus_points
     @@bonus_points_hash.values.inject(:+)
+  end
+
+  def create_bonus_points_hash
+    @@bonus_points_hash = {
+      "Less than one minute"    => @@total_time_bonus,
+      "No hints used"           => @@no_hints_bonus,
+      "Less than three guesses" => @@less_than_three_guesses_bonus,
+      "No invalid actions"      => @@no_invalid_actions_bonus
+    }
   end
 
   def show_total_time

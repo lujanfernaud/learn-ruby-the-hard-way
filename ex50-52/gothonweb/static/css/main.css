@@ -140,6 +140,14 @@ p.score:last-child {
   }
 }
 
+.text-color-red {
+  color: red;
+}
+
+.text-color-green {
+  color: green;
+}
+
 /***************************/
 /* Bootstrap modifications */
 /***************************/

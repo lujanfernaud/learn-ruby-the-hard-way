@@ -76,11 +76,12 @@ class App < Sinatra::Base
       if room.code    
 
         if action == "hint!" && hint_not_used?
-          @@activate_hint = true      
-          @@hint_counter  = 1
-          @@score_change  = rand(2..4)
-          @@score        -= @@score_change
-          @@score_change  = "-#{@@score_change}"
+          @@activate_hint  = true      
+          @@hint_counter   = 1
+          @@no_hints_used  = false
+          @@score_change   = rand(2..4)
+          @@score         -= @@score_change
+          @@score_change   = "-#{@@score_change}"
 
         elsif action == room.code || action == "n!!"
           next_room = room.go(action)
@@ -104,11 +105,12 @@ class App < Sinatra::Base
       elsif room.doors
 
         if action == "hint!" && hint_not_used?
-          @@activate_hint = true      
-          @@hint_counter  = 1
-          @@score_change  = rand(2..4)
-          @@score        -= @@score_change
-          @@score_change  = "-#{@@score_change}"
+          @@activate_hint  = true      
+          @@hint_counter   = 1
+          @@no_hints_used  = false
+          @@score_change   = rand(2..4)
+          @@score         -= @@score_change
+          @@score_change   = "-#{@@score_change}"
         
         # Winning room.
         elsif action == room.good_door || action == "n!!"
@@ -120,25 +122,37 @@ class App < Sinatra::Base
           @@total_time = @@end_time - @@start_time
 
           # Add bonus points depending on total time.
-          # We create @@time_bonus, @@total_time_bonus and @@bonus_multiplier
+          # We create @@time_bonus, @@total_time_bonus and @@time_bonus_multiplier
           # to show them separately in the view and improve the experience.
           if @@total_time < 60
 
             @@time_bonus = 60 - @@total_time
 
             case @@total_time         
-            when 30..39 then @@bonus_multiplier = 2
-            when 20..29 then @@bonus_multiplier = 3
-            when 10..19 then @@bonus_multiplier = 4
-            when  0..9  then @@bonus_multiplier = 8
+            when 30..39 then @@time_bonus_multiplier = 2
+            when 20..29 then @@time_bonus_multiplier = 3
+            when 10..19 then @@time_bonus_multiplier = 4
+            when  0..9  then @@time_bonus_multiplier = 8
             end
 
-            if @@bonus_multiplier == 0
+            if @@time_bonus_multiplier == 0
               @@score += @@time_bonus
             else
-              @@total_time_bonus = @@time_bonus * @@bonus_multiplier
+              @@total_time_bonus = @@time_bonus * @@time_bonus_multiplier
               @@score           += @@total_time_bonus
             end
+          end
+
+          # No hints used bonus.
+          if @@no_hints_used
+            @@no_hints_bonus = 100
+            @@score += @@no_hints_bonus
+          end
+
+          # No invalid actions bonus.
+          if @@no_invalid_actions
+            @@no_invalid_actions_bonus = 30
+            @@score += @@no_invalid_actions_bonus
           end
 
           @@total_time = "%02d:%02d" % [@@total_time / 60 % 60, @@total_time % 60]
@@ -191,6 +205,7 @@ class App < Sinatra::Base
         # Else, the action is invalid.
         else
           @@action_does_not_exist = true
+          @@no_invalid_actions    = false
 
           if @@score != 0
             @@score_change  = rand(1..3)
