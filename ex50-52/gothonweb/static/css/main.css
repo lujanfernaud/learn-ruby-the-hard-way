@@ -106,6 +106,14 @@ p.score:last-child {
   }
 }
 
+.text-color-red {
+  color: red;
+}
+
+.text-color-green {
+  color: green;
+}
+
 /*.actions-info {
   padding: 8px 8px 1px 8px;
   margin-bottom: 10px;
@@ -140,14 +148,6 @@ p.score:last-child {
   }
 }
 
-.text-color-red {
-  color: red;
-}
-
-.text-color-green {
-  color: green;
-}
-
 /***************************/
 /* Bootstrap modifications */
 /***************************/
@@ -157,6 +157,13 @@ p.score:last-child {
 }
 .voffset-2 {
   margin-top: 20px;
+}
+.voffset-bottom {
+  margin-bottom: 20px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
 }
 
 p {

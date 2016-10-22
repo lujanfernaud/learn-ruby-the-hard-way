@@ -106,10 +106,12 @@
 </div>
 
 <% if room.player_won %>
-  <div class="row">
+  <div class="row voffset-bottom">
     <div class="col-sm-12">
-      <h3 class="bonus-table-title">Bonus points</h3>
-      <div class="panel panel-default">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <a href="#collapseBonusPoints" class="btn btn-default" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseBonusPoints">Bonus Points</a>
+      </div>
+      <div class="panel panel-default no-margin-bottom collapse" id="collapseBonusPoints">
         <table class="table table-striped">
           <tbody>
             <% create_bonus_points_hash %>
@@ -130,7 +132,7 @@
                 </td>
               </tr>
             <% end %>
-            <tr>
+            <tr class="success">
               <td>Total bonus points</td>
               <% if total_bonus_points != 0 %>
               <td class="text-right text-color-green">
