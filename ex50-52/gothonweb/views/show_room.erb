@@ -20,12 +20,8 @@
         <%= score_change %>
       </p>
     <% end %>
-    <% if time_bonus? %>
-      <% if time_bonus_multiplier? %>
-        <p class="time-bonus score-change-time-bonus"><%= "+#{total_time_bonus} Time bonus x #{time_bonus_multiplier}!" %></p>
-      <% else %>
-        <p class="time-bonus score-change-time-bonus"><%= "+#{time_bonus} Time bonus!" %></p>
-      <% end %>
+    <% if total_bonus_points? %>
+      <p class="bonus-points score-change-bonus-points"><%= "+#{total_bonus_points} Bonus points!" %></p>
     <% end %>
   </div>
 </div>
@@ -120,7 +116,7 @@
             <% bonus_points.each do |key, value| %>
               <tr>
                 <% if key == bonus_points.keys[0] && time_bonus_multiplier? %>
-                  <td><%= "#{key} (x#{time_bonus_multiplier}!)" %></td>
+                  <td><%= "#{key} (x#{time_bonus_multiplier})" %></td>
                 <% else %>
                   <td><%= key %></td>
                 <% end %>

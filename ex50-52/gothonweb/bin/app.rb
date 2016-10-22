@@ -129,10 +129,11 @@ class App < Sinatra::Base
             @@time_bonus = 60 - @@total_time
 
             case @@total_time         
-            when 30..39 then @@time_bonus_multiplier = 2
-            when 20..29 then @@time_bonus_multiplier = 3
-            when 10..19 then @@time_bonus_multiplier = 4
-            when  0..9  then @@time_bonus_multiplier = 8
+            when 40..49 then @@time_bonus_multiplier = 2
+            when 30..39 then @@time_bonus_multiplier = 3
+            when 20..29 then @@time_bonus_multiplier = 4
+            when 10..19 then @@time_bonus_multiplier = 8
+            when  0..9  then @@time_bonus_multiplier = 16
             end
 
             if @@time_bonus_multiplier == 0
@@ -145,13 +146,13 @@ class App < Sinatra::Base
 
           # No hints used bonus.
           if @@no_hints_used
-            @@no_hints_bonus = 100
+            @@no_hints_bonus = 200
             @@score += @@no_hints_bonus
           end
 
           # No invalid actions bonus.
           if @@no_invalid_actions
-            @@no_invalid_actions_bonus = 30
+            @@no_invalid_actions_bonus = 50
             @@score += @@no_invalid_actions_bonus
           end
 

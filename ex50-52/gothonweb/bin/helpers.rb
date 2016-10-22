@@ -49,9 +49,9 @@ module Helpers
   def add_score_checking_guesses
     case @@guesses
     when 0 
-      @@guesses_bonus = 30
+      @@guesses_bonus = 50
     when 1
-      @@guesses_bonus = 10
+      @@guesses_bonus = 30
     else 
       @@guesses_bonus = 0
     end
@@ -87,8 +87,15 @@ module Helpers
     @@bonus_points_hash
   end
 
+  def total_bonus_points?
+    total_bonus_points != 0
+  end
+
   def total_bonus_points
-    @@bonus_points_hash.values.inject(:+)
+    @@total_time_bonus              +
+    @@no_hints_bonus                +
+    @@less_than_three_guesses_bonus +
+    @@no_invalid_actions_bonus
   end
 
   def create_bonus_points_hash

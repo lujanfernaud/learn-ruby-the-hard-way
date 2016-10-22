@@ -63,7 +63,7 @@ p.score:last-child {
   font-size: 16px;
   color: transparent;
 }
-.time-bonus {
+.bonus-points {
   display: inline-block;
   margin-left: 3px;
   font-family: monospace;
@@ -77,7 +77,7 @@ p.score:last-child {
 .score-change-negative {
   animation: color-change-negative 3.3s ease-in-out 1;
 }
-.score-change-time-bonus {
+.score-change-bonus-points {
   animation: color-change-positive 4.3s ease-in-out 1;
   animation-delay: 1.5s;
 }
