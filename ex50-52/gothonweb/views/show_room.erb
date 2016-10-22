@@ -20,12 +20,8 @@
         <%= score_change %>
       </p>
     <% end %>
-    <% if time_bonus? %>
-      <% if bonus_multiplier? %>
-        <p class="time-bonus score-change-time-bonus"><%= "+#{total_time_bonus} Time bonus x #{bonus_multiplier}!" %></p>
-      <% else %>
-        <p class="time-bonus score-change-time-bonus"><%= "+#{time_bonus} Time bonus!" %></p>
-      <% end %>
+    <% if total_bonus_points? && bonus_added? %>
+      <p class="bonus-points score-change-bonus-points"><%= "+#{total_bonus_points} Bonus points!" %></p>
     <% end %>
   </div>
 </div>
@@ -108,6 +104,51 @@
     </div>
   </div>
 </div>
+
+<% if room.player_won %>
+  <div class="row voffset-bottom">
+    <div class="col-sm-12">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <a href="#collapseBonusPoints" class="btn btn-default" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseBonusPoints">Bonus Points</a>
+      </div>
+      <div class="panel panel-default no-margin-bottom collapse" id="collapseBonusPoints">
+        <table class="table table-striped">
+          <tbody>
+            <% create_bonus_points_hash %>
+            <% bonus_points.each do |key, value| %>
+              <tr>
+                <% if key == bonus_points.keys[0] && time_bonus_multiplier? %>
+                  <td><%= "#{key} (x#{time_bonus_multiplier})" %></td>
+                <% else %>
+                  <td><%= key %></td>
+                <% end %>
+                <% if value != 0 %>
+                <td class="text-right text-color-green">
+                  <%= "+#{value}" %>
+                <% else %>
+                <td class="text-right text-color-red">
+                  <%= value %>
+                <% end %>
+                </td>
+              </tr>
+            <% end %>
+            <tr class="success">
+              <td>Total bonus points</td>
+              <% if total_bonus_points != 0 %>
+              <td class="text-right text-color-green">
+                <%= "+#{total_bonus_points}" %>
+              <% else %>
+              <td class="text-right text-color-red">
+                <%= total_bonus_points %>
+              <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <% if door_did_not_open? && hint_not_used? %>
   <div class="row">

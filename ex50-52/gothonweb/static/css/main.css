@@ -41,6 +41,11 @@ h6,
   margin-bottom: 12px;
 }
 
+.bonus-table-title {
+  margin-top: -3px;
+  margin-bottom: 15px;
+}
+
 .score {
   display: inline-block;
   margin-bottom: 12px;
@@ -58,7 +63,7 @@ p.score:last-child {
   font-size: 16px;
   color: transparent;
 }
-.time-bonus {
+.bonus-points {
   display: inline-block;
   margin-left: 3px;
   font-family: monospace;
@@ -72,7 +77,7 @@ p.score:last-child {
 .score-change-negative {
   animation: color-change-negative 3.3s ease-in-out 1;
 }
-.score-change-time-bonus {
+.score-change-bonus-points {
   animation: color-change-positive 4.3s ease-in-out 1;
   animation-delay: 1.5s;
 }
@@ -99,6 +104,14 @@ p.score:last-child {
   100% {
     color: transparent;
   }
+}
+
+.text-color-red {
+  color: red;
+}
+
+.text-color-green {
+  color: green;
 }
 
 /*.actions-info {
@@ -144,6 +157,13 @@ p.score:last-child {
 }
 .voffset-2 {
   margin-top: 20px;
+}
+.voffset-bottom {
+  margin-bottom: 20px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
 }
 
 p {
