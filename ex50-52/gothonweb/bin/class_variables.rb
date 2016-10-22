@@ -15,6 +15,7 @@ module ClassVariables
   @@no_hints_bonus                = 0
   @@no_invalid_actions            = true
   @@no_invalid_actions_bonus      = 0
+  @@bonus_added                   = false
   @@bonus_points_hash             = nil
   
   @@start_time                    = 0
