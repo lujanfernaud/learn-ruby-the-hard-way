@@ -17,59 +17,6 @@ module Helpers
     @@activate_name_length_error = false
   end
 
-  def show_score
-    @@score
-  end
-
-  def reset_score
-    @@score            = 0
-    @@time_bonus       = 0
-    @@total_time_bonus = 0
-    @@bonus_multiplier = 0
-  end
-
-  def score_change
-    @@score_change
-  end
-
-  def reset_score_change
-    @@score_change = 0
-  end
-
-  def add_score_checking_guesses
-    case @@guesses
-    when 0 
-      @@score += 50
-      @@score_change = "+50"
-    when 1
-      @@score += 30
-      @@score_change = "+30"
-    else 
-      @@score += 20
-      @@score_change = "+20"
-    end
-  end
-
-  def time_bonus?
-    @@time_bonus != 0
-  end
-
-  def time_bonus
-    @@time_bonus
-  end
-
-  def total_time_bonus
-    @@total_time_bonus
-  end
-
-  def bonus_multiplier?
-    @@bonus_multiplier != 0
-  end
-
-  def bonus_multiplier
-    @@bonus_multiplier
-  end
-
   def show_total_time
     @@total_time
   end
