@@ -1,11 +1,12 @@
-require './bin/helpers.rb'
+require './bin/application_helpers.rb'
+require './bin/score_helpers.rb'
 require 'test/unit'
 
 require 'pry-byebug'
 require 'pry-inline'
 
 class TestHelpers < Test::Unit::TestCase
-  include Helpers
+  include ApplicationHelpers, ScoreHelpers
 
   def test_show_code_hint
     hint = show_code_hint("324")
