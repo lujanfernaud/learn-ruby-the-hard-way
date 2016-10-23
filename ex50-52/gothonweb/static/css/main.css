@@ -107,11 +107,11 @@ p.score:last-child {
 }
 
 .text-color-red {
-  color: red;
+  color: #fff5f5;
 }
 
 .text-color-green {
-  color: green;
+  color: #ebfbee;
 }
 
 /*.actions-info {
