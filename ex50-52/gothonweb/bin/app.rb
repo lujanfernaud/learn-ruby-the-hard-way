@@ -2,7 +2,7 @@ require 'sinatra/base'
 
 require './lib/gothonweb/map.rb'
 require './bin/class_variables.rb'
-require './bin/helpers.rb'
+require './bin/application_helpers.rb'
 require './bin/score_helpers.rb'
 
 require 'pry-byebug'
@@ -21,7 +21,7 @@ class App < Sinatra::Base
   end
 
   include ClassVariables
-  helpers Helpers, ScoreHelpers
+  helpers ApplicationHelpers, ScoreHelpers
 
   get '/' do
     reset_score

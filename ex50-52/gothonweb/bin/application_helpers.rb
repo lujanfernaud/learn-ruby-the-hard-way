@@ -1,6 +1,6 @@
 require './bin/class_variables.rb'
 
-module Helpers
+module ApplicationHelpers
   include ClassVariables
 
   def name_error?
