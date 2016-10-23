@@ -2,6 +2,7 @@ require 'sinatra/base'
 
 require './lib/gothonweb/map.rb'
 require './bin/class_variables.rb'
+require './bin/score_model.rb'
 require './bin/application_helpers.rb'
 require './bin/score_helpers.rb'
 
@@ -126,7 +127,6 @@ class App < Sinatra::Base
           add_score_checking_guesses
           no_invalid_actions_bonus?
           no_hints_used_bonus?
-
           reset_buzz_guesses_hint_and_door
 
           @@end_time   = Time.now.to_i
@@ -136,13 +136,7 @@ class App < Sinatra::Base
 
           @@total_time = "%02d:%02d" % [@@total_time / 60 % 60, @@total_time % 60]
 
-          # Save user data to the database.
-          @@user_data = Score.new
-          @@user_data[:user_name]  = @@user_name
-          @@user_data[:total_time] = @@total_time
-          @@user_data[:score]      = @@score
-          @@user_data[:date]       = Time.now.strftime("%d %b %Y")
-          @@user_data.save        
+          Score.save_user_data
 
         elsif action == room.bad_door
           next_room = room.go(action)
