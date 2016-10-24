@@ -271,8 +271,12 @@ fieldset[disabled] .btn-default.focus {
   border-radius: 0;
 }
 
+.table > thead > tr > th.table-th-transparent {
+  padding: 9px;
+  background-color: #212529;
+}
 .table {
-  font-size: 16px;
+  font-size: 15px;
   background-color: #495057;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
