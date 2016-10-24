@@ -132,13 +132,12 @@
                 </td>
               </tr>
             <% end %>
-            <tr class="success">
+            <tr>
               <td>Total bonus points</td>
+              <td class="text-right">
               <% if total_bonus_points != 0 %>
-              <td class="text-right text-color-green">
                 <%= "+#{total_bonus_points}" %>
               <% else %>
-              <td class="text-right text-color-red">
                 <%= total_bonus_points %>
               <% end %>
               </td>
