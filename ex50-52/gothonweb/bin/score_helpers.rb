@@ -131,10 +131,10 @@ module ScoreHelpers
 
   def create_bonus_points_hash
     @@bonus_points_hash = {
-      "Less than one minute"    => @@total_time_bonus,
-      "No hints used"           => @@no_hints_bonus,
-      "Less than three guesses" => @@less_than_three_guesses_bonus,
-      "No invalid actions"      => @@no_invalid_actions_bonus
+      "Less than one minute"    => [@@total_time_bonus, @@total_time_bonus_max],
+      "No hints used"           => [@@no_hints_bonus, @@no_hints_bonus_max],
+      "Less than three guesses" => [@@less_than_three_guesses_bonus, @@guesses_bonus_max],
+      "No invalid actions"      => [@@no_invalid_actions_bonus, @@no_invalid_actions_bonus_max]
     }
   end
 

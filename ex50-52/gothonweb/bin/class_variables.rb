@@ -10,14 +10,18 @@ module ClassVariables
 
   # Bonus points:
   @@time_bonus                    = 0
-  @@total_time_bonus              = 0
   @@time_bonus_multiplier         = 0
+  @@total_time_bonus              = 0
+  @@total_time_bonus_max          = 400 # add_time_bonus_points (50 seconds x8) (not including x16 because it's unlikely)
   @@guesses_bonus                 = 0
   @@less_than_three_guesses_bonus = 0
+  @@guesses_bonus_max             = 100 # add_score_checking_guesses (50 x2)
   @@no_hints_used                 = true
   @@no_hints_bonus                = 0
+  @@no_hints_bonus_max            = 200 # no_hints_used_bonus? (100 x2)
   @@no_invalid_actions            = true
   @@no_invalid_actions_bonus      = 0
+  @@no_invalid_actions_bonus_max  = 50 # no_invalid_actions_bonus? (50 x1)
   @@bonus_added                   = false
   @@bonus_points_hash             = nil
   

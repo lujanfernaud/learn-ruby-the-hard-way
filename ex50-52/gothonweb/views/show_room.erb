@@ -128,12 +128,12 @@
                 <% else %>
                   <td><%= key %></td>
                 <% end %>
-                <% if value != 0 %>
+                <% if value[0] != 0 %>
                 <td class="text-right text-color-green">
-                  <%= "+#{value}" %>
+                  <%= "+#{value[0]} / #{value[1]}" %>
                 <% else %>
                 <td class="text-right text-color-red">
-                  <%= value %>
+                  <%= "#{value[0]} / #{value[1]}" %>
                 <% end %>
                 </td>
               </tr>
