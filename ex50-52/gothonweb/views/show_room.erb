@@ -105,6 +105,26 @@
   </div>
 </div>
 
+<% if door_did_not_open? && hint_not_used? %>
+  <div class="row">
+    <div class="col-sm-12">  
+      <div class="alert alert-info">
+        <p>Type 'hint!' to receive a hint.</p>
+      </div>   
+    </div>
+  </div>
+<% end %>
+
+<% if does_not_compute? %>
+  <div class="row">
+    <div class="col-sm-12">    
+      <div class="alert alert-info">
+          <p>INVALID ACTION</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <% if room.player_won %>
   <div class="row voffset-bottom">
     <div class="col-sm-12">
@@ -129,10 +149,10 @@
                   <td><%= key %></td>
                 <% end %>
                 <% if value[0] != 0 %>
-                <td class="text-right text-color-green">
+                <td class="text-right">
                   <%= "+#{value[0]} / #{value[1]}" %>
                 <% else %>
-                <td class="text-right text-color-red">
+                <td class="text-right">
                   <%= "#{value[0]} / #{value[1]}" %>
                 <% end %>
                 </td>
@@ -150,26 +170,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<% if door_did_not_open? && hint_not_used? %>
-  <div class="row">
-    <div class="col-sm-12">  
-      <div class="alert alert-info">
-        <p>Type 'hint!' to receive a hint.</p>
-      </div>   
-    </div>
-  </div>
-<% end %>
-
-<% if does_not_compute? %>
-  <div class="row">
-    <div class="col-sm-12">    
-      <div class="alert alert-info">
-          <p>INVALID ACTION</p>
       </div>
     </div>
   </div>
