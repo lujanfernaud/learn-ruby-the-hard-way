@@ -135,6 +135,10 @@ p.score:last-child {
   }
 }
 
+.unicode-enter-arrow {
+  font-size: 20px;
+}
+
 /***************************/
 /* Bootstrap modifications */
 /***************************/
