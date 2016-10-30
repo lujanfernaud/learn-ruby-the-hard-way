@@ -76,21 +76,24 @@ p.score:last-child {
 }
 
 .score-change-positive {
-  animation: color-change-positive 3.3s ease-in-out 1;
+  animation: color-change-positive 4s ease-in-out 1;
 }
 .score-change-negative {
-  animation: color-change-negative 3.3s ease-in-out 1;
+  animation: color-change-negative 4s ease-in-out 1;
 }
-.score-change-bonus-points {
+/*.score-change-bonus-points {
   animation: color-change-positive 4.3s ease-in-out 1;
   animation-delay: 1.5s;
-}
+}*/
 
 @keyframes color-change-positive {
   0% {
     color: transparent;
   }
-  50% {
+  17% {
+    color: green;
+  }
+  57% {
     color: green;
   }
   100% {
