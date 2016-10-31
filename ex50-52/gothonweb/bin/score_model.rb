@@ -11,4 +11,8 @@ class Score < Sequel::Model
     @@user_data[:date]       = Time.now.strftime("%d %b %Y")
     @@user_data.save   
   end
+
+  def self.high_scores
+    Score.reverse_order(:score).limit(10)
+  end
 end

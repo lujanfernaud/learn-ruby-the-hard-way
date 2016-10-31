@@ -199,7 +199,7 @@ class App < Sinatra::Base
   end
 
   get '/scores' do
-    @high_scores        = Score.reverse_order(:score).limit(10)
+    @high_scores        = Score.high_scores
     @maximum_score_data = @high_scores.first
     @current_user_data  = @@user_data
 
