@@ -12,7 +12,7 @@ class Score < Sequel::Model
     @@user_data.save   
   end
 
-  def self.high_scores
+  def self.get_high_scores
     Score.reverse_order(:score).limit(10)
   end
 end
