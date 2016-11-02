@@ -29,7 +29,7 @@
         <% else %>
           <tr>
         <% end %>
-          <td><%= "#{i += 1}." %></td>
+          <td><%= i += 1 %>.</td>
           <td><%= data[:user_name] %></td>
           <td><%= data[:total_time] %></td>
           <td><%= data[:score] %></td>
@@ -38,6 +38,21 @@
       </tbody>
     </table>
     </div>
+
+    <% if @current_user_data && !@high_scores.include?(@current_user_data) %>
+      <div class="panel-dark panel-default">
+      <table class="table table-striped">
+        <tbody>
+          <tr class="warning">
+            <td><%= @current_user_position %>.</td>
+            <td><%= @current_user_data[:user_name] %></td>
+            <td><%= @current_user_data[:total_time] %></td>
+            <td><%= @current_user_data[:score] %></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    <% end %>
   
   </div>
 </div>
