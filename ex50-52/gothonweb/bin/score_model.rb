@@ -15,4 +15,13 @@ class Score < Sequel::Model
   def self.get_high_scores
     Score.reverse_order(:score).limit(10)
   end
+
+  def self.get_user_position
+    if @@user_data
+      @all_scores_array      = Score.reverse_order(:score).to_a
+      @current_user_in_array = @all_scores_array.detect { |user| user[:id] == @@user_data[:id] }
+
+      @all_scores_array.index(@current_user_in_array)
+    end
+  end
 end

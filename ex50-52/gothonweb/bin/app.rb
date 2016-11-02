@@ -199,9 +199,10 @@ class App < Sinatra::Base
   end
 
   get '/scores' do
-    @high_scores        = Score.get_high_scores
-    @maximum_score_data = @high_scores.first
-    @current_user_data  = @@user_data
+    @high_scores           = Score.get_high_scores
+    @maximum_score_data    = @high_scores.first
+    @current_user_data     = @@user_data
+    @current_user_position = Score.get_user_position
 
     erb :high_scores
   end
