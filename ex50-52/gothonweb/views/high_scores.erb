@@ -11,10 +11,10 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Pos.</th>
-          <th>Name</th>
-          <th>Time</th>
-          <th>Score</th>
+          <th width="20%">Pos.</th>
+          <th width="25%">Name</th>
+          <th width="25%">Time</th>
+          <th width="25%">Score</th>
         </tr>
       </thead>
       <tbody>
@@ -29,10 +29,10 @@
         <% else %>
           <tr>
         <% end %>
-          <td><%= i += 1 %>.</td>
-          <td><%= data[:user_name] %></td>
-          <td><%= data[:total_time] %></td>
-          <td><%= data[:score] %></td>
+          <td width="20%"><%= i += 1 %>.</td>
+          <td width="25%"><%= data[:user_name] %></td>
+          <td width="25%"><%= data[:total_time] %></td>
+          <td width="25%"><%= data[:score] %></td>
         </tr>
       <% end %>
       </tbody>
@@ -44,10 +44,10 @@
       <table class="table table-striped">
         <tbody>
           <tr class="warning">
-            <td><%= @current_user_position %>.</td>
-            <td><%= @current_user_data[:user_name] %></td>
-            <td><%= @current_user_data[:total_time] %></td>
-            <td><%= @current_user_data[:score] %></td>
+            <td width="20%"><%= @current_user_position %>.</td>
+            <td width="25%"><%= @current_user_data[:user_name] %></td>
+            <td width="25%"><%= @current_user_data[:total_time] %></td>
+            <td width="25%"><%= @current_user_data[:score] %></td>
           </tr>
         </tbody>
       </table>
