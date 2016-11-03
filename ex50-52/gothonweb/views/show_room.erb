@@ -96,9 +96,12 @@
       <% end %>
 
       <% if room.player_won %>
-        <p>You won!</p>
-        <p><%= "Time: #{show_total_time}" %></p>      
-        <p><%= "Score: #{show_score}" %></p>
+        <p>Congratulations! You won!</p>
+        <p>
+          <%= "Position: #{Score.get_user_position}" %> |
+          <%= "Time: #{show_total_time}" %> |
+          <%= "Score: #{show_score}" %>
+        </p>      
       <% end %>
 
     </div>
