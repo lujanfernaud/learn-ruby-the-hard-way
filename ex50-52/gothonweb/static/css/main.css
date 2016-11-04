@@ -182,6 +182,57 @@ p:last-child, ul:last-child {
   background-color: #495057;
   border-color: none;
 }
+.alert-disappear {
+  width: 22%;
+  color: transparent;
+  white-space: nowrap;
+  background-color: transparent;
+  animation: alert-disappear 4s ease-in-out 1;
+}
+.alert-disappear:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent;
+      top: -20px;
+      left: 41px;
+      animation: alert-disappear-arrow 4s ease-in-out 1;
+}
+@keyframes alert-disappear {
+  0% {
+    color: transparent;
+    background-color: transparent;
+  }
+  15% {
+    color: #f8f9fa;
+    background-color: #495057;
+  }
+  60% {
+    color: #f8f9fa;
+    background-color: #495057;
+  }
+  100% {
+    color: transparent;
+    background-color: transparent;
+  }
+}
+@keyframes alert-disappear-arrow {
+  0% {
+    border-color: transparent;
+  }
+  15% {
+    border-color: transparent transparent #495057 transparent;
+  }
+  60% {
+    border-color: transparent transparent #495057 transparent;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
 
 input {
   font-family: monospace;
