@@ -169,6 +169,19 @@ module ApplicationHelpers
     @@activate_actions      = false
   end
 
+  def show_winning_message(position)
+    case position
+    when 1
+      "WOW! You achieved the maximum score!!"
+    when 2..3
+      "You are in the three best!!"
+    when 4..10
+      "You made it to the high scores!"
+    else
+      "Congratulations! You won!"
+    end
+  end
+
   def show_last_death_line
     death_lines = [
       "You died. You kinda suck at this.",
