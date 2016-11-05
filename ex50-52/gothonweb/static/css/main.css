@@ -81,11 +81,6 @@ p.score:last-child {
 .score-change-negative {
   animation: color-change-negative 4s ease-in-out 1;
 }
-/*.score-change-bonus-points {
-  animation: color-change-positive 4.3s ease-in-out 1;
-  animation-delay: 1.5s;
-}*/
-
 @keyframes color-change-positive {
   0% {
     color: transparent;
@@ -100,7 +95,6 @@ p.score:last-child {
     color: transparent;
   }
 }
-
 @keyframes color-change-negative {
   0% {
     color: transparent;
@@ -119,7 +113,6 @@ p.score:last-child {
   backface-visibility: hidden;
   perspective: 1000px;
 }
-
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
