@@ -241,7 +241,6 @@ input {
   color: #f8f9fa;
   background-color: #495057;
   border-color: transparent;
-  border-left-color: #2b3e50;
 }
 .btn-default:focus,
 .btn-default.focus {
@@ -294,6 +293,14 @@ fieldset[disabled] .btn-default.focus {
 .btn-default .badge {
   color: #4e5d6c;
   background-color: #ffffff;
+}
+.btn-right, 
+.btn-right:focus,
+.btn-right.focus,
+.btn-right:hover,
+.btn-right:active,
+.btn-right.active {
+  border-left-color: #212529;
 }
 
 .form-control {
